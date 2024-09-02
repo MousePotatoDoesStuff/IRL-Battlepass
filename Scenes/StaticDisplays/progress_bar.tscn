@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://qx6yj04f3171"]
+
+[ext_resource type="Script" path="res://Scenes/StaticDisplays/progress_bar.gd" id="1_2bhdb"]
+
+[node name="ProgressBar" type="Control"]
+layout_mode = 3
+anchor_right = 0.0868056
+anchor_bottom = 0.0154321
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2bhdb")
+metadata/_edit_use_anchors_ = true
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="done" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0, 1)
+
+[node name="locked" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 1, 1)

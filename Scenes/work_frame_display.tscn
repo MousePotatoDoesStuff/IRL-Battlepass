@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://4u5x48eknjan"]
+
+[ext_resource type="PackedScene" uid="uid://b6xe84tt1m3gk" path="res://Scenes/Interfaces/task_display.tscn" id="1_ajksy"]
+
+[node name="WorkFrameDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
+layout_mode = 1
+offset_left = 569.0
+offset_right = 1150.0
+offset_bottom = 650.0
