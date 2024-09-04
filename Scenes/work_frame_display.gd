@@ -13,4 +13,14 @@ func _ready() -> void:
 	var TS=TaskState.new(T,1,4,2)
 	var A={"Hi":1}
 	var B={"Nice 2 meet u":1}
-	var WF=WorkFrame.new([TS],{},[],A,B)
+	var TSA:Array[TaskState]=[TS]
+	var cur_workframe=WorkFrame.new(TSA,{},[],A,B)
+	set_workframe(cur_workframe)
+
+func set_task_list():
+	var texts:Array[String]=cur_workframe.get_cur_task_names()
+	$"Task List".populate(texts)
+
+func set_workframe(workframe:WorkFrame):
+	self.cur_workframe=workframe
+	self.set_task_list()

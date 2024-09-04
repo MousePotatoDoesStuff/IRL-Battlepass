@@ -7,7 +7,7 @@ func _ready() -> void:
 	var s="""Somebody once told me the world is gonna roll me
 I ain't the smartest tool in the shed
 	"""
-	populate("Title",s.replace("\n","").split(" "))
+	var L=s.replace("\n","").split(" ")
 	pass # Replace with function body.
 
 
@@ -38,7 +38,7 @@ func add_tail(count:int):
 		add_button(ind+i)
 	return
 
-func populate(title:String, texts: Array[String]):
+func populate(texts: Array[String]):
 	var n=len(texts)
 	var n2=len(buttons)
 	if n<n2:
