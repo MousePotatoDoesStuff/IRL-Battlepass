@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://r1erbh5spxqf"]
 
-[ext_resource type="Script" path="res://Scenes/Interfaces/custom_input.gd" id="1_mody2"]
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/custom_input.gd" id="1_mody2"]
 
 [node name="CustomInput" type="LineEdit"]
 offset_right = 200.0

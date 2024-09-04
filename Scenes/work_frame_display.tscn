@@ -1,13 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://4u5x48eknjan"]
+[gd_scene load_steps=4 format=3 uid="uid://b8n6i7776pp52"]
 
 [ext_resource type="PackedScene" uid="uid://b6xe84tt1m3gk" path="res://Scenes/Interfaces/task_display.tscn" id="1_ajksy"]
+[ext_resource type="Script" path="res://Scenes/work_frame_display.gd" id="1_dwfmf"]
+[ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_m1g5f"]
 
 [node name="WorkFrameDisplay" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dwfmf")
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
 layout_mode = 1
-offset_left = 569.0
-offset_right = 1150.0
-offset_bottom = 650.0
+anchor_left = 0.481771
+anchor_right = 1.00277
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectDropdown" parent="." instance=ExtResource("2_m1g5f")]
+layout_mode = 1
+anchor_left = 0.195313
+anchor_top = 0.216049
+anchor_right = 0.369312
+anchor_bottom = 0.602049
+metadata/_edit_use_anchors_ = true

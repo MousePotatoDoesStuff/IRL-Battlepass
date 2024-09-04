@@ -5,7 +5,7 @@ extends Control
 var cur_editable:bool=false
 var cur_taskstate:TaskState
 var cur_inventory:Dictionary
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	var T=Task.new(
 		"HelloTask","Hello!",{"Hi":1},{"Nice 2 meet u":1}
@@ -13,11 +13,6 @@ func _ready() -> void:
 	var TS=TaskState.new(T,1,4,2)
 	var A={"Hi":1}
 	set_curstate(TS,A)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func set_curstate(in_ts:TaskState,in_inv:Dictionary):
 	cur_taskstate=in_ts
