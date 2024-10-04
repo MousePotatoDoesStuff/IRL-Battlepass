@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxkkpqrbwn1et"]
+
+[ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/work_frame_display.tscn" id="1_2fljl"]
+[ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_csmhp"]
+[ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_csmhp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Save" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 146.0
+offset_right = 706.0
+offset_bottom = 298.0
+text = "Save Test
+"
+
+[node name="Load" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 356.0
+offset_right = 708.0
+offset_bottom = 508.0
+text = "Load Test"
+
+[node name="Notes" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 584.0
+offset_right = 722.0
+offset_bottom = 736.0
+text = "Open Notes"
+
+[node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
+visible = false
+layout_mode = 1
+
+[node name="Notes" parent="." instance=ExtResource("3_mmksw")]
+visible = false
+layout_mode = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+position = Vector2i(200, 200)
+size = Vector2i(800, 500)
+access = 2
+filters = PackedStringArray("*.irlbp")
+
+[connection signal="pressed" from="Control/Save" to="." method="save_data"]
+[connection signal="pressed" from="Control/Load" to="." method="load_data"]
+[connection signal="pressed" from="Control/Notes" to="." method="open_notes"]
+[connection signal="exit" from="Notes" to="." method="close_notes"]
+[connection signal="save" from="Notes" to="." method="save_notes"]
+[connection signal="file_selected" from="FileDialog" to="." method="finish_save_data"]
