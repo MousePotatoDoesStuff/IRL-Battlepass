@@ -27,6 +27,15 @@ static func from_raw(raw: Dictionary):
 	assert(vars[3] is Dictionary)
 	return Task.new(vars[0],vars[1],vars[2],vars[3])
 
+func to_raw()->Dictionary:
+	var raw={
+		'name':self.name,
+		'desc':self.description,
+		'reqs':self.requirements,
+		'rews':self.rewards
+	}
+	return raw
+
 func get_resources(rewards:bool=false):
 	return self.rewards if rewards else self.requirements
 
