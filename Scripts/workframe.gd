@@ -17,6 +17,28 @@ func _init(
 	self.inventory=in_inventory
 	self.targets=in_targets
 
+static func from_raw(raw: Dictionary):
+	var vars=Util.check_dict_values(raw,['current','periodical','available','inventory','targets'])
+	if vars == null:
+		return null
+	assert(vars[0] is Array)
+	assert(vars[1] is Dictionary)
+	assert(vars[2] is Array)
+	assert(vars[3] is Dictionary)
+	assert(vars[4] is Dictionary)
+	var periodicals={}
+	for key in vars[1]:
+		var val=vars[1][key]
+		periodicals[key]=WorkFrame.from_raw(val)
+	var res=[
+		TaskState.from_array(vars[0]),
+		periodicals,
+		TaskState.from_array(vars[2]),
+		vars[3],
+		vars[4]
+	]
+	return WorkFrame.new(res[0], res[1], res[2], res[3], res[4])
+
 func get_cur_tasks():
 	return self.current_tasks.duplicate()
 

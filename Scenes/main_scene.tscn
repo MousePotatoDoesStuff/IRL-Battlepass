@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_csmhp"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
 
-[node name="MainScene" type="Control"]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,39 +12,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_csmhp")
+namenode = NodePath("Control/Name")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -892.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
 [node name="Save" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 410.0
-offset_top = 146.0
-offset_right = 706.0
-offset_bottom = 298.0
-text = "Save Test
-"
+offset_left = 26.0
+offset_top = 238.0
+offset_right = 126.0
+offset_bottom = 288.0
+text = "Save"
 
 [node name="Load" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 412.0
-offset_top = 356.0
-offset_right = 708.0
-offset_bottom = 508.0
-text = "Load Test"
+offset_left = 30.0
+offset_top = 364.0
+offset_right = 130.0
+offset_bottom = 414.0
+text = "Load"
 
 [node name="Notes" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 426.0
-offset_top = 584.0
-offset_right = 722.0
-offset_bottom = 736.0
-text = "Open Notes"
+offset_left = 34.0
+offset_top = 502.0
+offset_right = 134.0
+offset_bottom = 552.0
+text = "Notes
+"
+
+[node name="Name" type="TextEdit" parent="Control"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 74.0
+offset_right = 268.0
+offset_bottom = 154.0
 
 [node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
 visible = false

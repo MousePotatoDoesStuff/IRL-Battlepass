@@ -17,6 +17,16 @@ func _init(
 	self.requirements = in_requirements
 	self.rewards = in_rewards
 
+static func from_raw(raw: Dictionary):
+	var vars=Util.check_dict_values(raw,['name','desc','reqs','rews'])
+	if vars == null:
+		return null
+	assert(vars[0] is String)
+	assert(vars[1] is String)
+	assert(vars[2] is Dictionary)
+	assert(vars[3] is Dictionary)
+	return Task.new(vars[0],vars[1],vars[2],vars[3])
+
 func get_resources(rewards:bool=false):
 	return self.rewards if rewards else self.requirements
 

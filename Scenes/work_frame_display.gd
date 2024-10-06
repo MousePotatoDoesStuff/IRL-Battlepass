@@ -5,6 +5,8 @@ extends Control
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
 var cur_inventory:Dictionary
+var tasks:Dictionary
+var workframes:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var T=Task.new(
@@ -16,6 +18,10 @@ func _ready() -> void:
 	var TSA:Array[TaskState]=[TS]
 	var cur_workframe=WorkFrame.new(TSA,{},[],A,B)
 	set_workframe(cur_workframe)
+
+func load_data(data:Dictionary):
+	# Add workframe load
+	return
 
 func set_task_list():
 	var texts:Array[String]=cur_workframe.get_cur_task_names()

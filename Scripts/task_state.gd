@@ -18,6 +18,36 @@ func _init(
 	self.max_amount = in_max_amount
 	self.cur_amount = {-1:self.min_amount}.get(in_cur_amount,in_cur_amount)
 
+static func from_raw(raw: Dictionary):
+	var vars=Util.check_dict_values(raw,['task','min','max','cur'])
+	if vars == null:
+		return null
+	assert(vars[0] is Dictionary)
+	assert(vars[1] is int)
+	assert(vars[2] is int)
+	assert(vars[3] is int)
+	var task=Task.from_raw(vars[0])
+	return TaskState.new(task,vars[1],vars[2],vars[3])
+
+static func from_array(rawarray: Array):
+	var resarray=[]
+	for raw in rawarray:
+		var res=from_raw(raw)
+		if res==null:
+			continue
+		resarray.append(res)
+	return resarray
+
+static func from_dict(rawdict: Dictionary):
+	var resdict={}
+	for key in rawdict:
+		var raw=rawdict[key]
+		var res=from_raw(raw)
+		if res==null:
+			continue
+		resdict[key]=res
+	return resdict
+
 func get_cur_ratio()->float:
 	return 1.0*self.cur_amount/self.max_amount
 

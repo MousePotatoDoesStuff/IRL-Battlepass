@@ -36,3 +36,11 @@ static func add_dict_int_values(base:Dictionary,added:Dictionary,factor:int):
 		base[E]=V
 		if V==0:
 			base.erase(E)
+
+static func check_dict_values(dict:Dictionary,keys:Array):
+	var res=[]
+	for key in keys:
+		if key not in dict:
+			return null
+		res.append(dict[key])
+	return res
