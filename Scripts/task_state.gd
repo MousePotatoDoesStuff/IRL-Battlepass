@@ -48,6 +48,34 @@ static func from_dict(rawdict: Dictionary):
 		resdict[key]=res
 	return resdict
 
+func to_raw():
+	var res={
+		'task': self.task.to_raw(),
+		'min': self.min_amount,
+		'max': self.max_amount,
+		'cur': self.cur_amount
+	}
+
+static func to_array(array: Array[TaskState]):
+	var resarray=[]
+	for obj in array:
+		var res=obj.to_raw()
+		if res==null:
+			continue
+		resarray.append(res)
+	return resarray
+	
+
+static func to_dict(dict: Dictionary):
+	var resdict={}
+	for key in dict:
+		var obj=dict[key]
+		var res=obj.to_raw()
+		if res==null:
+			continue
+		resdict[key]=res
+	return resdict
+
 func get_cur_ratio()->float:
 	return 1.0*self.cur_amount/self.max_amount
 

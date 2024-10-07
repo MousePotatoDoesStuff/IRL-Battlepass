@@ -78,9 +78,9 @@ size = Vector2i(800, 500)
 access = 2
 filters = PackedStringArray("*.irlbp")
 
-[connection signal="pressed" from="Control/Save" to="." method="save_data"]
-[connection signal="pressed" from="Control/Load" to="." method="load_data"]
+[connection signal="pressed" from="Control/Save" to="." method="dialog_save_data"]
+[connection signal="pressed" from="Control/Load" to="." method="dialog_load_data"]
 [connection signal="pressed" from="Control/Notes" to="." method="open_notes"]
 [connection signal="exit" from="Notes" to="." method="close_notes"]
 [connection signal="save" from="Notes" to="." method="save_notes"]
-[connection signal="file_selected" from="FileDialog" to="." method="finish_save_data"]
+[connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]

@@ -14,12 +14,12 @@ func open_notes():
 
 func save_notes(notes:String):
 	data['notes']=notes
-	save_data()
+	dialog_save_data()
 
 func close_notes():
 	$Notes.hide()
 
-func load_data():
+func dialog_load_data():
 	var filepath=data.get('filepath')
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
 	var name=data.get('filename','Untitled')
@@ -30,7 +30,7 @@ func load_data():
 	file_dialog.current_file=name+".irlbp"
 	file_dialog.show()
 
-func save_data():
+func dialog_save_data():
 	data['name']=namenode.text
 	var filepath=data.get('filepath')
 	file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
@@ -43,18 +43,24 @@ func save_data():
 	file_dialog.show()
 
 
-func finish_save_data(path: String) -> void:
+func finish_dialog(path: String) -> void:
 	data['filepath']=path
 	if file_dialog.file_mode==FileDialog.FILE_MODE_SAVE_FILE:
-		data['name']=namenode.text
-		var raw=JSON.stringify(data,"\t",true)
-		var savefile=FileAccess.open(path,FileAccess.WRITE)
-		savefile.store_line(raw)
-		savefile.close()
+		save_data(path)
 	else:
-		var savefile=FileAccess.open(path,FileAccess.READ)
-		var raw=savefile.get_as_text()
-		savefile.close()
-		data=JSON.parse_string(raw)
-		namenode.text=data.get('name','Untitled')
+		load_data(path)
 	file_dialog.hide()
+
+func save_data(path: String):
+	data['name']=namenode.text
+	var raw=JSON.stringify(data,"\t",true)
+	var savefile=FileAccess.open(path,FileAccess.WRITE)
+	savefile.store_line(raw)
+	savefile.close()
+
+func load_data(path:String):
+	var savefile=FileAccess.open(path,FileAccess.READ)
+	var raw=savefile.get_as_text()
+	savefile.close()
+	data=JSON.parse_string(raw)
+	namenode.text=data.get('name','Untitled')

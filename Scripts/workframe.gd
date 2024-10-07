@@ -39,6 +39,19 @@ static func from_raw(raw: Dictionary):
 	]
 	return WorkFrame.new(res[0], res[1], res[2], res[3], res[4])
 
+func to_raw():
+	var tempres={}
+	for key in self.periodical_tasks:
+		tempres[key]=self.periodical_tasks[key].to_raw()
+	var res={
+		'current'		: TaskState.to_array(self.current_tasks),
+		'periodical'	: tempres,
+		'available'		: TaskState.to_array(self.current_tasks),
+		'inventory'		: self.inventory,
+		'targets'		: self.targets
+	}
+	return res
+
 func get_cur_tasks():
 	return self.current_tasks.duplicate()
 
