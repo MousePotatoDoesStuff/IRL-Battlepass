@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_csmhp"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode")]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,18 +12,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_csmhp")
-namenode = NodePath("Control/Name")
+namenode = NodePath("Control/Inner Control/VBoxContainer/Name")
+pathnode = NodePath("Control/Inner Control/VBoxContainer/Filepath")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -892.0
+offset_right = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="bg" type="ColorRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,37 +33,72 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="Save" type="Button" parent="Control"]
+[node name="Inner Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Inner Control"]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 238.0
-offset_right = 126.0
-offset_bottom = 288.0
+offset_right = 250.0
+offset_bottom = 519.0
+
+[node name="Name" type="TextEdit" parent="Control/Inner Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="gap" type="ColorRect" parent="Control/Inner Control/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="Filepath" type="RichTextLabel" parent="Control/Inner Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/Inner Control/VBoxContainer/Filepath"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.290196, 0.286275, 1)
+
+[node name="Save" type="Button" parent="Control/Inner Control/VBoxContainer"]
+layout_mode = 2
 text = "Save"
 
-[node name="Load" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 364.0
-offset_right = 130.0
-offset_bottom = 414.0
+[node name="SaveAs" type="Button" parent="Control/Inner Control/VBoxContainer"]
+layout_mode = 2
+text = "Save as..."
+
+[node name="Load" type="Button" parent="Control/Inner Control/VBoxContainer"]
+layout_mode = 2
 text = "Load"
 
-[node name="Notes" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 502.0
-offset_right = 134.0
-offset_bottom = 552.0
+[node name="gap2" type="ColorRect" parent="Control/Inner Control/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="Notes" type="Button" parent="Control/Inner Control/VBoxContainer"]
+layout_mode = 2
 text = "Notes
 "
 
-[node name="Name" type="TextEdit" parent="Control"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 74.0
-offset_right = 268.0
-offset_bottom = 154.0
+[node name="Button" type="Button" parent="Control/Inner Control/VBoxContainer"]
+layout_mode = 2
+text = "Notes
+"
 
 [node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
 visible = false
@@ -78,9 +114,11 @@ size = Vector2i(800, 500)
 access = 2
 filters = PackedStringArray("*.irlbp")
 
-[connection signal="pressed" from="Control/Save" to="." method="dialog_save_data"]
-[connection signal="pressed" from="Control/Load" to="." method="dialog_load_data"]
-[connection signal="pressed" from="Control/Notes" to="." method="open_notes"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Save" to="." method="decide_save"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/SaveAs" to="." method="dialog_save_data"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Load" to="." method="dialog_load_data"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Notes" to="." method="open_notes"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Button" to="." method="open_notes"]
 [connection signal="exit" from="Notes" to="." method="close_notes"]
 [connection signal="save" from="Notes" to="." method="save_notes"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]

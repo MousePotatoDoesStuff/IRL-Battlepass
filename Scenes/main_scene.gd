@@ -2,10 +2,14 @@ extends Control
 
 @onready var file_dialog: FileDialog = $FileDialog
 @export var namenode:TextEdit
+@export var pathnode:RichTextLabel
 
 var data={'name':"Test Name",'filename':"test.irlbp"}
 func _ready() -> void:
+	assert(namenode!=null)
+	assert(pathnode!=null)
 	namenode.text=data['name']
+	pathnode.text="No path"
 	pass
 
 func open_notes():
@@ -14,7 +18,7 @@ func open_notes():
 
 func save_notes(notes:String):
 	data['notes']=notes
-	dialog_save_data()
+	decide_save()
 
 func close_notes():
 	$Notes.hide()
@@ -30,6 +34,15 @@ func dialog_load_data():
 	file_dialog.current_file=name+".irlbp"
 	file_dialog.show()
 
+func decide_save():
+	data['name']=namenode.text
+	var filepath=data.get('filepath')
+	if filepath==null:
+		dialog_save_data()
+	else:
+		file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
+		finish_dialog(filepath)
+
 func dialog_save_data():
 	data['name']=namenode.text
 	var filepath=data.get('filepath')
@@ -37,7 +50,6 @@ func dialog_save_data():
 	var name=data.get('filename','Untitled')
 	if filepath!=null:
 		var dirpath=filepath.get_base_dir()
-		print(dirpath)
 		file_dialog.current_dir=dirpath
 	file_dialog.current_file=name+".irlbp"
 	file_dialog.show()
@@ -64,3 +76,4 @@ func load_data(path:String):
 	savefile.close()
 	data=JSON.parse_string(raw)
 	namenode.text=data.get('name','Untitled')
+	pathnode.text=path
