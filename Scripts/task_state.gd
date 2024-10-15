@@ -29,8 +29,8 @@ static func from_raw(raw: Dictionary):
 	var task=Task.from_raw(vars[0])
 	return TaskState.new(task,vars[1],vars[2],vars[3])
 
-static func from_array(rawarray: Array):
-	var resarray=[]
+static func from_array(rawarray: Array)->Array[TaskState]:
+	var resarray:Array[TaskState]=[]
 	for raw in rawarray:
 		var res=from_raw(raw)
 		if res==null:
@@ -48,13 +48,14 @@ static func from_dict(rawdict: Dictionary):
 		resdict[key]=res
 	return resdict
 
-func to_raw():
+func to_raw()->Dictionary:
 	var res={
 		'task': self.task.to_raw(),
 		'min': self.min_amount,
 		'max': self.max_amount,
 		'cur': self.cur_amount
 	}
+	return res
 
 static func to_array(array: Array[TaskState]):
 	var resarray=[]

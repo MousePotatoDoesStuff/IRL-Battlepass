@@ -4,6 +4,9 @@ extends Control
 @export var namenode:TextEdit
 @export var pathnode:RichTextLabel
 
+@export var notesmenu:Control
+@export var taskmenu:Control
+
 var data={'name':"Test Name",'filename':"test.irlbp"}
 func _ready() -> void:
 	assert(namenode!=null)
@@ -13,15 +16,24 @@ func _ready() -> void:
 	pass
 
 func open_notes():
-	$Notes.load_notes(data.get('notes',""))
-	$Notes.show()
+	notesmenu.load_notes(data.get('notes',""))
+	notesmenu.show()
+
+func open_tasks() -> void:
+	taskmenu.load_data(data)
+	taskmenu.show()
+
+func close_notes():
+	notesmenu.hide()
+
+func close_tasks():
+	taskmenu.save_data(data)
+	taskmenu.hide()
+	decide_save()
 
 func save_notes(notes:String):
 	data['notes']=notes
 	decide_save()
-
-func close_notes():
-	$Notes.hide()
 
 func dialog_load_data():
 	var filepath=data.get('filepath')

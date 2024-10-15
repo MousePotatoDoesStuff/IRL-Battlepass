@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_csmhp"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode")]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "notesmenu", "taskmenu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,8 @@ grow_vertical = 2
 script = ExtResource("1_csmhp")
 namenode = NodePath("Control/Inner Control/VBoxContainer/Name")
 pathnode = NodePath("Control/Inner Control/VBoxContainer/Filepath")
+notesmenu = NodePath("Notes")
+taskmenu = NodePath("WorkFrameDisplay")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -95,10 +97,9 @@ layout_mode = 2
 text = "Notes
 "
 
-[node name="Button" type="Button" parent="Control/Inner Control/VBoxContainer"]
+[node name="Tasks" type="Button" parent="Control/Inner Control/VBoxContainer"]
 layout_mode = 2
-text = "Notes
-"
+text = "Tasks"
 
 [node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
 visible = false
@@ -118,7 +119,8 @@ filters = PackedStringArray("*.irlbp")
 [connection signal="pressed" from="Control/Inner Control/VBoxContainer/SaveAs" to="." method="dialog_save_data"]
 [connection signal="pressed" from="Control/Inner Control/VBoxContainer/Load" to="." method="dialog_load_data"]
 [connection signal="pressed" from="Control/Inner Control/VBoxContainer/Notes" to="." method="open_notes"]
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Button" to="." method="open_notes"]
+[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Tasks" to="." method="open_tasks"]
+[connection signal="save_and_exit" from="WorkFrameDisplay" to="." method="close_tasks"]
 [connection signal="exit" from="Notes" to="." method="close_notes"]
 [connection signal="save" from="Notes" to="." method="save_notes"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]

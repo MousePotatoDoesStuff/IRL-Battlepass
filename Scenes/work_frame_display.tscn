@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/work_frame_display.gd" id="1_dwfmf"]
 [ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_m1g5f"]
 
-[node name="WorkFrameDisplay" type="Control"]
+[node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_task_list", "ex_subframe_list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
+ex_task_display = NodePath("Task Display")
+ex_task_list = NodePath("Task List")
+ex_subframe_list = NodePath("Subframe List")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.454524, 0.454524, 0.454524, 1)
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
 layout_mode = 1
@@ -34,3 +46,14 @@ anchor_top = 0.506173
 anchor_right = 0.220006
 anchor_bottom = 0.892173
 metadata/_edit_use_anchors_ = true
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.0316667
+anchor_top = 0.02
+anchor_right = 0.146667
+anchor_bottom = 0.0733333
+text = "Return"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ReturnButton" to="." method="save_and_exit_function"]

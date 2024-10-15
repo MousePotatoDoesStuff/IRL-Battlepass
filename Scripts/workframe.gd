@@ -30,14 +30,10 @@ static func from_raw(raw: Dictionary):
 	for key in vars[1]:
 		var val=vars[1][key]
 		periodicals[key]=WorkFrame.from_raw(val)
-	var res=[
-		TaskState.from_array(vars[0]),
-		periodicals,
-		TaskState.from_array(vars[2]),
-		vars[3],
-		vars[4]
-	]
-	return WorkFrame.new(res[0], res[1], res[2], res[3], res[4])
+	var temp:Array[TaskState]=TaskState.from_array(vars[0])
+	var curtasks:Array[TaskState]=temp
+	var available:Array[TaskState]=TaskState.from_array(vars[2])
+	return WorkFrame.new(curtasks, periodicals, available, vars[3], vars[4])
 
 func to_raw():
 	var tempres={}
@@ -47,8 +43,8 @@ func to_raw():
 		'current'		: TaskState.to_array(self.current_tasks),
 		'periodical'	: tempres,
 		'available'		: TaskState.to_array(self.current_tasks),
-		'inventory'		: self.inventory,
-		'targets'		: self.targets
+		'inventory'		: self.inventory.duplicate(),
+		'targets'		: self.targets.duplicate()
 	}
 	return res
 
