@@ -8,6 +8,7 @@ signal save_and_exit
 @export var ex_task_display:Control
 @export var ex_task_list:Control
 @export var ex_subframe_list:Control
+@export var ex_inv_disp:InventoryDisplay
 var main_data_struct={}
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
@@ -54,6 +55,15 @@ func load_data(data:Dictionary):
 		self.workframes[key]=frame
 	
 	setup_display()
+	update_inventory()
+	return
+
+func update_inventory():
+	ex_inv_disp.display_data(
+		self.cur_workframe.inventory,
+		self.cur_workframe.targets,
+		true
+	)
 	return
 
 func setup_display():

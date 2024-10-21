@@ -6,14 +6,26 @@ extends Control
 
 @export var notesmenu:Control
 @export var taskmenu:Control
+@export var functionslist:VBoxContainer
+@export var function_state_text:RichTextLabel
 
-var data={'name':"Test Name",'filename':"test.irlbp"}
+var data={'name':"Test Name",'filename':"test"}
 func _ready() -> void:
 	assert(namenode!=null)
 	assert(pathnode!=null)
+	assert(functionslist is VBoxContainer)
 	namenode.text=data['name']
 	pathnode.text="No path"
-	pass
+	toggle_functions(false)
+
+func toggle_functions(enabled:bool=true):
+	for obj:Button in self.functionslist.get_children():
+		obj.disabled=not enabled
+	var text='Save or load to enable functions'
+	if enabled:
+		text='Functions enabled'
+	function_state_text.text="[center]"+text
+	return
 
 func open_notes():
 	notesmenu.load_notes(data.get('notes',""))
@@ -74,6 +86,7 @@ func finish_dialog(path: String) -> void:
 	else:
 		load_data(path)
 	file_dialog.hide()
+	toggle_functions(true)
 
 func save_data(path: String):
 	data['name']=namenode.text

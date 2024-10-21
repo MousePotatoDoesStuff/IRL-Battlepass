@@ -1,4 +1,5 @@
 extends Control
+class_name InventoryDisplay
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,7 +12,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func display_data(inventory:Dictionary, requirements:Dictionary):
+func display_data(inventory:Dictionary, requirements:Dictionary,
+show_redundant:bool=false):
 	var sortdata=[]
 	var sortdict={}
 	
@@ -26,6 +28,14 @@ func display_data(inventory:Dictionary, requirements:Dictionary):
 			sortdict[ratio]=L
 			sortdata.append(ratio)
 		L.append(e)
+	if show_redundant:
+		var L=[]
+		sortdict[INF]=L
+		sortdata.append(INF)
+		for e in inventory:
+			if e in requirements:
+				continue
+			L.append(e)
 	sortdata.sort()
 	
 	var templ=[]

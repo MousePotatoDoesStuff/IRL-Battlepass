@@ -23,9 +23,11 @@ static func from_raw(raw: Dictionary):
 	if vars == null:
 		return null
 	assert(vars[0] is Dictionary)
-	assert(vars[1] is int)
-	assert(vars[2] is int)
-	assert(vars[3] is int)
+	print(typeof(vars[1]), typeof(1.0))
+	for i in range(1,4):
+		if vars[i] is float:
+			vars[i]=int(vars[i])
+		assert(vars[i] is int, str(vars[i]))
 	var task=Task.from_raw(vars[0])
 	return TaskState.new(task,vars[1],vars[2],vars[3])
 

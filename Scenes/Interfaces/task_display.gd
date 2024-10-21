@@ -1,6 +1,7 @@
 extends Control
 
 
+signal DataIsChangedSignal
 @export var editable:bool
 var cur_editable:bool=false
 var cur_taskstate:TaskState
@@ -34,3 +35,4 @@ func process_change(new_value:int):
 		used_value=cur_taskstate.refund_resources(cur_inventory,-delta)
 	print(delta,cur_inventory)
 	set_curstate(cur_taskstate,cur_inventory)
+	DataIsChangedSignal.emit()

@@ -1,4 +1,5 @@
 extends Control
+class_name SelectDropdown
 signal ButtonPressedSignal(ind:int)
 
 var buttons=[]
@@ -20,11 +21,13 @@ func remove_button(button:Node):
 	button.queue_free()
 
 func add_button(ind:int):
-	var button=Button.new()
+	var button:Button=Button.new()
 	button.text="Untitled"
 	%Organizer.add_child(button)
 	self.buttons.append(button)
-	# Connect button's pressed signal to on_button_pressed
+	var temp=func():
+		ButtonPressedSignal.emit(ind)
+	button.pressed.connect(temp)
 
 func remove_tail(count:int):
 	for i in range(count):
