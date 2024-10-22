@@ -6,7 +6,8 @@ signal save_and_exit
 
 @export var editable:bool
 @export var ex_task_display:Control
-@export var ex_task_list:Control
+@export var ex_av_task_list:Control
+@export var ex_cur_task_list:Control
 @export var ex_subframe_list:Control
 @export var ex_inv_disp:InventoryDisplay
 var main_data_struct={}
@@ -15,6 +16,9 @@ var cur_workframe:WorkFrame
 var cur_inventory:Dictionary
 var tasks:Dictionary
 var workframes:Dictionary
+
+var cur_task_ind:int
+var is_cur_in_workframe:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	init_data()
@@ -91,10 +95,10 @@ func set_workframe(workframe:WorkFrame):
 
 func set_task_list():
 	var texts:Array[String]=cur_workframe.get_cur_task_names()
-	$"Task List".populate(texts)
+	ex_cur_task_list.populate(texts)
 
-func load_task(ind:int):
-	ex_task_display.set_curstate(cur_workframe.current_tasks[ind],cur_workframe.inventory)
+func load_task(ind:int, is_cur:bool):
+	ex_task_display.set_curstate(cur_workframe.current_tasks[ind],cur_workframe.inventory, is_cur)
 	ex_task_display.show()
 
 func insert_task(ind:int, task:Task):

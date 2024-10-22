@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_m1g5f"]
 [ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="4_n3rv8"]
 
-[node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_task_list", "ex_subframe_list", "ex_inv_disp")]
+[node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_av_task_list", "ex_cur_task_list", "ex_subframe_list", "ex_inv_disp")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
 ex_task_display = NodePath("Task Display")
-ex_task_list = NodePath("Task List")
+ex_av_task_list = NodePath("ATL")
+ex_cur_task_list = NodePath("CTL")
 ex_subframe_list = NodePath("Subframe List")
 ex_inv_disp = NodePath("InventoryDisplay")
 
@@ -37,14 +38,25 @@ offset_right = 0.0
 offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Task List" parent="." instance=ExtResource("2_m1g5f")]
+[node name="ATL" parent="." instance=ExtResource("2_m1g5f")]
 layout_mode = 1
-anchor_left = 0.0416667
+anchor_left = 0.025
 anchor_top = 0.666667
-anchor_right = 0.375
+anchor_right = 0.191667
 anchor_bottom = 0.888889
 offset_right = 0.0
 offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CTL" parent="." instance=ExtResource("2_m1g5f")]
+layout_mode = 1
+anchor_left = 0.225
+anchor_top = 0.666667
+anchor_right = 0.391667
+anchor_bottom = 0.888889
+offset_right = -3.05176e-05
+offset_bottom = 0.0
+is_cur = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Subframe List" parent="." instance=ExtResource("2_m1g5f")]
@@ -74,5 +86,6 @@ anchor_right = 0.375
 anchor_bottom = 0.333333
 
 [connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_inventory"]
-[connection signal="ButtonPressedSignal" from="Task List" to="." method="load_task"]
+[connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task"]
+[connection signal="ButtonPressedSignal" from="CTL" to="." method="load_task"]
 [connection signal="pressed" from="ReturnButton" to="." method="save_and_exit_function"]
