@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" path="res://Scenes/BaseInterfaces/select_dropdown.gd" id="1_qthtj"]
 
-[node name="SelectDropdown" type="Control" node_paths=PackedStringArray("Organizer")]
+[node name="SelectDropdown" type="Control"]
 layout_mode = 3
 anchor_right = 0.174
 anchor_bottom = 0.386
 offset_right = -0.448013
 offset_bottom = -0.128006
 script = ExtResource("1_qthtj")
-Organizer = NodePath("Control/ScrollContainer/Organizer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

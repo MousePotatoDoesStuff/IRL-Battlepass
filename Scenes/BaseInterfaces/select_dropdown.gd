@@ -1,10 +1,12 @@
 extends Control
 class_name SelectDropdown
 signal ButtonPressedSignal(ind:int)
+@export var Organizer:BoxContainer
 
 var buttons=[]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	assert(Organizer is BoxContainer)
 	var s="""Somebody once told me the world is gonna roll me
 I ain't the smartest tool in the shed
 	"""
@@ -17,13 +19,13 @@ func _process(delta: float) -> void:
 	pass
 
 func remove_button(button:Node):
-	%Organizer.remove_child(button)
+	Organizer.remove_child(button)
 	button.queue_free()
 
 func add_button(ind:int):
 	var button:Button=Button.new()
 	button.text="Untitled"
-	%Organizer.add_child(button)
+	Organizer.add_child(button)
 	self.buttons.append(button)
 	var temp=func():
 		ButtonPressedSignal.emit(ind)
@@ -53,5 +55,9 @@ func populate(texts: Array[String]):
 		cur.text=texts[i]
 	return
 
+
 func on_button_pressed(button_index:int):
 	ButtonPressedSignal.emit(button_index)
+
+func get_task():
+	return

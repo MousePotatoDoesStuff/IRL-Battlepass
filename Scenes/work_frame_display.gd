@@ -91,12 +91,19 @@ func set_workframe(workframe:WorkFrame):
 
 func set_task_list():
 	var texts:Array[String]=cur_workframe.get_cur_task_names()
-	print(cur_workframe.to_raw())
 	$"Task List".populate(texts)
 
 func load_task(ind:int):
 	ex_task_display.set_curstate(cur_workframe.current_tasks[ind],cur_workframe.inventory)
 	ex_task_display.show()
+
+func insert_task(ind:int, task:Task):
+	self.cur_workframe.insert_task(ind,task)
+	set_task_list()
+
+func remove_task(ind:int):
+	self.cur_workframe.remove_task(ind)
+	set_task_list()
 
 
 func save_and_exit_function() -> void:

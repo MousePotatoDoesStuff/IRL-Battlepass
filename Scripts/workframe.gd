@@ -59,3 +59,17 @@ func get_cur_task_names()->Array[String]:
 
 func get_avail_tasks():
 	return self.available_tasks.duplicate()
+
+func insert_task(ind:int, task:Task):
+	if ind<0:
+		ind=0
+	ind=min(ind,len(self.current_tasks))
+	self.current_tasks.insert(ind,task)
+	return
+
+func remove_task(ind:int):
+	if ind<0:
+		ind=0
+	ind=min(ind,len(self.current_tasks)-1)
+	self.current_tasks.remove_at(ind)
+	return
