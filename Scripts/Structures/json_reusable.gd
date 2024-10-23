@@ -4,9 +4,15 @@ class_name JSONReusable
 var id:int
 
 static func process_from_raw(raw: Dictionary, existing:Dictionary):
-	return null
+	"""
+	Creates object. Must be implemented in inheritor class.
+	"""
+	assert(false,"You forgot to implement process_from_raw!")
 
 static func check_for(raw:Dictionary, all_existing:Dictionary, classname:String):
+	"""
+	Checks if the object was already initialised.
+	"""
 	if classname not in all_existing:
 		return null
 	var existing_of_class:Dictionary=all_existing[classname]
@@ -14,7 +20,10 @@ static func check_for(raw:Dictionary, all_existing:Dictionary, classname:String)
 	var cur_state=existing_of_class.get(ID,null)
 	return cur_state
 
-static func set_new(all_existing:Dictionary,classname:String,id:int,value):
+static func set_new(all_existing:Dictionary,classname:String,id:int,value:JSONReusable):
+	"""
+	Saves object.
+	"""
 	if id==-1:
 		return
 	var existing_of_class:Dictionary=all_existing.get(classname,{})

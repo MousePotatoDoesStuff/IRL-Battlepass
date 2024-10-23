@@ -2,6 +2,7 @@
 	"cur_workframe": {
 		"available": [
 			{
+				"id":0
 				"cur": 2,
 				"max": 4,
 				"min": 1,
