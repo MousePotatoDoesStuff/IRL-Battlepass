@@ -1,4 +1,4 @@
-extends Object
+extends JSONReusable
 class_name TaskState
 
 var task:Task
@@ -11,14 +11,16 @@ func _init(
 	in_task:Task,
 	in_min_amount: int,
 	in_max_amount: int,
-	in_cur_amount: int=-1
+	in_cur_amount: int=-1,
+	in_id: int=-1
 ):
 	self.task=in_task
 	self.min_amount = in_min_amount
 	self.max_amount = in_max_amount
 	self.cur_amount = {-1:self.min_amount}.get(in_cur_amount,in_cur_amount)
+	self.id=in_id
 
-static func from_raw(raw: Dictionary):
+static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var vars=Util.check_dict_values(raw,['task','min','max','cur'])
 	if vars == null:
 		return null
@@ -28,8 +30,10 @@ static func from_raw(raw: Dictionary):
 		if vars[i] is float:
 			vars[i]=int(vars[i])
 		assert(vars[i] is int, str(vars[i]))
-	var task=Task.from_raw(vars[0])
-	return TaskState.new(task,vars[1],vars[2],vars[3])
+	var task=Task.from_raw(vars[0], existing)
+	var ID=raw.get('id',-1)
+	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
+	return res
 
 static func from_array(rawarray: Array)->Array[TaskState]:
 	var resarray:Array[TaskState]=[]

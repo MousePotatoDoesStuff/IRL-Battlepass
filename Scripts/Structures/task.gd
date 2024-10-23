@@ -1,4 +1,4 @@
-extends Object
+extends JSONReusable
 class_name Task
 
 var name: String
@@ -10,14 +10,16 @@ func _init(
 	in_name: String,
 	in_description: String,
 	in_requirements: Dictionary,
-	in_rewards: Dictionary
+	in_rewards: Dictionary,
+	in_id: int=0
 ):
 	self.name = in_name
 	self.description = in_description
 	self.requirements = in_requirements
 	self.rewards = in_rewards
+	self.id = in_id
 
-static func from_raw(raw: Dictionary):
+static func process_from_raw(raw: Dictionary, existing: Dictionary):
 	var vars=Util.check_dict_values(raw,['name','desc','reqs','rews'])
 	if vars == null:
 		return null
@@ -25,14 +27,24 @@ static func from_raw(raw: Dictionary):
 	assert(vars[1] is String)
 	assert(vars[2] is Dictionary)
 	assert(vars[3] is Dictionary)
-	return Task.new(vars[0],vars[1],vars[2],vars[3])
+	var ID=raw.get('id',0)
+	var res=Task.new(vars[0],vars[1],vars[2],vars[3],ID)
+	return res
 
-func to_raw()->Dictionary:
-	var raw={
+static func from_raw(raw: Dictionary, existing: Dictionary={}):
+	var res=from_raw_base(raw,existing,'Task')
+	return res
+
+func to_raw(existing: Dictionary={})->Dictionary:
+	var raw={'id':self.id}
+	if check_for(raw,existing,'Task')!=null:
+		return raw
+	raw={
 		'name':self.name,
 		'desc':self.description,
 		'reqs':self.requirements,
-		'rews':self.rewards
+		'rews':self.rewards,
+		'id':self.id
 	}
 	return raw
 

@@ -1,4 +1,4 @@
-extends Object
+extends JSONReusable
 class_name WorkFrame
 
 var current_tasks:Array[TaskState]
@@ -9,15 +9,20 @@ var targets:Dictionary
 
 func _init(
 		in_current:Array[TaskState]=[], in_periodical:Dictionary={}, in_available:Array[TaskState]=[],
-		in_inventory:Dictionary={}, in_targets:Dictionary={}
+		in_inventory:Dictionary={}, in_targets:Dictionary={},
+		in_id=-1
 	) -> void:
 	self.current_tasks=in_current
 	self.periodical_tasks=in_periodical
 	self.available_tasks=in_available
 	self.inventory=in_inventory
 	self.targets=in_targets
+	self.id=in_id
 
-static func from_raw(raw: Dictionary):
+static func from_raw(raw: Dictionary, existing:Dictionary={}):
+	var old:TaskState=check_for(raw, existing, 'WorkFrame')
+	if old != null:
+		return old
 	var vars=Util.check_dict_values(raw,['current','periodical','available','inventory','targets'])
 	if vars == null:
 		return null
