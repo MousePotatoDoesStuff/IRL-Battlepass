@@ -38,7 +38,7 @@ func process_change(new_value:int):
 	else:
 		used_value=cur_taskstate.refund_resources(cur_inventory,-delta)
 	print(delta,cur_inventory)
-	set_curstate(cur_taskstate,cur_inventory)
+	set_curstate(cur_taskstate,cur_inventory,is_cur)
 	DataIsChangedSignal.emit()
 
 func pass_remove_task():

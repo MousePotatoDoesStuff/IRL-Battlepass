@@ -98,7 +98,9 @@ func set_task_list():
 	ex_cur_task_list.populate(texts)
 
 func load_task(ind:int, is_cur:bool):
-	ex_task_display.set_curstate(cur_workframe.current_tasks[ind],cur_workframe.inventory, is_cur)
+	var task=cur_workframe.current_tasks[ind]
+	var inv=cur_workframe.inventory
+	ex_task_display.set_curstate(task,inv,is_cur)
 	ex_task_display.show()
 
 func insert_task(ind:int, task:Task):
