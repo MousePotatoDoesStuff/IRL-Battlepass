@@ -22,7 +22,7 @@ static func check_for(raw:Dictionary, all_existing:Dictionary, classname:String)
 
 static func set_new(all_existing:Dictionary,classname:String,id:int,value:JSONReusable):
 	"""
-	Saves object.
+	Places newly initalised object in dictionary.
 	"""
 	if id==-1:
 		return
@@ -32,12 +32,22 @@ static func set_new(all_existing:Dictionary,classname:String,id:int,value:JSONRe
 	return
 
 static func from_raw_base(raw: Dictionary, existing: Dictionary, classname:String=''):
+	"""
+	Base
+	"""
 	var old:Task=check_for(raw, existing, classname)
 	if old != null:
 		return old
 	var res=process_from_raw(raw, existing)
 	var ID=raw.get('id',0)
 	set_new(existing,classname,ID,res)
+
+static func from_raw(raw: Dictionary, existing: Dictionary={}):
+	"""
+	Override this function with different class name value.
+	"""
+	var res=from_raw_base(raw,existing,'Change this value')
+	return res
 
 func add_new(all_existing:Dictionary,classname:String):
 	var existing_of_class:Dictionary=all_existing.get(classname,{})
