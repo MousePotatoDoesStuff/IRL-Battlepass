@@ -7,6 +7,9 @@ var available_tasks:Array[TaskState]
 var inventory:Dictionary
 var targets:Dictionary
 
+static func get_class_name():
+	return "WorkFrame"
+
 func _init(
 		in_current:Array[TaskState]=[], in_periodical:Dictionary={}, in_available:Array[TaskState]=[],
 		in_inventory:Dictionary={}, in_targets:Dictionary={},
@@ -19,10 +22,20 @@ func _init(
 	self.targets=in_targets
 	self.id=in_id
 
-static func from_raw(raw: Dictionary, existing:Dictionary={}):
-	var old:TaskState=check_for(raw, existing, 'WorkFrame')
+static func from_raw(raw: Dictionary, existing: Dictionary):
+	"""
+	Create function from processed JSON.
+	"""
+	var classname=get_class_name()
+	var old:Task=check_for(raw, existing, classname)
 	if old != null:
 		return old
+	var res=process_from_raw(raw, existing)
+	var ID=raw.get('id',0)
+	set_new(existing,classname,ID,res)
+	return res
+
+static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var vars=Util.check_dict_values(raw,['current','periodical','available','inventory','targets'])
 	if vars == null:
 		return null
@@ -34,20 +47,20 @@ static func from_raw(raw: Dictionary, existing:Dictionary={}):
 	var periodicals={}
 	for key in vars[1]:
 		var val=vars[1][key]
-		periodicals[key]=WorkFrame.from_raw(val)
-	var temp:Array[TaskState]=TaskState.from_array(vars[0])
+		periodicals[key]=WorkFrame.from_raw(val, existing)
+	var temp:Array[TaskState]=TaskState.from_array(vars[0], existing)
 	var curtasks:Array[TaskState]=temp
-	var available:Array[TaskState]=TaskState.from_array(vars[2])
+	var available:Array[TaskState]=TaskState.from_array(vars[2], existing)
 	return WorkFrame.new(curtasks, periodicals, available, vars[3], vars[4])
 
-func to_raw():
+func process_to_raw(existing):
 	var tempres={}
 	for key in self.periodical_tasks:
 		tempres[key]=self.periodical_tasks[key].to_raw()
 	var res={
-		'current'		: TaskState.to_array(self.current_tasks),
+		'current'		: TaskState.to_array(self.current_tasks, existing),
 		'periodical'	: tempres,
-		'available'		: TaskState.to_array(self.current_tasks),
+		'available'		: TaskState.to_array(self.current_tasks, existing),
 		'inventory'		: self.inventory.duplicate(),
 		'targets'		: self.targets.duplicate()
 	}

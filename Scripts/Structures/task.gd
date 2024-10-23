@@ -31,15 +31,24 @@ static func process_from_raw(raw: Dictionary, existing: Dictionary):
 	var res=Task.new(vars[0],vars[1],vars[2],vars[3],ID)
 	return res
 
-static func from_raw(raw: Dictionary, existing: Dictionary={}):
-	var res=from_raw_base(raw,existing,'Task')
+static func from_raw(raw: Dictionary, existing: Dictionary):
+	"""
+	Create function from processed JSON.
+	"""
+	var classname=get_class_name()
+	var old:Task=check_for(raw, existing, classname)
+	if old != null:
+		return old
+	var res=process_from_raw(raw, existing)
+	var ID=raw.get('id',0)
+	set_new(existing,classname,ID,res)
 	return res
 
-func to_raw(existing: Dictionary={})->Dictionary:
-	var raw={'id':self.id}
-	if check_for(raw,existing,'Task')!=null:
-		return raw
-	raw={
+static func get_class_name():
+	return "Task"
+
+func process_to_raw(existing: Dictionary={})->Dictionary:
+	var raw={
 		'name':self.name,
 		'desc':self.description,
 		'reqs':self.requirements,

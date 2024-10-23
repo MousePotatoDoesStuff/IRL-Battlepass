@@ -124,6 +124,7 @@ text = "Tasks"
 [node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
 visible = false
 layout_mode = 1
+editable = null
 
 [node name="Notes" parent="." instance=ExtResource("3_mmksw")]
 visible = false

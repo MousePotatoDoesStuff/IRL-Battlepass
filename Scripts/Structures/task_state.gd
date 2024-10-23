@@ -35,30 +35,42 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
 	return res
 
-static func from_raw(raw: Dictionary, existing: Dictionary={}):
-	var res=from_raw_base(raw,existing,'TaskState')
+static func from_raw(raw: Dictionary, existing: Dictionary):
+	"""
+	Create function from processed JSON.
+	"""
+	var classname=get_class_name()
+	var old:Task=check_for(raw, existing, classname)
+	if old != null:
+		return old
+	var res=process_from_raw(raw, existing)
+	var ID=raw.get('id',0)
+	set_new(existing,classname,ID,res)
 	return res
 
-static func from_array(rawarray: Array)->Array[TaskState]:
+static func get_class_name():
+	return "TaskState"
+
+static func from_array(rawarray: Array, existing:Dictionary)->Array[TaskState]:
 	var resarray:Array[TaskState]=[]
 	for raw in rawarray:
-		var res=from_raw(raw)
+		var res=from_raw(raw, existing)
 		if res==null:
 			continue
 		resarray.append(res)
 	return resarray
 
-static func from_dict(rawdict: Dictionary):
+static func from_dict(rawdict: Dictionary, existing:Dictionary):
 	var resdict={}
 	for key in rawdict:
 		var raw=rawdict[key]
-		var res=from_raw(raw)
+		var res=from_raw(raw, existing)
 		if res==null:
 			continue
 		resdict[key]=res
 	return resdict
 
-func to_raw()->Dictionary:
+func process_to_raw(existing: Dictionary)->Dictionary:
 	var res={
 		'task': self.task.to_raw(),
 		'min': self.min_amount,
@@ -67,21 +79,21 @@ func to_raw()->Dictionary:
 	}
 	return res
 
-static func to_array(array: Array[TaskState]):
+static func to_array(array: Array[TaskState], existing:Dictionary):
 	var resarray=[]
 	for obj in array:
-		var res=obj.to_raw()
+		var res=obj.to_raw(existing)
 		if res==null:
 			continue
 		resarray.append(res)
 	return resarray
 	
 
-static func to_dict(dict: Dictionary):
+static func to_dict(dict: Dictionary, existing:Dictionary):
 	var resdict={}
 	for key in dict:
 		var obj=dict[key]
-		var res=obj.to_raw()
+		var res=obj.to_raw(existing)
 		if res==null:
 			continue
 		resdict[key]=res

@@ -36,7 +36,7 @@ func init_data():
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
 	save_data()
 
-func load_data(data:Dictionary):
+func load_data(data:Dictionary, existing:Dictionary={}):
 	self.main_data_struct=data
 	if 'cur_workframe' not in data:
 		init_data()
@@ -44,18 +44,18 @@ func load_data(data:Dictionary):
 	self.cur_editable=data.get('editable',false)
 	
 	var raw_workframe:Dictionary=data['cur_workframe']
-	self.cur_workframe=WorkFrame.from_raw(raw_workframe)
+	self.cur_workframe=WorkFrame.from_raw(raw_workframe, existing)
 	
 	self.cur_inventory=cur_workframe.inventory
 	
 	var raw_tasks:Dictionary=data.get('tasks',[])
-	self.tasks=TaskState.from_dict(raw_tasks)
+	self.tasks=TaskState.from_dict(raw_tasks, existing)
 	
 	var raw_workframes:Dictionary=data.get('workframes',[])
 	self.workframes={}
 	for key in raw_workframes:
 		var rawframe=raw_workframes[key]
-		var frame=WorkFrame.from_raw(rawframe)
+		var frame=WorkFrame.from_raw(rawframe, existing)
 		self.workframes[key]=frame
 	
 	setup_display()
@@ -74,17 +74,17 @@ func setup_display():
 	ex_task_display.hide()
 	set_task_list()
 
-func save_data(data_storage=null):
+func save_data(data_storage=null, existing:Dictionary={}):
 	var data:Dictionary=data_storage if data_storage is Dictionary else self.main_data_struct
 	data['editable']=self.cur_editable
-	var raw_main=self.cur_workframe.to_raw()
+	var raw_main=self.cur_workframe.to_raw(existing)
 	data['cur_workframe']=raw_main
-	var raw_tasks=TaskState.to_dict(self.tasks)
+	var raw_tasks=TaskState.to_dict(self.tasks, existing)
 	data['tasks']=raw_tasks
 	var raw_workframes={}
 	for key in self.workframes:
 		var frame:WorkFrame=self.workframes[key]
-		var rawframe=frame.to_raw()
+		var rawframe=frame.to_raw(existing)
 		raw_workframes[key]=rawframe
 	data['workframes']=raw_workframes
 	return data
