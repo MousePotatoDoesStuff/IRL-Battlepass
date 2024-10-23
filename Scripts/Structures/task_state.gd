@@ -35,6 +35,10 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
 	return res
 
+static func from_raw(raw: Dictionary, existing: Dictionary={}):
+	var res=from_raw_base(raw,existing,'TaskState')
+	return res
+
 static func from_array(rawarray: Array)->Array[TaskState]:
 	var resarray:Array[TaskState]=[]
 	for raw in rawarray:

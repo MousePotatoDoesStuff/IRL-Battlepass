@@ -48,6 +48,7 @@
 	"filename": "test",
 	"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 	"name": "Test Name",
+	"notes": "wasd",
 	"tasks": {
 
 	},

@@ -23,12 +23,12 @@ static func set_new(all_existing:Dictionary,classname:String,id:int,value):
 	return
 
 static func from_raw_base(raw: Dictionary, existing: Dictionary, classname:String=''):
-	var old:Task=check_for(raw, existing, 'Task')
+	var old:Task=check_for(raw, existing, classname)
 	if old != null:
 		return old
 	var res=process_from_raw(raw, existing)
 	var ID=raw.get('id',0)
-	set_new(existing,'Task',ID,res)
+	set_new(existing,classname,ID,res)
 
 func add_new(all_existing:Dictionary,classname:String):
 	var existing_of_class:Dictionary=all_existing.get(classname,{})
