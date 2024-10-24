@@ -7,9 +7,9 @@
 
 [node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_av_task_list", "ex_cur_task_list", "ex_subframe_list", "ex_inv_disp")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.75
 anchor_bottom = 1.0
+offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
@@ -31,12 +31,14 @@ color = Color(0.454524, 0.454524, 0.454524, 1)
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
 layout_mode = 1
-anchor_left = 0.416667
-anchor_top = 0.0177778
-anchor_right = 0.958333
-anchor_bottom = 0.906667
-offset_right = 0.0
-offset_bottom = 0.0
+anchor_left = 0.496667
+anchor_top = 0.0333333
+anchor_right = 0.956667
+anchor_bottom = 0.922222
+offset_left = -47.0
+offset_top = -30.0
+offset_right = 38.9999
+offset_bottom = 70.0
 editable = false
 is_cur = false
 metadata/_edit_use_anchors_ = true

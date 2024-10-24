@@ -12,14 +12,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_csmhp")
-namenode = NodePath("Control/Inner Control/VBoxContainer/Header/Name")
-pathnode = NodePath("Control/Inner Control/VBoxContainer/Header/Filepath")
+namenode = NodePath("Sidebar/Frame/VBoxContainer/Header/Name")
+pathnode = NodePath("Sidebar/Frame/VBoxContainer/Header/Filepath")
 notesmenu = NodePath("Notes")
 taskmenu = NodePath("WorkFrameDisplay")
-functionslist = NodePath("Control/Inner Control/VBoxContainer/Functions")
-function_state_text = NodePath("Control/Inner Control/VBoxContainer/gap2/FunctionState")
+functionslist = NodePath("Sidebar/Frame/VBoxContainer/Functions")
+function_state_text = NodePath("Sidebar/Frame/VBoxContainer/gap2/FunctionState")
 
-[node name="Control" type="Control" parent="."]
+[node name="Sidebar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,7 @@ offset_right = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="bg" type="ColorRect" parent="Control"]
+[node name="bg" type="ColorRect" parent="Sidebar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="Inner Control" type="Control" parent="Control"]
+[node name="Frame" type="Control" parent="Sidebar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,28 +49,28 @@ offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Inner Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Frame"]
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 519.0
 
-[node name="Header" type="VBoxContainer" parent="Control/Inner Control/VBoxContainer"]
+[node name="Header" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
 
-[node name="Name" type="TextEdit" parent="Control/Inner Control/VBoxContainer/Header"]
+[node name="Name" type="TextEdit" parent="Sidebar/Frame/VBoxContainer/Header"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="gap" type="ColorRect" parent="Control/Inner Control/VBoxContainer/Header"]
+[node name="gap" type="ColorRect" parent="Sidebar/Frame/VBoxContainer/Header"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="Filepath" type="RichTextLabel" parent="Control/Inner Control/VBoxContainer/Header"]
+[node name="Filepath" type="RichTextLabel" parent="Sidebar/Frame/VBoxContainer/Header"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/Inner Control/VBoxContainer/Header/Filepath"]
+[node name="ColorRect" type="ColorRect" parent="Sidebar/Frame/VBoxContainer/Header/Filepath"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -80,27 +80,27 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0588235, 0.290196, 0.286275, 1)
 
-[node name="LSF" type="VBoxContainer" parent="Control/Inner Control/VBoxContainer"]
+[node name="LSF" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
 
-[node name="Save" type="Button" parent="Control/Inner Control/VBoxContainer/LSF"]
+[node name="Save" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
 layout_mode = 2
 text = "Save"
 
-[node name="SaveAs" type="Button" parent="Control/Inner Control/VBoxContainer/LSF"]
+[node name="SaveAs" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
 layout_mode = 2
 text = "Save as..."
 
-[node name="Load" type="Button" parent="Control/Inner Control/VBoxContainer/LSF"]
+[node name="Load" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
 layout_mode = 2
 text = "Load"
 
-[node name="gap2" type="ColorRect" parent="Control/Inner Control/VBoxContainer"]
+[node name="gap2" type="ColorRect" parent="Sidebar/Frame/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="FunctionState" type="RichTextLabel" parent="Control/Inner Control/VBoxContainer/gap2"]
+[node name="FunctionState" type="RichTextLabel" parent="Sidebar/Frame/VBoxContainer/gap2"]
 layout_mode = 2
 offset_top = 17.0
 offset_right = 250.0
@@ -109,22 +109,23 @@ bbcode_enabled = true
 text = "Save or load to enable functions"
 fit_content = true
 
-[node name="Functions" type="VBoxContainer" parent="Control/Inner Control/VBoxContainer"]
+[node name="Functions" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
 
-[node name="Notes" type="Button" parent="Control/Inner Control/VBoxContainer/Functions"]
+[node name="Notes" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
 layout_mode = 2
 text = "Notes
 "
 
-[node name="Tasks" type="Button" parent="Control/Inner Control/VBoxContainer/Functions"]
+[node name="Tasks" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
 layout_mode = 2
 text = "Tasks"
 
 [node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
 visible = false
 layout_mode = 1
-editable = null
+offset_left = 300.0
+offset_right = 300.0
 
 [node name="Notes" parent="." instance=ExtResource("3_mmksw")]
 visible = false
@@ -136,11 +137,11 @@ size = Vector2i(800, 500)
 access = 2
 filters = PackedStringArray("*.irlbp")
 
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/LSF/Save" to="." method="decide_save"]
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/LSF/SaveAs" to="." method="dialog_save_data"]
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Functions/Notes" to="." method="open_notes"]
-[connection signal="pressed" from="Control/Inner Control/VBoxContainer/Functions/Tasks" to="." method="open_tasks"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Save" to="." method="decide_save"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/SaveAs" to="." method="dialog_save_data"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Notes" to="." method="open_notes"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Tasks" to="." method="open_tasks"]
 [connection signal="save_and_exit" from="WorkFrameDisplay" to="." method="close_tasks"]
 [connection signal="exit" from="Notes" to="." method="close_notes"]
 [connection signal="save" from="Notes" to="." method="save_notes"]
