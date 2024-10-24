@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxkkpqrbwn1et"]
+[gd_scene load_steps=5 format=3 uid="uid://bxkkpqrbwn1et"]
 
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/work_frame_display.tscn" id="1_2fljl"]
 [ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_csmhp"]
+[ext_resource type="Script" path="res://Scripts/menu_mode_opener.gd" id="2_bpv6c"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
 
 [node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "notesmenu", "taskmenu", "functionslist", "function_state_text")]
@@ -14,8 +15,8 @@ grow_vertical = 2
 script = ExtResource("1_csmhp")
 namenode = NodePath("Sidebar/Frame/VBoxContainer/Header/Name")
 pathnode = NodePath("Sidebar/Frame/VBoxContainer/Header/Filepath")
-notesmenu = NodePath("Notes")
-taskmenu = NodePath("WorkFrameDisplay")
+notesmenu = NodePath("Mainbar/Notes")
+taskmenu = NodePath("Mainbar/WorkFrameDisplay")
 functionslist = NodePath("Sidebar/Frame/VBoxContainer/Functions")
 function_state_text = NodePath("Sidebar/Frame/VBoxContainer/gap2/FunctionState")
 
@@ -112,24 +113,20 @@ fit_content = true
 [node name="Functions" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
 
-[node name="Notes" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
+[node name="Notes" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
 layout_mode = 2
 text = "Notes
 "
+script = ExtResource("2_bpv6c")
+manager = NodePath("../../../../..")
+menu = NodePath("../../../../../Mainbar/Notes")
 
-[node name="Tasks" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
+[node name="Tasks" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
 layout_mode = 2
 text = "Tasks"
-
-[node name="WorkFrameDisplay" parent="." instance=ExtResource("1_2fljl")]
-visible = false
-layout_mode = 1
-offset_left = 300.0
-offset_right = 300.0
-
-[node name="Notes" parent="." instance=ExtResource("3_mmksw")]
-visible = false
-layout_mode = 1
+script = ExtResource("2_bpv6c")
+manager = NodePath("../../../../..")
+menu = NodePath("../../../../../Mainbar/WorkFrameDisplay")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 position = Vector2i(200, 200)
@@ -144,12 +141,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 metadata/_edit_use_anchors_ = true
 
+[node name="Notes" parent="Mainbar" instance=ExtResource("3_mmksw")]
+layout_mode = 1
+
+[node name="WorkFrameDisplay" parent="Mainbar" instance=ExtResource("1_2fljl")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+offset_right = 0.0
+editable = false
+
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Save" to="." method="decide_save"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/SaveAs" to="." method="dialog_save_data"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
-[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Notes" to="." method="open_notes"]
-[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Tasks" to="." method="open_tasks"]
-[connection signal="save_and_exit" from="WorkFrameDisplay" to="." method="close_tasks"]
-[connection signal="exit" from="Notes" to="." method="close_notes"]
-[connection signal="save" from="Notes" to="." method="save_notes"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]
+[connection signal="exit" from="Mainbar/Notes" to="." method="close_notes"]
+[connection signal="save" from="Mainbar/Notes" to="." method="save_notes"]
+[connection signal="save_and_exit" from="Mainbar/WorkFrameDisplay" to="." method="close_tasks"]

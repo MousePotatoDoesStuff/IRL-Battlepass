@@ -1,4 +1,5 @@
 extends Control
+class_name MainScene
 
 @onready var file_dialog: FileDialog = $FileDialog
 @export var namenode:TextEdit
@@ -8,6 +9,8 @@ extends Control
 @export var taskmenu:Control
 @export var functionslist:VBoxContainer
 @export var function_state_text:RichTextLabel
+
+var curmenu:MenuMode=null
 
 var data={'name':"Test Name",'filename':"test"}
 func _ready() -> void:
@@ -26,6 +29,12 @@ func toggle_functions(enabled:bool=true):
 		text='Functions enabled'
 	function_state_text.text="[center]"+text
 	return
+
+func swap_menu(next_menu:MenuMode):
+	if self.curmenu!=null:
+		self.curmenu.on_close(self.data)
+	self.curmenu=next_menu
+	self.curmenu.on_open(self.data)
 
 func open_notes():
 	notesmenu.load_notes(data.get('notes',""))

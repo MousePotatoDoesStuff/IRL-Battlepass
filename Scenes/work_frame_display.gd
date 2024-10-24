@@ -1,4 +1,4 @@
-extends Control
+extends MenuMode
 
 
 signal save_and_exit
@@ -35,6 +35,14 @@ func init_data():
 	var TSA:Array[TaskState]=[TS]
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
 	save_data()
+
+func on_open(data:Dictionary):
+	show()
+	return
+
+func on_close(data:Dictionary):
+	hide()
+	return
 
 func load_data(data:Dictionary, existing:Dictionary={}):
 	self.main_data_struct=data
