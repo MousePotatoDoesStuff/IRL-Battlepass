@@ -42,6 +42,22 @@ func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
 		self.curmenu.on_open(self.data,self.existing)
 
+func init_data():
+	var raw_workframe={
+		
+	}
+	self.existing={}
+	self.data={
+		"filename": "test",
+		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
+		"name": "Test Name",
+		
+		"editable": true,
+		"cur_workframe": raw_workframe,
+		"notes": "Type your notes here."
+	}
+	toggle_functions(true)
+
 func dialog_load_data():
 	var filepath=data.get('filepath')
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
@@ -81,7 +97,6 @@ func finish_dialog(path: String) -> void:
 	else:
 		load_data(path)
 	file_dialog.hide()
-	toggle_functions(true)
 
 func save_data(path: String):
 	data['name']=namenode.text
@@ -109,3 +124,4 @@ func load_data(path:String):
 	pathnode.text=path
 	if self.curmenu:
 		self.curmenu.on_open(self.data,self.existing)
+	toggle_functions(true)

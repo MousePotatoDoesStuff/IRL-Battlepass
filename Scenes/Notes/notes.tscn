@@ -27,3 +27,5 @@ anchor_top = 0.0987654
 anchor_right = 0.944444
 anchor_bottom = 0.79321
 metadata/_edit_use_anchors_ = true
+
+[connection signal="text_changed" from="TextEdit" to="." method="on_edited"]

@@ -161,6 +161,7 @@ anchors_preset = 15
 anchor_right = 1.0
 offset_right = 0.0
 
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/New" to="." method="init_data"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Save" to="." method="decide_save"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/SaveAs" to="." method="dialog_save_data"]

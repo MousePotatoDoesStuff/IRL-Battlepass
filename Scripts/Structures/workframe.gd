@@ -23,22 +23,27 @@ func _init(
 	self.id=in_id
 
 static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
-	var vars=Util.check_dict_values(raw,['current','periodical','available','inventory','targets'])
-	if vars == null:
-		return null
-	assert(vars[0] is Array)
-	assert(vars[1] is Dictionary)
-	assert(vars[2] is Array)
-	assert(vars[3] is Dictionary)
-	assert(vars[4] is Dictionary)
+	var raw_curtasks:Array=raw.get('current',[])
+	var raw_periodical:Dictionary=raw.get('periodical',{})
+	var raw_available:Array=raw.get('available',[])
+	var raw_inventory:Dictionary=raw.get('inventory',{})
+	var raw_targets:Dictionary=raw.get('targets',{})
+	
+	assert(raw_curtasks is Array)
+	assert(raw_periodical is Dictionary)
+	assert(raw_available is Array)
+	assert(raw_inventory is Dictionary)
+	assert(raw_targets is Dictionary)
+	
 	var periodicals={}
-	for key in vars[1]:
-		var val=vars[1][key]
+	for key in raw_periodical:
+		var val=raw_periodical[key]
 		periodicals[key]=WorkFrame.from_raw(val, existing)
-	var temp:Array[TaskState]=TaskState.from_array(vars[0], existing)
+	
+	var temp:Array[TaskState]=TaskState.from_array(raw_curtasks, existing)
 	var curtasks:Array[TaskState]=temp
-	var available:Array[TaskState]=TaskState.from_array(vars[2], existing)
-	return WorkFrame.new(curtasks, periodicals, available, vars[3], vars[4])
+	var available:Array[TaskState]=TaskState.from_array(raw_available, existing)
+	return WorkFrame.new(curtasks, periodicals, available, raw_inventory, raw_targets)
 
 static func from_raw(raw: Dictionary, existing: Dictionary):
 	"""

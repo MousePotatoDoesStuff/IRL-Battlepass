@@ -1,8 +1,13 @@
 [
 	{
+		"cur_workframe": {
+
+		},
+		"editable": true,
 		"filename": "test",
 		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
-		"name": "Test Name"
+		"name": "Test Name",
+		"notes": "Type your notes here."
 	},
 	{
 

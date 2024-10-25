@@ -34,6 +34,9 @@ func init_data():
 	var B={"Nice 2 meet u":1}
 	var TSA:Array[TaskState]=[TS]
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
+	var existing={}
+	print(cur_workframe.to_raw(existing))
+	print(existing)
 	save_data()
 
 func on_open(data:Dictionary, existing:Dictionary):
@@ -58,10 +61,10 @@ func load_data(data:Dictionary, existing:Dictionary={}):
 	
 	self.cur_inventory=cur_workframe.inventory
 	
-	var raw_tasks:Dictionary=data.get('tasks',[])
+	var raw_tasks:Dictionary=data.get('tasks',{})
 	self.tasks=TaskState.from_dict(raw_tasks, existing)
 	
-	var raw_workframes:Dictionary=data.get('workframes',[])
+	var raw_workframes:Dictionary=data.get('workframes',{})
 	self.workframes={}
 	for key in raw_workframes:
 		var rawframe=raw_workframes[key]

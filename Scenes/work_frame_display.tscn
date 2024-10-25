@@ -38,8 +38,6 @@ offset_left = -47.0
 offset_top = -30.0
 offset_right = 38.9999
 offset_bottom = 70.0
-editable = false
-is_cur = false
 metadata/_edit_use_anchors_ = true
 
 [node name="ATL" parent="." instance=ExtResource("2_m1g5f")]
