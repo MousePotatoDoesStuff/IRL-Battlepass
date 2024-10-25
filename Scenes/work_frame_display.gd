@@ -36,11 +36,13 @@ func init_data():
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
 	save_data()
 
-func on_open(data:Dictionary):
+func on_open(data:Dictionary, existing:Dictionary):
+	load_data(data, existing)
 	show()
 	return
 
-func on_close(data:Dictionary):
+func on_close(data:Dictionary, existing:Dictionary):
+	save_data(data, existing)
 	hide()
 	return
 

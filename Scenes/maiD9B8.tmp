@@ -84,10 +84,13 @@ color = Color(0.0588235, 0.290196, 0.286275, 1)
 [node name="LSF" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
 
-[node name="New" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
+[node name="Save" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
 layout_mode = 2
-text = "New
-"
+text = "Save"
+
+[node name="SaveAs" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
+layout_mode = 2
+text = "Save as..."
 
 [node name="Load" type="Button" parent="Sidebar/Frame/VBoxContainer/LSF"]
 layout_mode = 2
@@ -100,27 +103,15 @@ color = Color(0, 0.570912, 0.567987, 1)
 
 [node name="FunctionState" type="RichTextLabel" parent="Sidebar/Frame/VBoxContainer/gap2"]
 layout_mode = 2
+offset_top = 17.0
 offset_right = 250.0
-offset_bottom = 23.0
+offset_bottom = 40.0
 bbcode_enabled = true
-text = "[center]Text"
+text = "Save or load to enable functions"
 fit_content = true
 
 [node name="Functions" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
-
-[node name="Save" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save"
-
-[node name="SaveAs" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save as..."
-
-[node name="gap3" type="ColorRect" parent="Sidebar/Frame/VBoxContainer/Functions"]
-custom_minimum_size = Vector2(50, 25)
-layout_mode = 2
-color = Color(0, 0.570912, 0.567987, 1)
 
 [node name="Notes" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
 layout_mode = 2
@@ -155,15 +146,15 @@ visible = false
 layout_mode = 1
 
 [node name="WorkFrameDisplay" parent="Mainbar" instance=ExtResource("1_2fljl")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 offset_right = 0.0
+editable = false
 
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Save" to="." method="decide_save"]
+[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/SaveAs" to="." method="dialog_save_data"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
-[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/Save" to="." method="decide_save"]
-[connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/SaveAs" to="." method="dialog_save_data"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]
 [connection signal="exit" from="Mainbar/Notes" to="." method="close_notes"]
 [connection signal="save" from="Mainbar/Notes" to="." method="save_notes"]

@@ -42,6 +42,7 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	var res=process_from_raw(raw, existing)
 	var ID=raw.get('id',0)
 	set_new(existing,classname,ID,res)
+	raw['id']=ID+1
 	return res
 
 static func get_class_name():

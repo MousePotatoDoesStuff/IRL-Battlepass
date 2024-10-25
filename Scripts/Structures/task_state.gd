@@ -14,6 +14,7 @@ func _init(
 	in_cur_amount: int=-1,
 	in_id: int=-1
 ):
+	assert(in_task is Task)
 	self.task=in_task
 	self.min_amount = in_min_amount
 	self.max_amount = in_max_amount
@@ -30,7 +31,7 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 		if vars[i] is float:
 			vars[i]=int(vars[i])
 		assert(vars[i] is int, str(vars[i]))
-	var task=Task.from_raw(vars[0], existing)
+	var task:Task=Task.from_raw(vars[0], existing)
 	var ID=raw.get('id',-1)
 	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
 	return res
@@ -46,6 +47,7 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	var res=process_from_raw(raw, existing)
 	var ID=raw.get('id',0)
 	set_new(existing,classname,ID,res)
+	raw['id']=ID+1
 	return res
 
 static func get_class_name():
@@ -57,6 +59,7 @@ static func from_array(rawarray: Array, existing:Dictionary)->Array[TaskState]:
 		var res=from_raw(raw, existing)
 		if res==null:
 			continue
+		assert(res is TaskState)
 		resarray.append(res)
 	return resarray
 

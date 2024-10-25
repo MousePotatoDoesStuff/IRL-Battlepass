@@ -13,6 +13,7 @@ class_name MainScene
 var curmenu:MenuMode=null
 
 var data={'name':"Test Name",'filename':"test"}
+var existing={}
 func _ready() -> void:
 	assert(namenode!=null)
 	assert(pathnode!=null)
@@ -22,9 +23,13 @@ func _ready() -> void:
 	toggle_functions(false)
 
 func toggle_functions(enabled:bool=true):
-	for obj:Button in self.functionslist.get_children():
+	var buttons:Array[Button]=[]
+	for obj in self.functionslist.get_children():
+		if obj is Button:
+			buttons.append(obj)
+	for obj in buttons:
 		obj.disabled=not enabled
-	var text='Save or load to enable functions'
+	var text='Create new or load to enable functions'
 	if enabled:
 		text='Functions enabled'
 	function_state_text.text="[center]"+text
@@ -32,29 +37,10 @@ func toggle_functions(enabled:bool=true):
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
-		self.curmenu.on_close(self.data)
+		self.curmenu.on_close(self.data,self.existing)
 	self.curmenu=next_menu
-	self.curmenu.on_open(self.data)
-
-func open_notes():
-	notesmenu.load_notes(data.get('notes',""))
-	notesmenu.show()
-
-func open_tasks() -> void:
-	taskmenu.load_data(data)
-	taskmenu.show()
-
-func close_notes():
-	notesmenu.hide()
-
-func close_tasks():
-	taskmenu.save_data(data)
-	taskmenu.hide()
-	decide_save()
-
-func save_notes(notes:String):
-	data['notes']=notes
-	decide_save()
+	if self.curmenu!=null:
+		self.curmenu.on_open(self.data,self.existing)
 
 func dialog_load_data():
 	var filepath=data.get('filepath')
@@ -70,7 +56,7 @@ func dialog_load_data():
 func decide_save():
 	data['name']=namenode.text
 	var filepath=data.get('filepath')
-	if filepath==null:
+	if not filepath:
 		dialog_save_data()
 	else:
 		file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
@@ -99,7 +85,9 @@ func finish_dialog(path: String) -> void:
 
 func save_data(path: String):
 	data['name']=namenode.text
-	var raw=JSON.stringify(data,"\t",true)
+	var existing_raw=JSONManager.save_existing(self.existing)
+	var pre_raw=[self.data,existing_raw]
+	var raw=JSON.stringify(pre_raw,"\t",true)
 	var savefile=FileAccess.open(path,FileAccess.WRITE)
 	savefile.store_line(raw)
 	savefile.close()
@@ -108,6 +96,16 @@ func load_data(path:String):
 	var savefile=FileAccess.open(path,FileAccess.READ)
 	var raw=savefile.get_as_text()
 	savefile.close()
-	data=JSON.parse_string(raw)
+	var temp_data=JSON.parse_string(raw)
+	if temp_data is Array:
+		self.data=temp_data[0]
+		self.existing=JSONManager.load_existing(temp_data[1])
+	elif temp_data is Dictionary:
+		self.data=temp_data
+		self.existing={}
+	else:
+		assert(false,"Wrong savefile data type!")
 	namenode.text=data.get('name','Untitled')
 	pathnode.text=path
+	if self.curmenu:
+		self.curmenu.on_open(self.data,self.existing)

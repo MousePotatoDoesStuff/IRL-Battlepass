@@ -1,5 +1,10 @@
-{
-	"filename": "test",
-	"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
-	"name": "Test Name"
-}
+[
+	{
+		"filename": "test",
+		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
+		"name": "Test Name"
+	},
+	{
+
+	}
+]

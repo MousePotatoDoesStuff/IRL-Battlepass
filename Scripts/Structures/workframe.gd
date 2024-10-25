@@ -22,19 +22,6 @@ func _init(
 	self.targets=in_targets
 	self.id=in_id
 
-static func from_raw(raw: Dictionary, existing: Dictionary):
-	"""
-	Create function from processed JSON.
-	"""
-	var classname=get_class_name()
-	var old:Task=check_for(raw, existing, classname)
-	if old != null:
-		return old
-	var res=process_from_raw(raw, existing)
-	var ID=raw.get('id',0)
-	set_new(existing,classname,ID,res)
-	return res
-
 static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var vars=Util.check_dict_values(raw,['current','periodical','available','inventory','targets'])
 	if vars == null:
@@ -52,6 +39,20 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var curtasks:Array[TaskState]=temp
 	var available:Array[TaskState]=TaskState.from_array(vars[2], existing)
 	return WorkFrame.new(curtasks, periodicals, available, vars[3], vars[4])
+
+static func from_raw(raw: Dictionary, existing: Dictionary):
+	"""
+	Create function from processed JSON.
+	"""
+	var classname=get_class_name()
+	var old:Task=check_for(raw, existing, classname)
+	if old != null:
+		return old
+	var res=process_from_raw(raw, existing)
+	var ID=raw.get('id',0)
+	set_new(existing,classname,ID,res)
+	raw['id']=ID+1
+	return res
 
 func process_to_raw(existing):
 	var tempres={}
@@ -71,8 +72,10 @@ func get_cur_tasks():
 
 func get_cur_task_names()->Array[String]:
 	var names:Array[String]=[]
-	for task in self.current_tasks:
-		names.append(task.task.name)
+	for taskstate:TaskState in self.current_tasks:
+		var task:Task=taskstate.task
+		var name=task.name
+		names.append(name)
 	return names
 
 func get_avail_tasks():

@@ -13,7 +13,6 @@ offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
-editable = null
 ex_task_display = NodePath("Task Display")
 ex_av_task_list = NodePath("ATL")
 ex_cur_task_list = NodePath("CTL")

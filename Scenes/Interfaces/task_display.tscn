@@ -12,8 +12,6 @@ offset_right = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c5o8w")
-editable = null
-is_cur = null
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1

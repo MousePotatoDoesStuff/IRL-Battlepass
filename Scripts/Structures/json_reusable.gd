@@ -45,6 +45,7 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	var res=process_from_raw(raw, existing)
 	var ID=raw.get('id',0)
 	set_new(existing,classname,ID,res)
+	raw['id']=ID+1
 	assert(false,"Copy this function into your class, omitting this line")
 	return res
 
@@ -55,11 +56,12 @@ func process_to_raw(existing:Dictionary):
 	assert(false,"You forgot to implement process_to_raw!")
 
 func to_raw(existing: Dictionary={})->Dictionary:
+	if self.id==-1:
+		return process_to_raw(existing)
 	var raw={'id':self.id}
-	if check_for(raw,existing,get_class_name())!=null:
-		return raw
-	raw=process_to_raw(existing)
-	return raw
+	if not check_for(raw,existing,get_class_name()):
+		existing[self.id]=process_to_raw(existing)
+	return {'id':self.id}
 
 func add_new(all_existing:Dictionary,classname:String):
 	var existing_of_class:Dictionary=all_existing.get(classname,{})
