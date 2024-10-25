@@ -44,7 +44,7 @@ func swap_menu(next_menu:MenuMode):
 
 func init_data():
 	var raw_workframe={
-		
+		"id":0
 	}
 	self.existing={}
 	self.data={
@@ -99,6 +99,8 @@ func finish_dialog(path: String) -> void:
 	file_dialog.hide()
 
 func save_data(path: String):
+	if self.curmenu:
+		self.curmenu.on_close(self.data,self.existing)
 	data['name']=namenode.text
 	var existing_raw=JSONManager.save_existing(self.existing)
 	var pre_raw=[self.data,existing_raw]

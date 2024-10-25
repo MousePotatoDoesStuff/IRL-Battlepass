@@ -43,7 +43,8 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var temp:Array[TaskState]=TaskState.from_array(raw_curtasks, existing)
 	var curtasks:Array[TaskState]=temp
 	var available:Array[TaskState]=TaskState.from_array(raw_available, existing)
-	return WorkFrame.new(curtasks, periodicals, available, raw_inventory, raw_targets)
+	return WorkFrame.new(curtasks, periodicals, available,
+	raw_inventory, raw_targets, raw.get('id',-1))
 
 static func from_raw(raw: Dictionary, existing: Dictionary):
 	"""
@@ -53,10 +54,10 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	var old:Task=check_for(raw, existing, classname)
 	if old != null:
 		return old
-	var res=process_from_raw(raw, existing)
-	var ID=raw.get('id',0)
+	var res:JSONReusable=process_from_raw(raw, existing)
+	var ID=raw.get('id',-1)
 	set_new(existing,classname,ID,res)
-	raw['id']=ID+1
+	raw['id']=res.id
 	return res
 
 func process_to_raw(existing):

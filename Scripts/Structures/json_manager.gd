@@ -35,6 +35,6 @@ static func save_existing(existing:Dictionary):
 				newsub[name]=subexisting[name]
 				continue
 			var obj:JSONReusable=subexisting[name]
-			var raw=obj.to_raw(newexisting)
+			var raw=obj.process_to_raw(newexisting)
 			newsub[name]=raw
 	return newexisting

@@ -28,6 +28,7 @@ static func set_new(all_existing:Dictionary,classname:String,id:int,value:JSONRe
 	Places newly initalised object in dictionary.
 	"""
 	if id==-1:
+		value.add_new(all_existing,classname)
 		return
 	var existing_of_class:Dictionary=all_existing.get(classname,{})
 	all_existing[classname]=existing_of_class
@@ -42,10 +43,10 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	var old:Task=check_for(raw, existing, classname)
 	if old != null:
 		return old
-	var res=process_from_raw(raw, existing)
-	var ID=raw.get('id',0)
+	var res:JSONReusable=process_from_raw(raw, existing)
+	var ID=raw.get('id',-1)
 	set_new(existing,classname,ID,res)
-	raw['id']=ID+1
+	raw['id']=res.id
 	assert(false,"Copy this function into your class, omitting this line")
 	return res
 
@@ -59,8 +60,9 @@ func to_raw(existing: Dictionary={})->Dictionary:
 	if self.id==-1:
 		return process_to_raw(existing)
 	var raw={'id':self.id}
-	if not check_for(raw,existing,get_class_name()):
-		existing[self.id]=process_to_raw(existing)
+	var classname=get_class_name()
+	if not check_for(raw,existing,classname):
+		existing[classname][self.id]=process_to_raw(existing)
 	return {'id':self.id}
 
 func add_new(all_existing:Dictionary,classname:String):

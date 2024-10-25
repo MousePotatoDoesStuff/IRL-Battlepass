@@ -21,6 +21,7 @@ var cur_task_ind:int
 var is_cur_in_workframe:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	return
 	init_data()
 	var raw_test_data=JSON.stringify(main_data_struct,"  ")
 	print(cur_workframe.current_tasks)

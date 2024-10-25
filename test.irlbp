@@ -1,15 +1,35 @@
 [
 	{
 		"cur_workframe": {
-
+			"id": 0
 		},
 		"editable": true,
 		"filename": "test",
 		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 		"name": "Test Name",
-		"notes": "Type your notes here."
+		"notes": "Type your notes here.",
+		"tasks": {
+
+		},
+		"workframes": {
+
+		}
 	},
 	{
+		"WorkFrame": {
+			"0": {
+				"available": [],
+				"current": [],
+				"inventory": {
 
+				},
+				"periodical": {
+
+				},
+				"targets": {
+
+				}
+			}
+		}
 	}
 ]
