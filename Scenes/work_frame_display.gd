@@ -10,6 +10,7 @@ signal save_and_exit
 @export var ex_cur_task_list:Control
 @export var ex_subframe_list:Control
 @export var ex_inv_disp:InventoryDisplay
+var existing=null
 var main_data_struct={}
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
@@ -51,6 +52,7 @@ func on_close(data:Dictionary, existing:Dictionary):
 	return
 
 func load_data(data:Dictionary, existing:Dictionary={}):
+	self.existing=existing
 	self.main_data_struct=data
 	if 'cur_workframe' not in data:
 		init_data()
@@ -108,12 +110,24 @@ func set_workframe(workframe:WorkFrame):
 	self.set_task_list()
 
 func set_task_list():
-	var texts:Array[String]=cur_workframe.get_cur_task_names()
+	var texts:Array[String]=cur_workframe.get_cur_task_names().duplicate()
+	texts.append("New task...")
 	ex_cur_task_list.populate(texts)
 
 func load_task(ind:int, is_cur:bool):
-	var source:Array[TaskState]=[cur_workframe.current_tasks,cur_workframe.current_tasks][int(is_cur)]
-	var task=source[ind]
+	var source:Array[TaskState]=[
+		self.tasks,
+		cur_workframe.current_tasks
+	][int(is_cur)]
+	var task:TaskState=null
+	if len(source)==ind:
+		var basetask:Task=Task.new("Untitled","Add description here",{},{})
+		basetask.add_new(self.existing,'Task')
+		task=TaskState.new(basetask,0,1,0)
+		task.add_new(self.existing,'TaskState')
+		source.append(task)
+		self.setup_display()
+	task=source[ind]
 	var inv=cur_workframe.inventory
 	ex_task_display.set_curstate(task,inv,is_cur)
 	ex_task_display.show()
