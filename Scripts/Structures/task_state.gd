@@ -32,13 +32,8 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 		if vars[i] is float:
 			vars[i]=int(vars[i])
 		assert(vars[i] is int, str(vars[i]))
-	var task:Task=Task.from_raw(vars[0], existing)
 	var ID=raw.get('id',-1)
-	var raw_frame=raw.get('workframe',null)
-	var work_frame=null
-	if raw_frame != null:
-		work_frame=WorkFrame.from_raw(raw_frame,existing)
-	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
+	var res=TaskState.new(null,vars[1],vars[2],vars[3],ID)
 	return res
 
 static func from_raw(raw: Dictionary, existing: Dictionary):
@@ -54,6 +49,11 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	set_new(existing,classname,ID,res)
 	raw['id']=res.id
 	return res
+
+func postprocess(complex_values: Array):
+	self.task=complex_values[0]
+	self.task_frame=complex_values[1]
+	assert(false,"Postprocessing function not implemented!")
 
 static func get_class_name():
 	return "TaskState"

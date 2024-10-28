@@ -45,7 +45,7 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	raw['id']=res.id
 	return res
 
-func postprocess(complex_values: Dictionary):
+func postprocess(complex_values: Array):
 	return
 
 static func get_class_name():

@@ -54,7 +54,7 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	assert(false,"Copy this function into your class, omitting this line")
 	return res
 
-func postprocess(complex_values: Dictionary):
+func postprocess(complex_values: Array):
 	assert(false,"Postprocessing function not implemented!")
 
 func process_to_raw(existing:Dictionary):
