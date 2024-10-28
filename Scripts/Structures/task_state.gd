@@ -79,12 +79,15 @@ static func from_dict(rawdict: Dictionary, existing:Dictionary):
 	return resdict
 
 func process_to_raw(existing: Dictionary)->Dictionary:
+	var tf=null
+	if self.task_frame!=null:
+		tf=self.task_frame.to_raw(existing)
 	var res={
 		'task': self.task.to_raw(),
 		'min': self.min_amount,
 		'max': self.max_amount,
 		'cur': self.cur_amount,
-		'workframe':self.task_frame.to_raw(existing)
+		'workframe':tf
 	}
 	return res
 

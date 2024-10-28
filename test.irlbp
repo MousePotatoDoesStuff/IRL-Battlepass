@@ -8,18 +8,50 @@
 		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 		"name": "Test Name",
 		"notes": "Type your notes here.",
-		"tasks": {
-
-		},
+		"tasks": [],
 		"workframes": {
 
 		}
 	},
 	{
+		"Task": {
+			"0": {
+				"desc": "Add description here",
+				"id": 0,
+				"name": "Untitled",
+				"reqs": {
+
+				},
+				"rews": {
+
+				}
+			},
+			"next": 1
+		},
+		"TaskState": {
+			"0": {
+				"cur": 0,
+				"max": 1,
+				"min": 0,
+				"task": {
+					"id": 0
+				},
+				"workframe": null
+			},
+			"next": 1
+		},
 		"WorkFrame": {
 			"0": {
-				"available": [],
-				"current": [],
+				"available": [
+					{
+						"id": 0
+					}
+				],
+				"current": [
+					{
+						"id": 0
+					}
+				],
 				"inventory": {
 
 				},

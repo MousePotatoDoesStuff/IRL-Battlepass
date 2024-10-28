@@ -45,6 +45,9 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	raw['id']=res.id
 	return res
 
+func postprocess(complex_values: Dictionary):
+	return
+
 static func get_class_name():
 	return "Task"
 

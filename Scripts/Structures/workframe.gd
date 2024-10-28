@@ -46,12 +46,12 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	return WorkFrame.new(curtasks, periodicals, available,
 	raw_inventory, raw_targets, raw.get('id',-1))
 
-static func from_raw(raw: Dictionary, existing: Dictionary):
+static func from_raw(raw: Dictionary, existing: Dictionary)->WorkFrame:
 	"""
 	Create function from processed JSON.
 	"""
 	var classname=get_class_name()
-	var old:Task=check_for(raw, existing, classname)
+	var old=check_for(raw, existing, classname)
 	if old != null:
 		return old
 	var res:JSONReusable=process_from_raw(raw, existing)

@@ -14,7 +14,6 @@ I ain't the smartest tool in the shed
 	var L=s.replace("\n","").split(" ")
 	populate(L)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

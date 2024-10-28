@@ -20,6 +20,10 @@ static func check_for(raw:Dictionary, all_existing:Dictionary, classname:String)
 		return null
 	var existing_of_class:Dictionary=all_existing[classname]
 	var ID=raw.get('id',-1)
+	if ID not in existing_of_class:
+		ID=str(ID)
+	if ID not in existing_of_class:
+		ID=str(ID)
 	var cur_state=existing_of_class.get(ID,null)
 	return cur_state
 
@@ -50,6 +54,9 @@ static func from_raw(raw: Dictionary, existing: Dictionary):
 	assert(false,"Copy this function into your class, omitting this line")
 	return res
 
+func postprocess(complex_values: Dictionary):
+	assert(false,"Postprocessing function not implemented!")
+
 func process_to_raw(existing:Dictionary):
 	"""
 	Creates object. Must be implemented in inheritor class.
@@ -62,14 +69,18 @@ func to_raw(existing: Dictionary={})->Dictionary:
 	var raw={'id':self.id}
 	var classname=get_class_name()
 	if not check_for(raw,existing,classname):
-		existing[classname][self.id]=process_to_raw(existing)
+		var rawtemp=process_to_raw(existing)
+		var tempopen=existing.get_or_add(classname,{})
+		tempopen[self.id]=rawtemp
 	return {'id':self.id}
 
-func add_new(all_existing:Dictionary,classname:String):
+func add_new(all_existing:Dictionary,classname:String,raw_form:bool=false):
 	var existing_of_class:Dictionary=all_existing.get(classname,{})
 	all_existing[classname]=existing_of_class
-	var id=existing_of_class.get('next',0)
-	existing_of_class[id]=self
-	id+=1
-	existing_of_class['next']=id
+	self.id=existing_of_class.get('next',0)
+	var form=self
+	if raw_form:
+		form=self.to_raw(all_existing)
+	existing_of_class[id]=form
+	existing_of_class['next']=self.id+1
 	return
