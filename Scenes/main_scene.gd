@@ -13,7 +13,6 @@ class_name MainScene
 var curmenu:MenuMode=null
 
 var data={'name':"Test Name",'filename':"test"}
-var existing={}
 func _ready() -> void:
 	assert(namenode!=null)
 	assert(pathnode!=null)
@@ -37,19 +36,17 @@ func toggle_functions(enabled:bool=true):
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
-		self.curmenu.on_close(self.data,self.existing)
+		self.curmenu.on_close(self.data)
 	self.curmenu=next_menu
 	if self.curmenu!=null:
-		self.curmenu.on_open(self.data,self.existing)
+		self.curmenu.on_open(self.data)
 
 func init_data():
 	var raw_workframe={
-		"id":0
 	}
-	self.existing={}
 	self.data={
 		"filename": "test",
-		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
+		# "filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 		"name": "Test Name",
 		
 		"editable": true,
@@ -100,11 +97,9 @@ func finish_dialog(path: String) -> void:
 
 func save_data(path: String):
 	if self.curmenu:
-		self.curmenu.on_close(self.data,self.existing)
+		self.curmenu.on_close(self.data)
 	data['name']=namenode.text
-	var existing_raw=JSONManager.save_existing(self.existing)
-	var pre_raw=[self.data,existing_raw]
-	var raw=JSON.stringify(pre_raw,"\t",true)
+	var raw=JSON.stringify(self.data,"\t",true)
 	var savefile=FileAccess.open(path,FileAccess.WRITE)
 	savefile.store_line(raw)
 	savefile.close()
@@ -116,14 +111,12 @@ func load_data(path:String):
 	var temp_data=JSON.parse_string(raw)
 	if temp_data is Array:
 		self.data=temp_data[0]
-		self.existing=JSONManager.load_existing(temp_data[1])
 	elif temp_data is Dictionary:
 		self.data=temp_data
-		self.existing={}
 	else:
 		assert(false,"Wrong savefile data type!")
 	namenode.text=data.get('name','Untitled')
 	pathnode.text=path
 	if self.curmenu:
-		self.curmenu.on_open(self.data,self.existing)
+		self.curmenu.on_open(self.data)
 	toggle_functions(true)

@@ -10,7 +10,7 @@ signal save_and_exit
 @export var ex_cur_task_list:Control
 @export var ex_subframe_list:Control
 @export var ex_inv_disp:InventoryDisplay
-var existing=null
+
 var main_data_struct={}
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
@@ -37,22 +37,20 @@ func init_data():
 	var TSA:Array[TaskState]=[TS]
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
 	var existing={}
-	print(cur_workframe.to_raw(existing))
-	print(existing)
+	print(cur_workframe.to_raw())
 	save_data()
 
-func on_open(data:Dictionary, existing:Dictionary):
-	load_data(data, existing)
+func on_open(data:Dictionary):
+	load_data(data)
 	show()
 	return
 
-func on_close(data:Dictionary, existing:Dictionary):
-	save_data(data, existing)
+func on_close(data:Dictionary):
+	save_data(data)
 	hide()
 	return
 
-func load_data(data:Dictionary, existing:Dictionary={}):
-	self.existing=existing
+func load_data(data:Dictionary):
 	self.main_data_struct=data
 	if 'cur_workframe' not in data:
 		init_data()
@@ -60,18 +58,18 @@ func load_data(data:Dictionary, existing:Dictionary={}):
 	self.cur_editable=data.get('editable',false)
 	
 	var raw_workframe:Dictionary=data['cur_workframe']
-	self.cur_workframe=WorkFrame.from_raw(raw_workframe, existing)
+	self.cur_workframe=WorkFrame.from_raw(raw_workframe)
 	
 	self.cur_inventory=cur_workframe.inventory
 	
 	var raw_tasks:Array=data.get('tasks',[])
-	self.tasks=TaskState.from_array(raw_tasks, existing)
+	self.tasks=TaskState.from_array(raw_tasks)
 	
 	var raw_workframes:Dictionary=data.get('workframes',{})
 	self.workframes={}
 	for key in raw_workframes:
 		var rawframe=raw_workframes[key]
-		var frame=WorkFrame.from_raw(rawframe, existing)
+		var frame=WorkFrame.from_raw(rawframe)
 		self.workframes[key]=frame
 	
 	setup_display()
@@ -90,17 +88,17 @@ func setup_display():
 	ex_task_display.hide()
 	set_task_list()
 
-func save_data(data_storage=null, existing:Dictionary={}):
+func save_data(data_storage=null):
 	var data:Dictionary=data_storage if data_storage is Dictionary else self.main_data_struct
 	data['editable']=self.cur_editable
-	var raw_main=self.cur_workframe.to_raw(existing)
+	var raw_main=self.cur_workframe.to_raw()
 	data['cur_workframe']=raw_main
-	var raw_tasks=TaskState.to_array(self.tasks, existing)
+	var raw_tasks=TaskState.to_array(self.tasks)
 	data['tasks']=raw_tasks
 	var raw_workframes={}
 	for key in self.workframes:
 		var frame:WorkFrame=self.workframes[key]
-		var rawframe=frame.to_raw(existing)
+		var rawframe=frame.to_raw()
 		raw_workframes[key]=rawframe
 	data['workframes']=raw_workframes
 	return data
@@ -122,9 +120,7 @@ func load_task(ind:int, is_cur:bool):
 	var task:TaskState=null
 	if len(source)==ind:
 		var basetask:Task=Task.new("Untitled","Add description here",{},{})
-		basetask.add_new(self.existing,'Task')
 		task=TaskState.new(basetask,0,1,0)
-		task.add_new(self.existing,'TaskState')
 		source.append(task)
 		self.setup_display()
 	task=source[ind]

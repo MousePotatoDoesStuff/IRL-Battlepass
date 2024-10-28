@@ -1,67 +1,56 @@
-[
-	{
-		"cur_workframe": {
-			"id": 0
-		},
-		"editable": true,
-		"filename": "test",
-		"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
-		"name": "Test Name",
-		"notes": "Type your notes here.",
-		"tasks": [],
-		"workframes": {
-
-		}
-	},
-	{
-		"Task": {
-			"0": {
-				"desc": "Add description here",
-				"id": 0,
-				"name": "Untitled",
-				"reqs": {
-
-				},
-				"rews": {
-
-				}
-			},
-			"next": 1
-		},
-		"TaskState": {
-			"0": {
+{
+	"cur_workframe": {
+		"available": [
+			{
 				"cur": 0,
 				"max": 1,
 				"min": 0,
 				"task": {
-					"id": 0
-				},
-				"workframe": null
-			},
-			"next": 1
-		},
-		"WorkFrame": {
-			"0": {
-				"available": [
-					{
-						"id": 0
+					"desc": "Add description here",
+					"name": "Untitled",
+					"reqs": {
+
+					},
+					"rews": {
+
 					}
-				],
-				"current": [
-					{
-						"id": 0
-					}
-				],
-				"inventory": {
-
-				},
-				"periodical": {
-
-				},
-				"targets": {
-
 				}
 			}
+		],
+		"current": [
+			{
+				"cur": 0,
+				"max": 1,
+				"min": 0,
+				"task": {
+					"desc": "Add description here",
+					"name": "Untitled",
+					"reqs": {
+
+					},
+					"rews": {
+
+					}
+				}
+			}
+		],
+		"inventory": {
+
+		},
+		"periodical": {
+
+		},
+		"targets": {
+
 		}
+	},
+	"editable": true,
+	"filename": "test",
+	"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
+	"name": "Test Name",
+	"notes": "Type your notes here.",
+	"tasks": [],
+	"workframes": {
+
 	}
-]
+}

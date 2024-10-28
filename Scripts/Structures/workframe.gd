@@ -1,4 +1,4 @@
-extends JSONReusable
+extends Object
 class_name WorkFrame
 
 var current_tasks:Array[TaskState]
@@ -7,22 +7,17 @@ var available_tasks:Array[TaskState]
 var inventory:Dictionary
 var targets:Dictionary
 
-static func get_class_name():
-	return "WorkFrame"
-
 func _init(
 		in_current:Array[TaskState]=[], in_periodical:Dictionary={}, in_available:Array[TaskState]=[],
-		in_inventory:Dictionary={}, in_targets:Dictionary={},
-		in_id=-1
+		in_inventory:Dictionary={}, in_targets:Dictionary={}
 	) -> void:
 	self.current_tasks=in_current
 	self.periodical_tasks=in_periodical
 	self.available_tasks=in_available
 	self.inventory=in_inventory
 	self.targets=in_targets
-	self.id=in_id
 
-static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
+static func from_raw(raw: Dictionary):
 	var raw_curtasks:Array=raw.get('current',[])
 	var raw_periodical:Dictionary=raw.get('periodical',{})
 	var raw_available:Array=raw.get('available',[])
@@ -38,44 +33,25 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 	var periodicals={}
 	for key in raw_periodical:
 		var val=raw_periodical[key]
-		periodicals[key]=WorkFrame.from_raw(val, existing)
+		periodicals[key]=WorkFrame.from_raw(val)
 	
-	var temp:Array[TaskState]=TaskState.from_array(raw_curtasks, existing)
+	var temp:Array[TaskState]=TaskState.from_array(raw_curtasks)
 	var curtasks:Array[TaskState]=temp
-	var available:Array[TaskState]=TaskState.from_array(raw_available, existing)
-	return WorkFrame.new(curtasks, periodicals, available,
-	raw_inventory, raw_targets, raw.get('id',-1))
+	var available:Array[TaskState]=TaskState.from_array(raw_available)
+	return WorkFrame.new(curtasks, periodicals, available, raw_inventory, raw_targets)
 
-static func from_raw(raw: Dictionary, existing: Dictionary)->WorkFrame:
-	"""
-	Create function from processed JSON.
-	"""
-	var classname=get_class_name()
-	var old=check_for(raw, existing, classname)
-	if old != null:
-		return old
-	var res:JSONReusable=process_from_raw(raw, existing)
-	var ID=raw.get('id',-1)
-	set_new(existing,classname,ID,res)
-	raw['id']=res.id
-	return res
-
-func process_to_raw(existing):
+func to_raw():
 	var tempres={}
 	for key in self.periodical_tasks:
 		tempres[key]=self.periodical_tasks[key].to_raw()
 	var res={
-		'current'		: TaskState.to_array(self.current_tasks, existing),
+		'current'		: TaskState.to_array(self.current_tasks),
 		'periodical'	: tempres,
-		'available'		: TaskState.to_array(self.current_tasks, existing),
+		'available'		: TaskState.to_array(self.current_tasks),
 		'inventory'		: self.inventory.duplicate(),
 		'targets'		: self.targets.duplicate()
 	}
 	return res
-
-
-func postprocess(complex_values: Array):
-	return
 
 func get_cur_tasks():
 	return self.current_tasks.duplicate()
