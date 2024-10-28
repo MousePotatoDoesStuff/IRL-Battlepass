@@ -8,11 +8,11 @@ var buttons=[]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(Organizer is BoxContainer)
-	var s="""Somebody once told me the world is gonna roll me
+	var s="""Somebody once told me the world is gonna roll me 
 I ain't the smartest tool in the shed
 	"""
 	var L=s.replace("\n","").split(" ")
-	pass # Replace with function body.
+	populate(L)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

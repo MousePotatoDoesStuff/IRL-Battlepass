@@ -14,7 +14,7 @@ var main_data_struct={}
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
 var cur_inventory:Dictionary
-var tasks:Dictionary
+var tasks:Array[TaskState]
 var workframes:Dictionary
 
 var cur_task_ind:int
@@ -62,8 +62,8 @@ func load_data(data:Dictionary, existing:Dictionary={}):
 	
 	self.cur_inventory=cur_workframe.inventory
 	
-	var raw_tasks:Dictionary=data.get('tasks',{})
-	self.tasks=TaskState.from_dict(raw_tasks, existing)
+	var raw_tasks:Array=data.get('tasks',[])
+	self.tasks=TaskState.from_array(raw_tasks, existing)
 	
 	var raw_workframes:Dictionary=data.get('workframes',{})
 	self.workframes={}
@@ -93,7 +93,7 @@ func save_data(data_storage=null, existing:Dictionary={}):
 	data['editable']=self.cur_editable
 	var raw_main=self.cur_workframe.to_raw(existing)
 	data['cur_workframe']=raw_main
-	var raw_tasks=TaskState.to_dict(self.tasks, existing)
+	var raw_tasks=TaskState.to_array(self.tasks, existing)
 	data['tasks']=raw_tasks
 	var raw_workframes={}
 	for key in self.workframes:
@@ -112,7 +112,8 @@ func set_task_list():
 	ex_cur_task_list.populate(texts)
 
 func load_task(ind:int, is_cur:bool):
-	var task=cur_workframe.current_tasks[ind]
+	var source:Array[TaskState]=[cur_workframe.current_tasks,cur_workframe.current_tasks][int(is_cur)]
+	var task=source[ind]
 	var inv=cur_workframe.inventory
 	ex_task_display.set_curstate(task,inv,is_cur)
 	ex_task_display.show()

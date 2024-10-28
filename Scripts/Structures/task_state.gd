@@ -5,14 +5,15 @@ var task:Task
 var min_amount: int
 var cur_amount: int
 var max_amount: int
-var task_frame=null
+var task_frame:WorkFrame=null
 
 func _init(
 	in_task:Task,
 	in_min_amount: int,
 	in_max_amount: int,
 	in_cur_amount: int=-1,
-	in_id: int=-1
+	in_id: int=-1,
+	in_frame:WorkFrame=null
 ):
 	assert(in_task is Task)
 	self.task=in_task
@@ -33,6 +34,10 @@ static func process_from_raw(raw: Dictionary, existing:Dictionary={}):
 		assert(vars[i] is int, str(vars[i]))
 	var task:Task=Task.from_raw(vars[0], existing)
 	var ID=raw.get('id',-1)
+	var raw_frame=raw.get('workframe',null)
+	var work_frame=null
+	if raw_frame != null:
+		work_frame=WorkFrame.from_raw(raw_frame,existing)
 	var res=TaskState.new(task,vars[1],vars[2],vars[3],ID)
 	return res
 
@@ -78,7 +83,8 @@ func process_to_raw(existing: Dictionary)->Dictionary:
 		'task': self.task.to_raw(),
 		'min': self.min_amount,
 		'max': self.max_amount,
-		'cur': self.cur_amount
+		'cur': self.cur_amount,
+		'workframe':self.task_frame.to_raw(existing)
 	}
 	return res
 
