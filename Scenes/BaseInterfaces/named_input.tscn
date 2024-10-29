@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxwpj8s6gtcch"]
+
+[ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/custom_input.tscn" id="1_kba3b"]
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/named_input.gd" id="1_pbkmk"]
+
+[node name="NamedInput" type="Control"]
+layout_mode = 3
+anchor_right = 0.333333
+anchor_bottom = 0.0555556
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pbkmk")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="value" parent="." instance=ExtResource("1_kba3b")]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="name" type="RichTextLabel" parent="."]
+layout_mode = 0
+anchor_left = 0.0125
+anchor_top = 0.1
+anchor_right = 0.4725
+anchor_bottom = 0.92
+text = "Test Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.2975
+anchor_top = 0.1
+anchor_right = 0.4675
+anchor_bottom = 0.9
+text = "Delete"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Button" to="." method="ondelete"]

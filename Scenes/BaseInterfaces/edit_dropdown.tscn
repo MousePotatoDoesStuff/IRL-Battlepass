@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8trc5oy7cmu1"]
+
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/edit_dropdown.gd" id="1_qodtl"]
+[ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="2_1pu55"]
+
+[node name="EditDropdown" type="Control"]
+layout_mode = 3
+anchor_right = 0.174
+anchor_bottom = 0.386
+offset_right = -0.448013
+offset_bottom = -0.128006
+script = ExtResource("1_qodtl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Organizer" type="VBoxContainer" parent="Control/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NamedInput" parent="." instance=ExtResource("2_1pu55")]
+layout_mode = 1
+anchor_left = -3.27331
+anchor_top = 0.475132
+anchor_right = -0.197
+anchor_bottom = 0.608
+offset_right = 0.0453415
+offset_bottom = -0.141373

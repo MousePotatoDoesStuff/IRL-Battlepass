@@ -41,6 +41,13 @@ func to_raw()->Dictionary:
 func get_resources(rewards:bool=false):
 	return self.rewards if rewards else self.requirements
 
+func get_res_names(rewards:bool=false):
+	var src = self.rewards if rewards else self.requirements
+	var res:Array[String]=[]
+	for e in src:
+		res.append(e)
+	return res
+
 func check_resources(resources:Dictionary,limit:int=-1,refund:bool=false):
 	var reqtype = get_resources(refund)
 	var factor=Util.check_dict_int_ratio(resources,reqtype,limit)
