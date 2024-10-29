@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciejxium0crvf"]
 
-[ext_resource type="Script" path="res://Scenes/Interfaces/task_display.gd" id="1_nq27s"]
+[ext_resource type="Script" path="res://Scenes/Interfaces/task_edit.gd" id="1_bv7ku"]
 [ext_resource type="PackedScene" uid="uid://cera3jgem28wk" path="res://Scenes/Interfaces/progress_control.tscn" id="2_to6pg"]
 [ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="3_xhhp6"]
 
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 offset_right = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nq27s")
+script = ExtResource("1_bv7ku")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
