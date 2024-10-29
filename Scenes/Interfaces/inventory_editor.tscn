@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bcwmogbavy0qx"]
+
+[node name="InventoryEditor" type="Control"]
+layout_mode = 3
+anchor_right = 0.333333
+anchor_bottom = 0.444444
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Scroll" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.5
+offset_bottom = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Scroll"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Organizer" type="VBoxContainer" parent="Scroll/ScrollContainer"]
+layout_mode = 2
+
+[node name="Element" type="Control" parent="Scroll/ScrollContainer/Organizer"]
+custom_minimum_size = Vector2(360, 90)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Scroll/ScrollContainer/Organizer/Element"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = -20.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.215686, 1, 1)
+
+[node name="TextEdit" type="TextEdit" parent="Scroll/ScrollContainer/Organizer/Element"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 19.0
+offset_right = 140.0
+offset_bottom = 70.0

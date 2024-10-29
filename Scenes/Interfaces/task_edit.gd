@@ -24,7 +24,7 @@ func set_curstate(in_ts:TaskState,in_inv:Dictionary,in_is_cur:int):
 	self.is_cur=is_cur
 	$Title.text=cur_taskstate.task.name
 	$Description.text=cur_taskstate.task.description
-	$ProgressControl.set_progress_display(cur_taskstate)
+	return
 	$InventoryDisplay.display_data(in_inv,cur_taskstate.task.requirements)
 	$RewardDisplay.display_data(in_inv,cur_taskstate.task.rewards)
 
