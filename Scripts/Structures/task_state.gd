@@ -81,6 +81,9 @@ static func to_dict(dict: Dictionary):
 		resdict[key]=res
 	return resdict
 
+func get_name()->String:
+	return self.task.name
+
 func get_cur_ratio()->float:
 	return 1.0*self.cur_amount/self.max_amount
 

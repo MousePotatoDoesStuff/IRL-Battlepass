@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciejxium0crvf"]
+
+[ext_resource type="Script" path="res://Scenes/Interfaces/task_display.gd" id="1_nq27s"]
+[ext_resource type="PackedScene" uid="uid://cera3jgem28wk" path="res://Scenes/Interfaces/progress_control.tscn" id="2_to6pg"]
+[ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="3_xhhp6"]
+
+[node name="Task Display" type="Control"]
+layout_mode = 3
+anchor_right = 0.417
+anchor_bottom = 1.0
+offset_right = -0.400024
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nq27s")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.121569, 0, 0.356863, 1)
+
+[node name="Title" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0574413
+anchor_top = 0.0416667
+anchor_right = 0.937337
+anchor_bottom = 0.136667
+text = "[center]Task Title"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Title"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Description" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.161667
+anchor_right = 0.926667
+anchor_bottom = 0.38
+offset_right = -6.10352e-05
+offset_bottom = 3.05176e-05
+text = "What the task entails"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Description"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressControl" parent="." instance=ExtResource("2_to6pg")]
+layout_mode = 1
+anchor_left = 0.462
+anchor_top = 0.817778
+anchor_right = 0.962
+anchor_bottom = 0.984444
+offset_right = 250.0
+offset_bottom = 150.0
+scale = Vector2(0.5, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="InventoryDisplay" parent="." instance=ExtResource("3_xhhp6")]
+layout_mode = 1
+anchor_left = 0.0566667
+anchor_right = 0.448333
+
+[node name="RewardDisplay" parent="." instance=ExtResource("3_xhhp6")]
+layout_mode = 1
+anchor_left = 0.563333
+anchor_right = 0.925833
+offset_right = 6.10352e-05
+
+[node name="Buttons" type="GridContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.0479994
+anchor_top = 0.857981
+anchor_right = 0.489594
+anchor_bottom = 0.90598
+offset_bottom = 50.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Move task"
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Buttons"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Remove task"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="changeSignal" from="ProgressControl" to="." method="process_change"]

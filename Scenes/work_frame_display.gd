@@ -86,7 +86,17 @@ func update_inventory():
 
 func setup_display():
 	ex_task_display.hide()
-	set_task_list()
+	var texts:Array[String]=cur_workframe.get_cur_task_names().duplicate()
+	texts.append("New task...")
+	ex_cur_task_list.populate(texts)
+	var task_texts:Array[String]=[]
+	for taskstate:TaskState in self.tasks:
+		var name:String=taskstate.get_name()
+		task_texts.append(name)
+	task_texts.append("New task...")
+	ex_av_task_list.populate(task_texts)
+	var subfnl:Array[String]=[]
+	ex_subframe_list.populate(subfnl)
 
 func save_data(data_storage=null):
 	var data:Dictionary=data_storage if data_storage is Dictionary else self.main_data_struct
@@ -105,12 +115,7 @@ func save_data(data_storage=null):
 
 func set_workframe(workframe:WorkFrame):
 	self.cur_workframe=workframe
-	self.set_task_list()
-
-func set_task_list():
-	var texts:Array[String]=cur_workframe.get_cur_task_names().duplicate()
-	texts.append("New task...")
-	ex_cur_task_list.populate(texts)
+	setup_display()
 
 func load_task(ind:int, is_cur:bool):
 	var source:Array[TaskState]=[
@@ -130,11 +135,11 @@ func load_task(ind:int, is_cur:bool):
 
 func insert_task(ind:int, task:Task):
 	self.cur_workframe.insert_task(ind,task)
-	set_task_list()
+	setup_display()
 
 func remove_task(ind:int):
 	self.cur_workframe.remove_task(ind)
-	set_task_list()
+	setup_display()
 
 
 func save_and_exit_function() -> void:
