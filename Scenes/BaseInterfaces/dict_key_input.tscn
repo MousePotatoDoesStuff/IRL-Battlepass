@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsgypqqnvyhwr"]
 
-[ext_resource type="Script" path="res://Scenes/BaseInterfaces/named_input.gd" id="1_v3lm7"]
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/dict_key_input.gd" id="1_pbmsx"]
 [ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/custom_input.tscn" id="2_75nt1"]
 
 [node name="DictKeyInput" type="Control"]
@@ -11,7 +11,7 @@ offset_right = 100.0
 offset_bottom = -4.19617e-05
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v3lm7")
+script = ExtResource("1_pbmsx")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -35,9 +35,9 @@ offset_bottom = 0.0
 [node name="key" parent="." instance=ExtResource("2_75nt1")]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.5
+anchor_right = 0.4
 anchor_bottom = 1.0
-offset_right = -50.0
+offset_right = 0.0
 offset_bottom = 0.0
 f_mode = "default"
 
@@ -48,7 +48,7 @@ anchor_left = 0.41
 anchor_top = 0.12
 anchor_right = 0.58
 anchor_bottom = 0.92
-text = "Delete"
+text = "X"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Button" to="." method="ondelete"]

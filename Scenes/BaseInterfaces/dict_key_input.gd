@@ -1,5 +1,5 @@
 extends Control
-
+class_name DictKeyInput
 
 signal DeleteSignal
 @export var allowDelete:bool=false
@@ -8,7 +8,7 @@ signal DeleteSignal
 @export var input_mode="natint"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$name.text=var_name
+	$key.text=var_name
 	$value.last_text=default_value
 	$value.f_mode=input_mode
 	$value._on_text_changed(default_value)
@@ -22,9 +22,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func get_value():
-	return $value.last_text
-
+func apply_value(target: Dictionary, convert_to_int: bool=false):
+	var key=$key.text
+	var value=$value.text
+	if convert_to_int:
+		value=int(value)
+	target[key]=value
 
 func ondelete() -> void:
 	DeleteSignal.emit()

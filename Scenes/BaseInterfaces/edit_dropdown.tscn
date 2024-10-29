@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8trc5oy7cmu1"]
 
 [ext_resource type="Script" path="res://Scenes/BaseInterfaces/edit_dropdown.gd" id="1_qodtl"]
-[ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="2_1pu55"]
+[ext_resource type="PackedScene" uid="uid://bsgypqqnvyhwr" path="res://Scenes/BaseInterfaces/dict_key_input.tscn" id="2_cvuu6"]
 
 [node name="EditDropdown" type="Control"]
 layout_mode = 3
@@ -39,11 +39,11 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NamedInput" parent="." instance=ExtResource("2_1pu55")]
+[node name="DictKeyInput" parent="." instance=ExtResource("2_cvuu6")]
 layout_mode = 1
-anchor_left = -3.27331
-anchor_top = 0.475132
-anchor_right = -0.197
-anchor_bottom = 0.608
-offset_right = 0.0453415
-offset_bottom = -0.141373
+anchor_left = 0.00959914
+anchor_top = 0.00863876
+anchor_right = 0.974475
+anchor_bottom = 0.13235
+offset_right = -0.0337067
+offset_bottom = 0.0386353
