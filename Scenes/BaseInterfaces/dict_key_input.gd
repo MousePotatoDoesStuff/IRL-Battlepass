@@ -22,6 +22,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func set_value(key:String, value):
+	$key.text=key
+	$value.text=str(value)
+
 func apply_value(target: Dictionary, convert_to_int: bool=false):
 	var key=$key.text
 	var value=$value.text

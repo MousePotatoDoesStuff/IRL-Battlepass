@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4vbx0cl816gg"]
+
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/ede_window.gd" id="1_ol4od"]
+[ext_resource type="PackedScene" uid="uid://bsgypqqnvyhwr" path="res://Scenes/BaseInterfaces/dict_key_input.tscn" id="1_qkc1m"]
+
+[node name="EDEWindow" type="Window"]
+auto_translate_mode = 1
+title = "Edit dictionary entry"
+size = Vector2i(400, 75)
+script = ExtResource("1_ol4od")
+
+[node name="DictKeyInput" parent="." instance=ExtResource("1_qkc1m")]
+anchors_preset = 10
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 1
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Confirm"

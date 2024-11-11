@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://crdadixuou2cn"]
+
+[ext_resource type="PackedScene" uid="uid://c4vbx0cl816gg" path="res://Scenes/BaseInterfaces/ede_window.tscn" id="1_fj2s5"]
+
+[node name="DictKeyWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="EDEWindow" parent="." instance=ExtResource("1_fj2s5")]

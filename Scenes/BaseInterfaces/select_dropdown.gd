@@ -55,6 +55,11 @@ func populate(texts: Array[String]):
 		cur.text=texts[i]
 	return
 
+func get_value(ind: int)->String:
+	if ind not in range(len(self.buttons)):
+		return ""
+	return self.buttons[ind].text
+
 
 func on_button_pressed(button_index:int):
 	ButtonPressedSignal.emit(button_index)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciejxium0crvf"]
+[gd_scene load_steps=5 format=3 uid="uid://ciejxium0crvf"]
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/task_edit.gd" id="1_bv7ku"]
 [ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_yx3hb"]
 [ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="3_im0dx"]
+[ext_resource type="PackedScene" uid="uid://c4vbx0cl816gg" path="res://Scenes/BaseInterfaces/ede_window.tscn" id="4_xrv74"]
 
-[node name="Task Edit" type="Control"]
+[node name="Task Edit" type="Control" node_paths=PackedStringArray("TitleNode", "DescNode")]
 layout_mode = 3
 anchor_right = 0.417
 anchor_bottom = 1.0
@@ -12,6 +13,8 @@ offset_right = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bv7ku")
+TitleNode = NodePath("Title")
+DescNode = NodePath("Description")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -25,22 +28,15 @@ color = Color(0.121569, 0, 0.356863, 1)
 [node name="Title" type="TextEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0574413
-anchor_top = 0.0416667
-anchor_right = 0.937337
+anchor_left = 0.058
+anchor_top = 0.0422222
+anchor_right = 0.938
 anchor_bottom = 0.136667
-text = "[center]Task Title"
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="Title"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+theme_override_colors/background_color = Color(0.01, 0.01, 0.01, 1)
+text = "[center]Task Title"
+metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="TextEdit" parent="."]
 layout_mode = 1
@@ -51,18 +47,9 @@ anchor_right = 0.926667
 anchor_bottom = 0.38
 offset_right = -6.10352e-05
 offset_bottom = 3.05176e-05
+theme_override_colors/background_color = Color(0.01, 0.01, 0.01, 1)
 text = "What the task entails"
 metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="Description"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="ReqDropdown" parent="." instance=ExtResource("2_yx3hb")]
 layout_mode = 1
@@ -93,7 +80,7 @@ anchor_bottom = 0.90598
 offset_bottom = 50.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="Buttons"]
+[node name="Save" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Save task"
 metadata/_edit_use_anchors_ = true
@@ -102,7 +89,7 @@ metadata/_edit_use_anchors_ = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="Buttons"]
+[node name="Close" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Close task"
 metadata/_edit_use_anchors_ = true
@@ -118,16 +105,16 @@ offset_bottom = 879.0
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 var_name = "Minimum"
-metadata/_edit_use_anchors_ = true
 
 [node name="Max" parent="VBoxContainer" instance=ExtResource("3_im0dx")]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 var_name = "Maximum"
-metadata/_edit_use_anchors_ = true
 
 [node name="Cur" parent="VBoxContainer" instance=ExtResource("3_im0dx")]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 var_name = "Current"
-metadata/_edit_use_anchors_ = true
+
+[node name="EDEWindow" parent="." instance=ExtResource("4_xrv74")]
+visible = false
