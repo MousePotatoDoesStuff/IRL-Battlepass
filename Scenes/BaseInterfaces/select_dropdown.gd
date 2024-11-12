@@ -2,7 +2,6 @@ extends Control
 class_name SelectDropdown
 signal ButtonPressedSignal(ind:int)
 @export var Organizer:BoxContainer
-@export var is_cur:bool
 
 var buttons=[]
 # Called when the node enters the scene tree for the first time.
@@ -22,13 +21,13 @@ func remove_button(button:Node):
 	Organizer.remove_child(button)
 	button.queue_free()
 
-func add_button(ind:int, is_cur:bool):
+func add_button(ind:int):
 	var button:Button=Button.new()
 	button.text="Untitled"
 	Organizer.add_child(button)
 	self.buttons.append(button)
 	var temp=func():
-		ButtonPressedSignal.emit(ind,is_cur)
+		ButtonPressedSignal.emit(ind)
 	button.pressed.connect(temp)
 
 func remove_tail(count:int):
@@ -40,7 +39,7 @@ func remove_tail(count:int):
 func add_tail(count:int):
 	var ind=buttons.size()
 	for i in range(count):
-		add_button(ind+i,is_cur)
+		add_button(ind+i)
 	return
 
 func populate(texts: Array[String]):

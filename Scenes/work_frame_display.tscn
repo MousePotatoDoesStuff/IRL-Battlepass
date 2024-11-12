@@ -58,7 +58,6 @@ anchor_right = 0.391667
 anchor_bottom = 0.888889
 offset_right = -3.05176e-05
 offset_bottom = 0.0
-is_cur = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Subframe List" parent="." instance=ExtResource("2_m1g5f")]

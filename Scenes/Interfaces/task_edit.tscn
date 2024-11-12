@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="3_im0dx"]
 [ext_resource type="PackedScene" uid="uid://c4vbx0cl816gg" path="res://Scenes/BaseInterfaces/ede_window.tscn" id="4_xrv74"]
 
-[node name="Task Edit" type="Control" node_paths=PackedStringArray("TitleNode", "DescNode")]
+[node name="Task Edit" type="Control" node_paths=PackedStringArray("TitleNode", "DescNode", "ReqDropdown", "RewDropdown")]
 layout_mode = 3
 anchor_right = 0.417
 anchor_bottom = 1.0
@@ -15,6 +15,8 @@ grow_vertical = 2
 script = ExtResource("1_bv7ku")
 TitleNode = NodePath("Title")
 DescNode = NodePath("Description")
+ReqDropdown = NodePath("ReqDropdown")
+RewDropdown = NodePath("RewDropdown")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -118,3 +120,6 @@ var_name = "Current"
 
 [node name="EDEWindow" parent="." instance=ExtResource("4_xrv74")]
 visible = false
+
+[connection signal="ButtonPressedSignal" from="ReqDropdown" to="." method="edit_dict_open" binds= [false]]
+[connection signal="ButtonPressedSignal" from="RewDropdown" to="." method="edit_dict_open" binds= [true]]

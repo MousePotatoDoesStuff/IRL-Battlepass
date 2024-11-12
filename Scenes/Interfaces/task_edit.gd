@@ -10,6 +10,8 @@ var cur_editable:bool=false
 var cur_taskstate:TaskState
 @export var TitleNode:TextEdit
 @export var DescNode:TextEdit
+@export var ReqDropdown:SelectDropdown
+@export var RewDropdown:SelectDropdown
 
 func _ready() -> void:
 	assert(TitleNode!=null)
@@ -26,8 +28,8 @@ func set_curstate(in_ts:TaskState,in_is_cur:int):
 	self.is_cur=is_cur
 	TitleNode.text=task.name
 	DescNode.text=task.description
-	$ReqDropdown.populate(task.get_res_names(false))
-	$RewDropdown.populate(task.get_res_names(true))
+	ReqDropdown.populate(task.get_res_names(false))
+	RewDropdown.populate(task.get_res_names(true))
 
 func save():
 	var task=self.cur_taskstate.task
@@ -38,5 +40,8 @@ func save():
 func edit_dict_open(ind:int, is_rew:bool):
 	var task=self.cur_taskstate.task
 	var dict=task.get_resources(is_rew)
-	var key=
-	$EDEWindow.set_value(dict,)
+	var dropdown:SelectDropdown=[ReqDropdown,RewDropdown][int(is_rew)]
+	var key=dropdown.get_value(ind)
+	if key=="":
+		return
+	$EDEWindow.set_value(dict,key)

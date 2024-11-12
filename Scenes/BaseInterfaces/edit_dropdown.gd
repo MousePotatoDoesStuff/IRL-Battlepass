@@ -2,7 +2,6 @@ extends Control
 class_name EditDropdown
 signal ButtonPressedSignal(ind:int)
 @export var Organizer:BoxContainer
-@export var is_cur:bool
 
 var buttons:Array[DictKeyInput]=[]
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +16,7 @@ func remove_button(button:Node):
 	Organizer.remove_child(button)
 	button.queue_free()
 
-func add_button(ind:int, is_cur:bool):
+func add_button(ind:int):
 	var button:DictKeyInput=DictKeyInput.new()
 	button.allowDelete=true
 	button.var_name=str(ind)
@@ -34,7 +33,7 @@ func remove_tail(count:int):
 func add_tail(count:int):
 	var ind=buttons.size()
 	for i in range(count):
-		add_button(ind+i,is_cur)
+		add_button(ind+i)
 	return
 
 func populate(texts: Array[String]):
