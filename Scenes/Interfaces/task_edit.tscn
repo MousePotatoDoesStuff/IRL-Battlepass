@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciejxium0crvf"]
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/task_edit.gd" id="1_bv7ku"]
-[ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_yx3hb"]
 [ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="3_im0dx"]
+[ext_resource type="PackedScene" uid="uid://bcwmogbavy0qx" path="res://Scenes/Interfaces/inventory_editor.tscn" id="3_qr0yx"]
 [ext_resource type="PackedScene" uid="uid://c4vbx0cl816gg" path="res://Scenes/BaseInterfaces/ede_window.tscn" id="4_xrv74"]
 
-[node name="Task Edit" type="Control" node_paths=PackedStringArray("TitleNode", "DescNode", "ReqDropdown", "RewDropdown")]
+[node name="Task Edit" type="Control" node_paths=PackedStringArray("TitleNode", "DescNode", "ReqEditor", "RewEditor")]
 layout_mode = 3
 anchor_right = 0.417
 anchor_bottom = 1.0
@@ -15,8 +15,8 @@ grow_vertical = 2
 script = ExtResource("1_bv7ku")
 TitleNode = NodePath("Title")
 DescNode = NodePath("Description")
-ReqDropdown = NodePath("ReqDropdown")
-RewDropdown = NodePath("RewDropdown")
+ReqEditor = NodePath("ReqEditor")
+RewEditor = NodePath("RewEditor")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -53,24 +53,20 @@ theme_override_colors/background_color = Color(0.01, 0.01, 0.01, 1)
 text = "What the task entails"
 metadata/_edit_use_anchors_ = true
 
-[node name="ReqDropdown" parent="." instance=ExtResource("2_yx3hb")]
+[node name="ReqEditor" parent="." instance=ExtResource("3_qr0yx")]
 layout_mode = 1
-anchor_left = 0.058
+anchor_left = 0.056
 anchor_top = 0.41
-anchor_right = 0.446
-anchor_bottom = 0.795556
-offset_right = 0.0
-offset_bottom = 0.0
+anchor_right = 0.918
+anchor_bottom = 0.6
 metadata/_edit_use_anchors_ = true
 
-[node name="RewDropdown" parent="." instance=ExtResource("2_yx3hb")]
+[node name="RewEditor" parent="." instance=ExtResource("3_qr0yx")]
 layout_mode = 1
-anchor_left = 0.524
-anchor_top = 0.41
-anchor_right = 0.91
-anchor_bottom = 0.795556
-offset_right = 0.0
-offset_bottom = 0.0
+anchor_left = 0.058
+anchor_top = 0.608889
+anchor_right = 0.918
+anchor_bottom = 0.793333
 metadata/_edit_use_anchors_ = true
 
 [node name="Buttons" type="GridContainer" parent="."]
@@ -93,7 +89,7 @@ layout_mode = 2
 
 [node name="Close" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "Close task"
+text = "Close editor"
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -120,6 +116,3 @@ var_name = "Current"
 
 [node name="EDEWindow" parent="." instance=ExtResource("4_xrv74")]
 visible = false
-
-[connection signal="ButtonPressedSignal" from="ReqDropdown" to="." method="edit_dict_open" binds= [false]]
-[connection signal="ButtonPressedSignal" from="RewDropdown" to="." method="edit_dict_open" binds= [true]]

@@ -78,26 +78,31 @@ anchor_right = 0.925833
 offset_right = 6.10352e-05
 
 [node name="Buttons" type="GridContainer" parent="."]
-layout_mode = 0
-anchor_left = 0.0479994
-anchor_top = 0.857981
-anchor_right = 0.489594
-anchor_bottom = 0.90598
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.036
+anchor_top = 0.82
+anchor_right = 0.41
+anchor_bottom = 0.921111
 offset_bottom = 50.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="Buttons"]
+[node name="Edit" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Edit task"
+metadata/_edit_use_anchors_ = true
+
+[node name="Move" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Move task"
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="Buttons"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="Buttons"]
+[node name="Remove" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Remove task"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="changeSignal" from="ProgressControl" to="." method="process_change"]
+[connection signal="pressed" from="Buttons/Edit" to="." method="pass_edit_task"]
+[connection signal="pressed" from="Buttons/Move" to="." method="pass_copy_over"]
+[connection signal="pressed" from="Buttons/Remove" to="." method="pass_remove_task"]

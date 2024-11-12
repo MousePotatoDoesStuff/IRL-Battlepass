@@ -133,6 +133,16 @@ func load_task(ind:int, is_cur:bool):
 	ex_task_display.set_curstate(task,inv,is_cur)
 	ex_task_display.show()
 
+func edit_task(is_cur: bool, task:TaskState):
+	$"Task Display".hide()
+	$"Task Edit".set_curstate(task, is_cur)
+	$"Task Edit".show()
+
+func exit_edit_task(is_cur: bool, task:TaskState):
+	$"Task Edit".hide()
+	$"Task Display".set_curstate(task, cur_workframe.inventory, is_cur)
+	$"Task Display".show()
+
 func insert_task(ind:int, task:Task):
 	self.cur_workframe.insert_task(ind,task)
 	setup_display()

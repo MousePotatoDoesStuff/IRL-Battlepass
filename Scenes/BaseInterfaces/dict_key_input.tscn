@@ -29,16 +29,19 @@ anchors_preset = -1
 anchor_left = 0.6
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_left = 0.000244141
+offset_top = 5.0
+offset_right = 0.000427246
+offset_bottom = -5.0
 
 [node name="key" parent="." instance=ExtResource("2_75nt1")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.4
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_top = 5.0
+offset_right = 0.000167847
+offset_bottom = -5.0
 f_mode = "default"
 
 [node name="Button" type="Button" parent="."]
@@ -51,4 +54,6 @@ anchor_bottom = 0.92
 text = "X"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="text_changed" from="value" to="." method="show_change"]
+[connection signal="text_changed" from="key" to="." method="show_change"]
 [connection signal="pressed" from="Button" to="." method="ondelete"]

@@ -2,6 +2,7 @@ extends Control
 
 
 signal DataIsChangedSignal
+signal EditTaskSignal(is_cur: bool, task: TaskState)
 signal RemoveTaskSignal(is_cur: bool)
 signal CopyTaskOverSignal(is_cur: bool)
 @export var editable:bool
@@ -40,6 +41,9 @@ func process_change(new_value:int):
 	print(delta,cur_inventory)
 	set_curstate(cur_taskstate,cur_inventory,is_cur)
 	DataIsChangedSignal.emit()
+
+func pass_edit_task():
+	EditTaskSignal.emit(self.is_cur, self.cur_taskstate)
 
 func pass_remove_task():
 	RemoveTaskSignal.emit(self.is_cur)

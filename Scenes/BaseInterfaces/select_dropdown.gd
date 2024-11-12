@@ -13,10 +13,6 @@ I ain't the smartest tool in the shed
 	var L=s.replace("\n","").split(" ")
 	populate(L)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func remove_button(button:Node):
 	Organizer.remove_child(button)
 	button.queue_free()
@@ -47,7 +43,7 @@ func populate(texts: Array[String]):
 	var n2=len(buttons)
 	if n<n2:
 		remove_tail(n2-n)
-	if n2<n:
+	elif n2<n:
 		add_tail(n-n2)
 	for i in range(n):
 		var cur=self.buttons[i]

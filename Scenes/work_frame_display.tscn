@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8n6i7776pp52"]
+[gd_scene load_steps=6 format=3 uid="uid://b8n6i7776pp52"]
 
 [ext_resource type="PackedScene" uid="uid://b6xe84tt1m3gk" path="res://Scenes/Interfaces/task_display.tscn" id="1_ajksy"]
 [ext_resource type="Script" path="res://Scenes/work_frame_display.gd" id="1_dwfmf"]
 [ext_resource type="PackedScene" uid="uid://07rrs37v4poh" path="res://Scenes/BaseInterfaces/select_dropdown.tscn" id="2_m1g5f"]
 [ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="4_n3rv8"]
+[ext_resource type="PackedScene" uid="uid://ciejxium0crvf" path="res://Scenes/Interfaces/task_edit.tscn" id="5_xqd5u"]
 
 [node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_av_task_list", "ex_cur_task_list", "ex_subframe_list", "ex_inv_disp")]
 layout_mode = 3
@@ -29,6 +30,7 @@ grow_vertical = 2
 color = Color(0.454524, 0.454524, 0.454524, 1)
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
+visible = false
 layout_mode = 1
 anchor_left = 0.496667
 anchor_top = 0.0333333
@@ -38,6 +40,14 @@ offset_left = -47.0
 offset_top = -30.0
 offset_right = 38.9999
 offset_bottom = 70.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Task Edit" parent="." instance=ExtResource("5_xqd5u")]
+visible = false
+layout_mode = 1
+anchor_left = 0.444444
+anchor_right = 1.0
+offset_right = -6.10352e-05
 metadata/_edit_use_anchors_ = true
 
 [node name="ATL" parent="." instance=ExtResource("2_m1g5f")]
@@ -80,6 +90,7 @@ text = "Return"
 metadata/_edit_use_anchors_ = true
 
 [node name="InventoryDisplay" parent="." instance=ExtResource("4_n3rv8")]
+visible = false
 layout_mode = 1
 anchor_left = 0.0416667
 anchor_top = 0.111111
@@ -87,6 +98,8 @@ anchor_right = 0.375
 anchor_bottom = 0.333333
 
 [connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_inventory"]
+[connection signal="EditTaskSignal" from="Task Display" to="." method="edit_task"]
+[connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_inventory"]
 [connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task" binds= [false]]
 [connection signal="ButtonPressedSignal" from="CTL" to="." method="load_task" binds= [true]]
 [connection signal="pressed" from="ReturnButton" to="." method="save_and_exit_function"]

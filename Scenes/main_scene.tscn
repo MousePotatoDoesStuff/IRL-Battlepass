@@ -22,10 +22,8 @@ function_state_text = NodePath("Sidebar/Frame/VBoxContainer/gap2/FunctionState")
 
 [node name="Sidebar" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -900.0
+offset_right = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -52,8 +50,9 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Frame"]
 layout_mode = 0
-offset_right = 250.0
-offset_bottom = 519.0
+anchor_right = 1.0
+anchor_bottom = 0.610588
+metadata/_edit_use_anchors_ = true
 
 [node name="Header" type="VBoxContainer" parent="Sidebar/Frame/VBoxContainer"]
 layout_mode = 2
@@ -144,10 +143,13 @@ access = 2
 filters = PackedStringArray("*.irlbp")
 
 [node name="Mainbar" type="Control" parent="."]
-anchors_preset = 0
-anchor_left = 0.25
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 300.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Notes" parent="Mainbar" instance=ExtResource("3_mmksw")]
