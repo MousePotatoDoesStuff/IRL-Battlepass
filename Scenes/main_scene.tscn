@@ -22,6 +22,7 @@ function_state_text = NodePath("Sidebar/Frame/VBoxContainer/gap2/FunctionState")
 
 [node name="Sidebar" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 300.0
 grow_horizontal = 2

@@ -2,12 +2,12 @@
 	"cur_workframe": {
 		"available": [
 			{
-				"cur": 0,
-				"max": 1,
+				"cur": 1,
+				"max": 2,
 				"min": 0,
 				"task": {
 					"desc": "Add description here",
-					"name": "Untitled",
+					"name": "Intitled",
 					"reqs": {
 
 					},
@@ -19,12 +19,12 @@
 		],
 		"current": [
 			{
-				"cur": 0,
-				"max": 1,
+				"cur": 1,
+				"max": 2,
 				"min": 0,
 				"task": {
 					"desc": "Add description here",
-					"name": "Untitled",
+					"name": "Intitled",
 					"reqs": {
 
 					},

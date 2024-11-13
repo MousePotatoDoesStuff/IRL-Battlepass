@@ -25,12 +25,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -500.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.454524, 0.454524, 0.454524, 1)
+color = Color(0.824582, 0, 0.417989, 1)
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
-visible = false
 layout_mode = 1
 anchor_left = 0.496667
 anchor_top = 0.0333333
@@ -80,17 +80,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ReturnButton" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.0316667
-anchor_top = 0.02
-anchor_right = 0.146667
-anchor_bottom = 0.0733333
-text = "Return"
-metadata/_edit_use_anchors_ = true
-
 [node name="InventoryDisplay" parent="." instance=ExtResource("4_n3rv8")]
-visible = false
 layout_mode = 1
 anchor_left = 0.0416667
 anchor_top = 0.111111
@@ -100,6 +90,6 @@ anchor_bottom = 0.333333
 [connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_inventory"]
 [connection signal="EditTaskSignal" from="Task Display" to="." method="edit_task"]
 [connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_inventory"]
+[connection signal="ExitEditSignal" from="Task Edit" to="." method="exit_edit_task"]
 [connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task" binds= [false]]
 [connection signal="ButtonPressedSignal" from="CTL" to="." method="load_task" binds= [true]]
-[connection signal="pressed" from="ReturnButton" to="." method="save_and_exit_function"]

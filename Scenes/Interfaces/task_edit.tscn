@@ -116,3 +116,6 @@ var_name = "Current"
 
 [node name="EDEWindow" parent="." instance=ExtResource("4_xrv74")]
 visible = false
+
+[connection signal="pressed" from="Buttons/Save" to="." method="save"]
+[connection signal="pressed" from="Buttons/Close" to="." method="close"]

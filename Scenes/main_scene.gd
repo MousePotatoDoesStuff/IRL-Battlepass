@@ -53,7 +53,7 @@ func init_data():
 		"cur_workframe": raw_workframe,
 		"notes": "Type your notes here."
 	}
-	toggle_functions(true)
+	setup_data("")
 
 func dialog_load_data():
 	var filepath=data.get('filepath')
@@ -115,6 +115,9 @@ func load_data(path:String):
 		self.data=temp_data
 	else:
 		assert(false,"Wrong savefile data type!")
+	setup_data(path)
+
+func setup_data(path):
 	namenode.text=data.get('name','Untitled')
 	pathnode.text=path
 	if self.curmenu:

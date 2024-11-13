@@ -21,6 +21,11 @@ func _on_text_changed(new_text: String) -> void:
 	caret_column=carcol
 	last_text=text
 
+func get_value():
+	if self.f_mode in ["int","natint"]:
+		return int(self.text)
+	return self.text
+
 static func ci_any(s:String,s2:String)->String:
 	return s
 

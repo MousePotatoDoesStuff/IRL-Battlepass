@@ -4,7 +4,6 @@ extends Control
 signal DataIsChangedSignal
 signal CopyTaskOverSignal(is_cur: bool)
 signal ExitEditSignal(is_cur:bool, task: TaskState)
-@export var editable:bool
 @export var is_cur:bool
 var cur_editable:bool=false
 var cur_taskstate:TaskState
@@ -16,6 +15,7 @@ var cur_taskstate:TaskState
 func _ready() -> void:
 	assert(TitleNode!=null)
 	assert(DescNode!=null)
+	return
 	var T=Task.new(
 		"HelloTask","Hello!",{"Hi":1},{"Nice 2 meet u":1}
 	)
@@ -30,10 +30,18 @@ func set_curstate(in_ts:TaskState,in_is_cur:int):
 	DescNode.text=task.description
 	ReqEditor.populate(task.requirements)
 	RewEditor.populate(task.rewards)
+	$VBoxContainer/Min.set_value(in_ts.min_amount)
+	$VBoxContainer/Max.set_value(in_ts.max_amount)
+	$VBoxContainer/Cur.set_value(in_ts.cur_amount)
 
 func save():
 	var task=self.cur_taskstate.task
 	task.name=TitleNode.text
 	task.description=DescNode.text
-	# TODO save reqs and rewards
+	self.cur_taskstate.min_amount=$VBoxContainer/Min.get_value()
+	self.cur_taskstate.max_amount=$VBoxContainer/Max.get_value()
+	self.cur_taskstate.cur_amount=$VBoxContainer/Cur.get_value()
 	DataIsChangedSignal.emit()
+
+func close():
+	ExitEditSignal.emit(self.is_cur,self.cur_taskstate)

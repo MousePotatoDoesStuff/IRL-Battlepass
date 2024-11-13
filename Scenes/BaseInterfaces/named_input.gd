@@ -17,13 +17,11 @@ func _ready() -> void:
 	else:
 		$Button.hide()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func set_value(value):
+	$value._on_text_changed(str(value))
 
 func get_value():
-	return $value.last_text
+	return $value.get_value()
 
 
 func ondelete() -> void:

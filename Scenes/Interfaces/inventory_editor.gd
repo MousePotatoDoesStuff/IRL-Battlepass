@@ -39,6 +39,7 @@ func add_tail(count:int):
 	return
 
 func populate(dict:Dictionary):
+	self.dict=dict
 	var n=len(dict)
 	var n2=len(entries)
 	if n<n2:
