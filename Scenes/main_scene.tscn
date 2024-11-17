@@ -45,7 +45,7 @@ anchor_bottom = 1.0
 offset_left = 25.0
 offset_top = 25.0
 offset_right = -25.0
-offset_bottom = -25.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -136,6 +136,15 @@ text = "Tasks"
 script = ExtResource("2_bpv6c")
 manager = NodePath("../../../../..")
 menu = NodePath("../../../../../Mainbar/WorkFrameDisplay")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sidebar"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 825.0
+offset_right = 275.0
+offset_bottom = 875.0
+text = "Version 0.1.0
+Some more data here?"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 position = Vector2i(200, 200)
