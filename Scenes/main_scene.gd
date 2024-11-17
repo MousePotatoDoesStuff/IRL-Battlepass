@@ -103,6 +103,8 @@ func save_data(path: String):
 	var savefile=FileAccess.open(path,FileAccess.WRITE)
 	savefile.store_line(raw)
 	savefile.close()
+	if self.curmenu:
+		self.curmenu.on_open(self.data)
 
 func load_data(path:String):
 	var savefile=FileAccess.open(path,FileAccess.READ)
