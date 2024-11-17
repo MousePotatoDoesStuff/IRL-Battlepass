@@ -143,7 +143,7 @@ offset_left = 25.0
 offset_top = 825.0
 offset_right = 275.0
 offset_bottom = 875.0
-text = "Version 0.1.0
+text = "Version 0.1.1
 Some more data here?"
 
 [node name="FileDialog" type="FileDialog" parent="."]
