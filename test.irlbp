@@ -15,6 +15,21 @@
 
 					}
 				}
+			},
+			{
+				"cur": 0,
+				"max": 1,
+				"min": 0,
+				"task": {
+					"desc": "Add description here",
+					"name": "Untitled",
+					"reqs": {
+
+					},
+					"rews": {
+
+					}
+				}
 			}
 		],
 		"current": [
@@ -25,6 +40,21 @@
 				"task": {
 					"desc": "Add description here",
 					"name": "Intitled",
+					"reqs": {
+
+					},
+					"rews": {
+
+					}
+				}
+			},
+			{
+				"cur": 0,
+				"max": 1,
+				"min": 0,
+				"task": {
+					"desc": "Add description here",
+					"name": "Untitled",
 					"reqs": {
 
 					},

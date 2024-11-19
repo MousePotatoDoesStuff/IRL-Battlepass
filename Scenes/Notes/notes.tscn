@@ -21,11 +21,15 @@ grow_vertical = 2
 color = Color(0, 0.352941, 0, 1)
 
 [node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.0486111
-anchor_top = 0.0987654
-anchor_right = 0.944444
-anchor_bottom = 0.79321
-metadata/_edit_use_anchors_ = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="text_changed" from="TextEdit" to="." method="on_edited"]

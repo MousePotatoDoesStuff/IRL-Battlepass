@@ -19,6 +19,9 @@ func remove_button(button:Node):
 
 func add_button(ind:int):
 	var button:Button=Button.new()
+	button.custom_minimum_size=Vector2(size.x,32)
+	button.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+	button.clip_text=true
 	button.text="Untitled"
 	Organizer.add_child(button)
 	self.buttons.append(button)

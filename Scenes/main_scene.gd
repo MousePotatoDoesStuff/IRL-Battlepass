@@ -53,7 +53,7 @@ func init_data():
 		"cur_workframe": raw_workframe,
 		"notes": "Type your notes here."
 	}
-	setup_data("")
+	setup_data("No path")
 
 func dialog_load_data():
 	var filepath=data.get('filepath')
@@ -65,6 +65,13 @@ func dialog_load_data():
 		file_dialog.current_dir=dirpath
 	file_dialog.current_file=name+".irlbp"
 	file_dialog.show()
+
+func exit():
+	get_tree().quit()
+
+func save_and_exit():
+	decide_save()
+	get_tree().quit()
 
 func decide_save():
 	data['name']=namenode.text
@@ -105,6 +112,7 @@ func save_data(path: String):
 	savefile.close()
 	if self.curmenu:
 		self.curmenu.on_open(self.data)
+	setup_data(path)
 
 func load_data(path:String):
 	var savefile=FileAccess.open(path,FileAccess.READ)

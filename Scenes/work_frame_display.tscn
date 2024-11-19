@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="4_n3rv8"]
 [ext_resource type="PackedScene" uid="uid://ciejxium0crvf" path="res://Scenes/Interfaces/task_edit.tscn" id="5_xqd5u"]
 
-[node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_av_task_list", "ex_cur_task_list", "ex_subframe_list", "ex_inv_disp")]
+[node name="WorkFrameDisplay" type="Control" node_paths=PackedStringArray("ex_task_display", "ex_task_edit", "ex_av_task_list", "ex_cur_task_list", "ex_subframe_list", "ex_inv_disp")]
 layout_mode = 3
 anchor_right = 0.75
 anchor_bottom = 1.0
@@ -15,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
 ex_task_display = NodePath("Task Display")
+ex_task_edit = NodePath("Task Edit")
 ex_av_task_list = NodePath("ATL")
 ex_cur_task_list = NodePath("CTL")
 ex_subframe_list = NodePath("Subframe List")
@@ -31,6 +32,7 @@ grow_vertical = 2
 color = Color(0.824582, 0, 0.417989, 1)
 
 [node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
+visible = false
 layout_mode = 1
 anchor_left = 0.496667
 anchor_top = 0.0333333
@@ -52,44 +54,52 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ATL" parent="." instance=ExtResource("2_m1g5f")]
 layout_mode = 1
-anchor_left = 0.025
-anchor_top = 0.666667
-anchor_right = 0.191667
-anchor_bottom = 0.888889
-offset_right = 0.0
-offset_bottom = 0.0
+anchor_top = 0.667
+anchor_right = 0.222
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -0.300049
+offset_right = -24.8
+offset_bottom = -50.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CTL" parent="." instance=ExtResource("2_m1g5f")]
 layout_mode = 1
-anchor_left = 0.225
-anchor_top = 0.666667
-anchor_right = 0.391667
-anchor_bottom = 0.888889
-offset_right = -3.05176e-05
-offset_bottom = 0.0
+anchor_left = 0.222
+anchor_top = 0.667
+anchor_right = 0.444
+anchor_bottom = 1.0
+offset_left = 25.2
+offset_top = -0.300049
+offset_right = -24.6
+offset_bottom = -50.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Subframe List" parent="." instance=ExtResource("2_m1g5f")]
 layout_mode = 1
-anchor_left = 0.0416667
-anchor_top = 0.388889
-anchor_right = 0.375
-anchor_bottom = 0.611111
-offset_right = 0.0
-offset_bottom = 0.0
+anchor_top = 0.333333
+anchor_right = 0.444444
+anchor_bottom = 0.666667
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
 metadata/_edit_use_anchors_ = true
 
 [node name="InventoryDisplay" parent="." instance=ExtResource("4_n3rv8")]
 layout_mode = 1
-anchor_left = 0.0416667
-anchor_top = 0.111111
-anchor_right = 0.375
-anchor_bottom = 0.333333
+anchor_left = 0.0
+anchor_top = 0.00555556
+anchor_right = 0.444
+anchor_bottom = 0.333
+offset_left = 25.0
+offset_top = 20.0
+offset_right = -24.6
+offset_bottom = -24.7
 
-[connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_inventory"]
+[connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_display"]
 [connection signal="EditTaskSignal" from="Task Display" to="." method="edit_task"]
-[connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_inventory"]
+[connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_display"]
 [connection signal="ExitEditSignal" from="Task Edit" to="." method="exit_edit_task"]
 [connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task" binds= [false]]
 [connection signal="ButtonPressedSignal" from="CTL" to="." method="load_task" binds= [true]]

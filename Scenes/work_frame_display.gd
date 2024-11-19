@@ -6,6 +6,7 @@ signal save_and_exit
 
 @export var editable:bool
 @export var ex_task_display:Control
+@export var ex_task_edit:Control
 @export var ex_av_task_list:Control
 @export var ex_cur_task_list:Control
 @export var ex_subframe_list:Control
@@ -18,7 +19,7 @@ var cur_inventory:Dictionary
 var tasks:Array[TaskState]
 var workframes:Dictionary
 
-var cur_task_ind:int
+var cur_task_ind:int=-1
 var is_cur_in_workframe:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _ready() -> void:
 	print(cur_workframe.current_tasks)
 
 func init_data():
+	return
 	var T=Task.new(
 		"HelloTask","Hello!",{"Hi":1},{"Nice 2 meet u":1}
 	)
@@ -71,21 +73,15 @@ func load_data(data:Dictionary):
 		var rawframe=raw_workframes[key]
 		var frame=WorkFrame.from_raw(rawframe)
 		self.workframes[key]=frame
-	
-	setup_display()
-	update_inventory()
+	update_display()
 	return
 
-func update_inventory():
+func update_display():
 	ex_inv_disp.display_data(
 		self.cur_workframe.inventory,
 		self.cur_workframe.targets,
 		true
 	)
-	return
-
-func setup_display():
-	ex_task_display.hide()
 	var texts:Array[String]=cur_workframe.get_cur_task_names().duplicate()
 	texts.append("New task...")
 	ex_cur_task_list.populate(texts)
@@ -115,7 +111,7 @@ func save_data(data_storage=null):
 
 func set_workframe(workframe:WorkFrame):
 	self.cur_workframe=workframe
-	setup_display()
+	update_display()
 
 func load_task(ind:int, is_cur:bool):
 	var source:Array[TaskState]=[
@@ -127,29 +123,28 @@ func load_task(ind:int, is_cur:bool):
 		var basetask:Task=Task.new("Untitled","Add description here",{},{})
 		task=TaskState.new(basetask,0,1,0)
 		source.append(task)
-		self.setup_display()
+		self.update_display()
 	task=source[ind]
 	var inv=cur_workframe.inventory
-	ex_task_display.set_curstate(task,inv,is_cur)
-	ex_task_display.show()
+	exit_edit_task(is_cur, task)
 
 func edit_task(is_cur: bool, task:TaskState):
-	$"Task Display".hide()
-	$"Task Edit".set_curstate(task, is_cur)
-	$"Task Edit".show()
+	ex_task_display.hide()
+	ex_task_edit.set_curstate(task, is_cur)
+	ex_task_edit.show()
 
 func exit_edit_task(is_cur: bool, task:TaskState):
-	$"Task Edit".hide()
-	$"Task Display".set_curstate(task, cur_workframe.inventory, is_cur)
-	$"Task Display".show()
+	ex_task_edit.hide()
+	ex_task_display.set_curstate(task, cur_workframe.inventory, is_cur)
+	ex_task_display.show()
 
 func insert_task(ind:int, task:Task):
 	self.cur_workframe.insert_task(ind,task)
-	setup_display()
+	update_display()
 
 func remove_task(ind:int):
 	self.cur_workframe.remove_task(ind)
-	setup_display()
+	update_display()
 
 
 func save_and_exit_function() -> void:
