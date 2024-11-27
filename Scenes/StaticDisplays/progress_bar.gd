@@ -5,5 +5,7 @@ func _ready() -> void:
 
 
 func set_progress(done:float,locked:float):
-	$done.size=Vector2(done,1.0)*$bg.size
-	$locked.size=Vector2(locked,1.0)*$bg.size
+	var done_size=Vector2(done,1.0)*$bg.size
+	var locked_size=Vector2(locked,1.0)*$bg.size
+	$done.set_deferred('size',done_size)
+	$locked.set_deferred('size',locked_size)

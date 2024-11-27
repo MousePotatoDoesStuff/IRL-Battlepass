@@ -37,7 +37,7 @@ anchor_bottom = 0.136667
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/background_color = Color(0.01, 0.01, 0.01, 1)
-text = "[center]Task Title"
+text = "Task Title"
 metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="TextEdit" parent="."]
@@ -93,11 +93,13 @@ text = "Close editor"
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 207.0
-offset_top = 735.0
-offset_right = 464.0
-offset_bottom = 879.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.414
+anchor_top = 0.816667
+anchor_right = 0.928
+anchor_bottom = 0.976667
+metadata/_edit_use_anchors_ = true
 
 [node name="Min" parent="VBoxContainer" instance=ExtResource("3_im0dx")]
 custom_minimum_size = Vector2(0, 40)
@@ -117,5 +119,12 @@ var_name = "Current"
 [node name="EDEWindow" parent="." instance=ExtResource("4_xrv74")]
 visible = false
 
+[connection signal="text_changed" from="Title" to="." method="save"]
+[connection signal="text_changed" from="Description" to="." method="save"]
+[connection signal="DataChangedSignal" from="ReqEditor" to="." method="save"]
+[connection signal="DataChangedSignal" from="RewEditor" to="." method="save"]
 [connection signal="pressed" from="Buttons/Save" to="." method="save"]
 [connection signal="pressed" from="Buttons/Close" to="." method="close"]
+[connection signal="UpdateSignal" from="VBoxContainer/Min" to="." method="save"]
+[connection signal="UpdateSignal" from="VBoxContainer/Max" to="." method="save"]
+[connection signal="UpdateSignal" from="VBoxContainer/Cur" to="." method="save"]

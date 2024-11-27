@@ -25,7 +25,7 @@ static func from_raw(raw: Dictionary):
 	assert(vars[1] is String)
 	assert(vars[2] is Dictionary)
 	assert(vars[3] is Dictionary)
-	var ID=raw.get('id',0)
+	# var ID=raw.get('id',0)
 	var res=Task.new(vars[0],vars[1],vars[2],vars[3])
 	return res
 
@@ -38,11 +38,11 @@ func to_raw()->Dictionary:
 	}
 	return raw
 
-func get_resources(rewards:bool=false):
-	return self.rewards if rewards else self.requirements
+func get_resources(get_rewards:bool=false):
+	return self.rewards if get_rewards else self.requirements
 
-func get_res_names(rewards:bool=false):
-	var src = self.rewards if rewards else self.requirements
+func get_res_names(get_rewards:bool=false):
+	var src = self.rewards if get_rewards else self.requirements
 	var res:Array[String]=[]
 	for e in src:
 		res.append(e)

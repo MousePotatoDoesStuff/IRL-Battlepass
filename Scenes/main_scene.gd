@@ -58,12 +58,12 @@ func init_data():
 func dialog_load_data():
 	var filepath=data.get('filepath')
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
-	var name=data.get('filename','Untitled')
+	var filename=data.get('filename','Untitled')
 	if filepath!=null:
 		var dirpath=filepath.get_base_dir()
 		print(dirpath)
 		file_dialog.current_dir=dirpath
-	file_dialog.current_file=name+".irlbp"
+	file_dialog.current_file=filename+".irlbp"
 	file_dialog.show()
 
 func exit():
@@ -86,11 +86,11 @@ func dialog_save_data():
 	data['name']=namenode.text
 	var filepath=data.get('filepath')
 	file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
-	var name=data.get('filename','Untitled')
+	var filename=data.get('filename','Untitled')
 	if filepath!=null:
 		var dirpath=filepath.get_base_dir()
 		file_dialog.current_dir=dirpath
-	file_dialog.current_file=name+".irlbp"
+	file_dialog.current_file=filename+".irlbp"
 	file_dialog.show()
 
 

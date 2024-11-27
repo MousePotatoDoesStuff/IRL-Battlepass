@@ -48,4 +48,5 @@ anchor_bottom = 0.9
 text = "Delete"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="EditedSignal" from="value" to="." method="onchange"]
 [connection signal="pressed" from="Button" to="." method="ondelete"]

@@ -5,16 +5,18 @@ var taskstate:TaskState
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	return
-	var task=Task.new("Task not set","Cringe",{},{})
-	var taskstate=TaskState.new(task,2,10,5)
-	set_progress_display(taskstate)
 
-func set_progress_display(taskstate:TaskState):
-	var relprogress:float=taskstate.get_cur_ratio()
-	var minprogress:float=taskstate.get_min_ratio()
+func test():
+	var new_task=Task.new("Task not set","Cringe",{},{})
+	var new_taskstate=TaskState.new(new_task,2,10,5)
+	set_progress_display(new_taskstate)
+
+func set_progress_display(new_taskstate:TaskState):
+	self.taskstate=new_taskstate
+	var relprogress:float=self.taskstate.get_cur_ratio()
+	var minprogress:float=self.taskstate.get_min_ratio()
 	$ProgressBar.set_progress(relprogress,minprogress)
-	$ProgressNumber.text=taskstate.get_ratio_text()
-	self.taskstate=taskstate
+	$ProgressNumber.text=self.taskstate.get_ratio_text()
 
 func set_progress(val:int):
 	val=max(val,taskstate.min_amount)

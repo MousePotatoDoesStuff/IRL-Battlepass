@@ -22,7 +22,7 @@ func _ready() -> void:
 func set_curstate(in_ts:TaskState,in_inv:Dictionary,in_is_cur:int):
 	self.cur_taskstate=in_ts
 	self.cur_inventory=in_inv
-	self.is_cur=is_cur
+	self.is_cur=in_is_cur
 	$Title.text=cur_taskstate.task.name
 	$Description.text=cur_taskstate.task.description
 	$ProgressControl.set_progress_display(cur_taskstate)
@@ -39,6 +39,8 @@ func process_change(new_value:int):
 	else:
 		used_value=cur_taskstate.refund_resources(cur_inventory,-delta)
 	print(delta,cur_inventory)
+	if used_value==0:
+		return
 	set_curstate(cur_taskstate,cur_inventory,is_cur)
 	DataIsChangedSignal.emit()
 

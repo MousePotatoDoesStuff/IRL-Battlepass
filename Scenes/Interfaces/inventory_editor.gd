@@ -3,6 +3,7 @@ class_name InventoryEditor
 signal DataChangedSignal
 @export var Organizer:BoxContainer
 @export var Template:DictKeyInput
+@export var ApplyChanges:Button
 var dict:Dictionary
 var entries:Array[DictKeyInput]=[]
 
@@ -38,8 +39,8 @@ func add_tail(count:int):
 		add_entry(ind+i)
 	return
 
-func populate(dict:Dictionary):
-	self.dict=dict
+func populate(in_dict:Dictionary):
+	self.dict=in_dict
 	var n=len(dict)
 	var n2=len(entries)
 	if n<n2:
@@ -49,18 +50,21 @@ func populate(dict:Dictionary):
 	var i=0
 	for e in dict:
 		var cur=self.entries[i]
+		if not cur.UpdateSignal.is_connected(self.on_update):
+			cur.UpdateSignal.connect(self.on_update)
 		cur.set_value(e,dict[e])
 		i+=1
 	return
 
-func retrieve_data(dict:Dictionary=self.dict):
-	dict.clear()
+func retrieve_data(out_dict:Dictionary=self.dict):
+	out_dict.clear()
 	for el in self.entries:
-		el.apply_value(dict,true)
+		el.apply_value(out_dict,true)
 
 func refresh():
 	retrieve_data()
 	populate(self.dict)
+	ApplyChanges.disabled=true
 
 func delete_entry(key,ind):
 	var to_delete:DictKeyInput=entries.pop_at(ind)
@@ -81,3 +85,7 @@ func new_entry():
 			self.add_entry(n)
 			self.entries[-1].set_value(e,X[e])
 	# TODO optimise
+	DataChangedSignal.emit()
+
+func on_update():
+	ApplyChanges.disabled=false

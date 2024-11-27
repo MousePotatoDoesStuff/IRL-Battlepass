@@ -2,6 +2,7 @@ extends Control
 
 
 signal DeleteSignal
+signal UpdateSignal
 @export var allowDelete:bool=false
 @export var var_name="Test"
 @export var default_value="0"
@@ -26,3 +27,6 @@ func get_value():
 
 func ondelete() -> void:
 	DeleteSignal.emit()
+
+func onchange():
+	UpdateSignal.emit()

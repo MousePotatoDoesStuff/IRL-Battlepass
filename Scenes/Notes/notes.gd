@@ -1,17 +1,15 @@
 extends MenuMode
 
 
-signal save(data:String)
-signal exit
 var data:Dictionary={}
 
-func on_open(data:Dictionary):
-	self.data=data
+func on_open(in_data:Dictionary):
+	self.data=in_data
 	$TextEdit.text=self.data['notes']
 	show()
 	return
 
-func on_close(data:Dictionary):
+func on_close(_in_data:Dictionary):
 	on_edited()
 	hide()
 	return

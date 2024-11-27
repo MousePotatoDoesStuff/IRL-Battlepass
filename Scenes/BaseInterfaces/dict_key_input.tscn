@@ -54,6 +54,8 @@ anchor_bottom = 0.92
 text = "X"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="EditedSignal" from="value" to="." method="onedit"]
 [connection signal="text_changed" from="value" to="." method="show_change"]
+[connection signal="EditedSignal" from="key" to="." method="onedit"]
 [connection signal="text_changed" from="key" to="." method="show_change"]
 [connection signal="pressed" from="Button" to="." method="ondelete"]

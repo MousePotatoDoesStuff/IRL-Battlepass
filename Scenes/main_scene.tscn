@@ -151,8 +151,8 @@ offset_left = 25.0
 offset_top = 825.0
 offset_right = 275.0
 offset_bottom = 875.0
-text = "Version 0.1.2
-Release date: 24/11/19"
+text = "Version 0.1.4
+Release date: 24/11/27"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 position = Vector2i(200, 200)
@@ -188,6 +188,4 @@ offset_right = 0.0
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/SaveAs" to="." method="dialog_save_data"]
 [connection signal="pressed" from="Sidebar/Frame/VBoxContainer/Functions/SaveAndExit" to="." method="save_and_exit"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]
-[connection signal="exit" from="Mainbar/Notes" to="." method="close_notes"]
-[connection signal="save" from="Mainbar/Notes" to="." method="save_notes"]
 [connection signal="save_and_exit" from="Mainbar/WorkFrameDisplay" to="." method="close_tasks"]

@@ -23,10 +23,10 @@ ex_inv_disp = NodePath("InventoryDisplay")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 0.444
 anchor_bottom = 1.0
-offset_right = -500.0
+offset_right = 0.399933
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.824582, 0, 0.417989, 1)

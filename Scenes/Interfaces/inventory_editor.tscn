@@ -3,13 +3,14 @@
 [ext_resource type="Script" path="res://Scenes/Interfaces/inventory_editor.gd" id="1_ofgf3"]
 [ext_resource type="PackedScene" uid="uid://bsgypqqnvyhwr" path="res://Scenes/BaseInterfaces/dict_key_input.tscn" id="1_r18cd"]
 
-[node name="InventoryEditor" type="Control" node_paths=PackedStringArray("Organizer", "Template")]
+[node name="InventoryEditor" type="Control" node_paths=PackedStringArray("Organizer", "Template", "ApplyChanges")]
 layout_mode = 3
 anchor_right = 0.333333
 anchor_bottom = 0.444444
 script = ExtResource("1_ofgf3")
 Organizer = NodePath("ScrollContainer/ArchOrganizer/Organizer")
 Template = NodePath("ScrollContainer/ArchOrganizer/AddInput")
+ApplyChanges = NodePath("ScrollContainer/ArchOrganizer/Buttons/Apply changes")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -38,6 +39,7 @@ layout_mode = 2
 
 [node name="Apply changes" type="Button" parent="ScrollContainer/ArchOrganizer/Buttons"]
 layout_mode = 2
+disabled = true
 text = "Apply changes
 "
 
@@ -51,3 +53,4 @@ layout_mode = 2
 
 [connection signal="pressed" from="ScrollContainer/ArchOrganizer/Buttons/Apply changes" to="." method="refresh"]
 [connection signal="pressed" from="ScrollContainer/ArchOrganizer/Buttons/Add Key" to="." method="new_entry"]
+[connection signal="pressed" from="ScrollContainer/ArchOrganizer/Buttons/Add Key" to="." method="on_update"]

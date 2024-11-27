@@ -2,6 +2,7 @@ extends Control
 class_name DictKeyInput
 
 signal DeleteSignal(key)
+signal UpdateSignal
 @export var allowDelete:bool=false
 @export var var_name="Test"
 @export var default_value="0"
@@ -15,16 +16,12 @@ func _ready() -> void:
 	self.toggleDelete(self.allowDelete)
 	$ColorRect.color=Color.WEB_GRAY
 
-func toggleDelete(allowDelete):
-	self.allowDelete=allowDelete
-	if allowDelete:
+func toggleDelete(in_allowDelete):
+	self.allowDelete=in_allowDelete
+	if self.allowDelete:
 		$Button.show()
 	else:
 		$Button.hide()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func set_value(key:String, value):
 	$key.text=key
@@ -44,3 +41,7 @@ func apply_value(target: Dictionary, convert_to_int: bool=false, show_apply=true
 
 func ondelete() -> void:
 	DeleteSignal.emit($key.text)
+
+
+func onedit() -> void:
+	UpdateSignal.emit()

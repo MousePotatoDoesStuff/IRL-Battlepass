@@ -28,8 +28,8 @@ static func from_raw(raw: Dictionary):
 		if vars[i] is float:
 			vars[i]=int(vars[i])
 		assert(vars[i] is int, str(vars[i]))
-	var task=Task.from_raw(vars[0])
-	var res=TaskState.new(task,vars[1],vars[2],vars[3])
+	var res_task=Task.from_raw(vars[0])
+	var res=TaskState.new(res_task,vars[1],vars[2],vars[3])
 	return res
 
 static func from_array(rawarray: Array)->Array[TaskState]:

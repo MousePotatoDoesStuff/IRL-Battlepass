@@ -1,5 +1,6 @@
 extends LineEdit
 
+signal EditedSignal
 @export var default_text="1"
 var last_text=""
 @export var f_mode="natint"
@@ -19,19 +20,22 @@ func _on_text_changed(new_text: String) -> void:
 	var res:String=tester.call(new_text,last_text)
 	text=res
 	caret_column=carcol
+	if last_text==text:
+		return
 	last_text=text
+	EditedSignal.emit()
 
 func get_value():
 	if self.f_mode in ["int","natint"]:
 		return int(self.text)
 	return self.text
 
-static func ci_any(s:String,s2:String)->String:
+static func ci_any(s:String,_s2:String)->String:
 	return s
 
 static func is_int(s:String,s2:String)->String:
 	if s.is_valid_int():
-		return s
+		return str(int(s))
 	if s == "-":
 		return "0"
 	if s == "+":
@@ -44,7 +48,7 @@ static func is_natint(s:String,s2:String)->String:
 			return s2
 	if s == "":
 		s="0"
-	return s
+	return str(int(s))
 
 static func is_float(s:String,s2:String)->String:
 	return s if s.is_valid_float() else s2

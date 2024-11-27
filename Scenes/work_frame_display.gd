@@ -24,12 +24,14 @@ var is_cur_in_workframe:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	return
+
+func test():
 	init_data()
 	var raw_test_data=JSON.stringify(main_data_struct,"  ")
+	print(raw_test_data)
 	print(cur_workframe.current_tasks)
 
 func init_data():
-	return
 	var T=Task.new(
 		"HelloTask","Hello!",{"Hi":1},{"Nice 2 meet u":1}
 	)
@@ -38,7 +40,6 @@ func init_data():
 	var B={"Nice 2 meet u":1}
 	var TSA:Array[TaskState]=[TS]
 	cur_workframe=WorkFrame.new(TSA,{},[],A,B)
-	var existing={}
 	print(cur_workframe.to_raw())
 	save_data()
 
@@ -87,8 +88,8 @@ func update_display():
 	ex_cur_task_list.populate(texts)
 	var task_texts:Array[String]=[]
 	for taskstate:TaskState in self.tasks:
-		var name:String=taskstate.get_name()
-		task_texts.append(name)
+		var got_name:String=taskstate.get_name()
+		task_texts.append(got_name)
 	task_texts.append("New task...")
 	ex_av_task_list.populate(task_texts)
 	var subfnl:Array[String]=[]
@@ -125,7 +126,6 @@ func load_task(ind:int, is_cur:bool):
 		source.append(task)
 		self.update_display()
 	task=source[ind]
-	var inv=cur_workframe.inventory
 	exit_edit_task(is_cur, task)
 
 func edit_task(is_cur: bool, task:TaskState):

@@ -2,10 +2,10 @@ extends Control
 
 
 signal DataIsChangedSignal
-signal CopyTaskOverSignal(is_cur: bool)
+# signal CopyTaskOverSignal(is_cur: bool) # TODO implement task copying
 signal ExitEditSignal(is_cur:bool, task: TaskState)
 @export var is_cur:bool
-var cur_editable:bool=false
+var changedetect_lock:bool=false
 var cur_taskstate:TaskState
 @export var TitleNode:TextEdit
 @export var DescNode:TextEdit
@@ -16,6 +16,8 @@ func _ready() -> void:
 	assert(TitleNode!=null)
 	assert(DescNode!=null)
 	return
+
+func test():
 	var T=Task.new(
 		"HelloTask","Hello!",{"Hi":1},{"Nice 2 meet u":1}
 	)
@@ -23,9 +25,10 @@ func _ready() -> void:
 	set_curstate(TS,true)
 
 func set_curstate(in_ts:TaskState,in_is_cur:int):
+	self.changedetect_lock=true
 	self.cur_taskstate=in_ts
 	var task=self.cur_taskstate.task
-	self.is_cur=is_cur
+	self.is_cur=in_is_cur
 	TitleNode.text=task.name
 	DescNode.text=task.description
 	ReqEditor.populate(task.requirements)
@@ -33,8 +36,13 @@ func set_curstate(in_ts:TaskState,in_is_cur:int):
 	$VBoxContainer/Min.set_value(in_ts.min_amount)
 	$VBoxContainer/Max.set_value(in_ts.max_amount)
 	$VBoxContainer/Cur.set_value(in_ts.cur_amount)
+	self.changedetect_lock=false
 
 func save():
+	if changedetect_lock:
+		return
+	if cur_taskstate == null:
+		return
 	var task=self.cur_taskstate.task
 	task.name=TitleNode.text
 	task.description=DescNode.text
