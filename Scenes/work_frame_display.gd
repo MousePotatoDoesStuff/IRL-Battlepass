@@ -75,6 +75,8 @@ func load_data(data:Dictionary):
 		var frame=WorkFrame.from_raw(rawframe)
 		self.workframes[key]=frame
 	update_display()
+	ex_task_display.hide()
+	ex_task_edit.hide()
 	return
 
 func update_display():
@@ -125,8 +127,11 @@ func load_task(ind:int, is_cur:bool):
 		task=TaskState.new(basetask,0,1,0)
 		source.append(task)
 		self.update_display()
-	task=source[ind]
-	exit_edit_task(is_cur, task)
+		edit_task(is_cur, task)
+	else:
+		task=source[ind]
+		exit_edit_task(is_cur, task)
+	self.cur_task_ind=ind
 
 func edit_task(is_cur: bool, task:TaskState):
 	ex_task_display.hide()
@@ -141,6 +146,13 @@ func exit_edit_task(is_cur: bool, task:TaskState):
 func insert_task(ind:int, task:Task):
 	self.cur_workframe.insert_task(ind,task)
 	update_display()
+
+func remove_current_task(is_cur:bool):
+	if is_cur:
+		self.cur_workframe.remove_task(self.cur_task_ind)
+	update_display()
+	ex_task_edit.hide()
+	ex_task_display.hide()
 
 func remove_task(ind:int):
 	self.cur_workframe.remove_task(ind)

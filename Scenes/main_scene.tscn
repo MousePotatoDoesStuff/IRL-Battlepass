@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/menu_mode_opener.gd" id="2_bpv6c"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_mmksw"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "notesmenu", "taskmenu", "functionslist", "function_state_text")]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "notesmenu", "taskmenu", "functionslist", "function_state_text", "save_time_text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ notesmenu = NodePath("Mainbar/Notes")
 taskmenu = NodePath("Mainbar/WorkFrameDisplay")
 functionslist = NodePath("Sidebar/Frame/VBoxContainer/Functions")
 function_state_text = NodePath("Sidebar/Frame/VBoxContainer/gap2/FunctionState")
+save_time_text = NodePath("Sidebar/Frame/VBoxContainer/Functions/gap3/SaveTime")
 
 [node name="Sidebar" type="Control" parent="."]
 layout_mode = 1
@@ -130,6 +131,14 @@ custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
+[node name="SaveTime" type="RichTextLabel" parent="Sidebar/Frame/VBoxContainer/Functions/gap3"]
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[center]No data"
+fit_content = true
+
 [node name="Notes" type="Button" parent="Sidebar/Frame/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
 layout_mode = 2
 text = "Notes
@@ -151,8 +160,8 @@ offset_left = 25.0
 offset_top = 825.0
 offset_right = 275.0
 offset_bottom = 875.0
-text = "Version 0.1.4
-Release date: 24/11/27"
+text = "Version 0.1.5
+Release date: 24/12/01"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 position = Vector2i(200, 200)

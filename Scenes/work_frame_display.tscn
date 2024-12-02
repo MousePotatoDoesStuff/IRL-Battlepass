@@ -99,6 +99,7 @@ offset_bottom = -24.7
 
 [connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_display"]
 [connection signal="EditTaskSignal" from="Task Display" to="." method="edit_task"]
+[connection signal="RemoveTaskSignal" from="Task Display" to="." method="remove_current_task"]
 [connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_display"]
 [connection signal="ExitEditSignal" from="Task Edit" to="." method="exit_edit_task"]
 [connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task" binds= [false]]

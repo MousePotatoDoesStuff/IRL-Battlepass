@@ -9,6 +9,7 @@ class_name MainScene
 @export var taskmenu:Control
 @export var functionslist:VBoxContainer
 @export var function_state_text:RichTextLabel
+@export var save_time_text:RichTextLabel
 
 var curmenu:MenuMode=null
 
@@ -16,7 +17,11 @@ var data={'name':"Test Name",'filename':"test"}
 func _ready() -> void:
 	assert(namenode!=null)
 	assert(pathnode!=null)
+	assert(notesmenu!=null)
+	assert(taskmenu!=null)
 	assert(functionslist is VBoxContainer)
+	assert(function_state_text!=null)
+	assert(save_time_text!=null)
 	namenode.text=data['name']
 	pathnode.text="No path"
 	toggle_functions(false)
@@ -54,6 +59,7 @@ func init_data():
 		"notes": "Type your notes here."
 	}
 	setup_data("No path")
+	setup_save_text("Created")
 
 func dialog_load_data():
 	var filepath=data.get('filepath')
@@ -113,6 +119,7 @@ func save_data(path: String):
 	if self.curmenu:
 		self.curmenu.on_open(self.data)
 	setup_data(path)
+	setup_save_text("Saved")
 
 func load_data(path:String):
 	var savefile=FileAccess.open(path,FileAccess.READ)
@@ -125,7 +132,9 @@ func load_data(path:String):
 		self.data=temp_data
 	else:
 		assert(false,"Wrong savefile data type!")
+		return
 	setup_data(path)
+	setup_save_text("Loaded")
 
 func setup_data(path):
 	namenode.text=data.get('name','Untitled')
@@ -133,3 +142,9 @@ func setup_data(path):
 	if self.curmenu:
 		self.curmenu.on_open(self.data)
 	toggle_functions(true)
+
+func setup_save_text(mode:String):
+	var time=Time.get_datetime_string_from_system()
+	time=time.replace('T',' ')
+	var data:Array[String]=[mode,time]
+	save_time_text.text="[center]%s at %s" % data
