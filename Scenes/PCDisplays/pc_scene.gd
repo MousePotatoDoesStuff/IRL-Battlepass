@@ -13,7 +13,7 @@ class_name MainScene
 
 var curmenu:MenuMode=null
 
-var data={'name':"Test Name",'filename':"test"}
+var state:MainState=null
 func _ready() -> void:
 	assert(namenode!=null)
 	assert(pathnode!=null)
@@ -22,8 +22,8 @@ func _ready() -> void:
 	assert(functionslist is VBoxContainer)
 	assert(function_state_text!=null)
 	assert(save_time_text!=null)
-	namenode.text=data['name']
-	pathnode.text="No path"
+	namenode.text=""
+	pathnode.text=""
 	toggle_functions(false)
 
 func toggle_functions(enabled:bool=true):
@@ -41,31 +41,20 @@ func toggle_functions(enabled:bool=true):
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
-		self.curmenu.on_close(self.data)
+		self.curmenu.on_close(self.state.data)
 	self.curmenu=next_menu
 	if self.curmenu!=null:
-		self.curmenu.on_open(self.data)
+		self.curmenu.on_open(self.state.data)
 
 func init_data():
-	var raw_workframe={
-	}
-	self.data={
-		"filename": "test",
-		# "filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
-		"name": "Test Name",
-		
-		"editable": true,
-		"cur_workframe": raw_workframe,
-		"notes": "Type your notes here."
-	}
-	setup_data("No path")
-	setup_save_text("Created")
+	self.state=MainState.init_test()
+	setup_data("Created")
 
 func dialog_load_data():
-	var filepath=data.get('filepath')
+	var filepath=self.state.filepath
+	var filename=self.state.filename
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
-	var filename=data.get('filename','Untitled')
-	if filepath!=null:
+	if filepath!="":
 		var dirpath=filepath.get_base_dir()
 		print(dirpath)
 		file_dialog.current_dir=dirpath
@@ -80,8 +69,8 @@ func save_and_exit():
 	get_tree().quit()
 
 func decide_save():
-	data['name']=namenode.text
-	var filepath=data.get('filepath')
+	self.state.name=namenode.text
+	var filepath=self.state.filepath
 	if not filepath:
 		dialog_save_data()
 	else:
@@ -89,10 +78,10 @@ func decide_save():
 		finish_dialog(filepath)
 
 func dialog_save_data():
-	data['name']=namenode.text
-	var filepath=data.get('filepath')
+	self.state.name=namenode.text
+	var filepath=self.state.filepath
 	file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
-	var filename=data.get('filename','Untitled')
+	var filename=self.state.filename
 	if filepath!=null:
 		var dirpath=filepath.get_base_dir()
 		file_dialog.current_dir=dirpath
@@ -101,7 +90,7 @@ func dialog_save_data():
 
 
 func finish_dialog(path: String) -> void:
-	data['filepath']=path
+	self.state.filepath=path
 	if file_dialog.file_mode==FileDialog.FILE_MODE_SAVE_FILE:
 		save_data(path)
 	else:
@@ -110,41 +99,21 @@ func finish_dialog(path: String) -> void:
 
 func save_data(path: String):
 	if self.curmenu:
-		self.curmenu.on_close(self.data)
-	data['name']=namenode.text
-	var raw=JSON.stringify(self.data,"\t",true)
-	var savefile=FileAccess.open(path,FileAccess.WRITE)
-	savefile.store_line(raw)
-	savefile.close()
+		self.curmenu.on_close(self.state.data)
+	var result=self.state.save_data()
 	if self.curmenu:
-		self.curmenu.on_open(self.data)
-	setup_data(path)
-	setup_save_text("Saved")
+		self.curmenu.on_open(self.state.data)
+	if result:
+		setup_data('Saved')
 
 func load_data(path:String):
-	var savefile=FileAccess.open(path,FileAccess.READ)
-	var raw=savefile.get_as_text()
-	savefile.close()
-	var temp_data=JSON.parse_string(raw)
-	if temp_data is Array:
-		self.data=temp_data[0]
-	elif temp_data is Dictionary:
-		self.data=temp_data
-	else:
-		assert(false,"Wrong savefile data type!")
-		return
-	setup_data(path)
-	setup_save_text("Loaded")
+	self.state=MainState.load_from_file(path)
+	setup_data('Loaded')
 
-func setup_data(path):
-	namenode.text=data.get('name','Untitled')
-	pathnode.text=path
+func setup_data(last_change:String):
+	namenode.text=self.state.name
+	pathnode.text=self.state.filepath
 	if self.curmenu:
-		self.curmenu.on_open(self.data)
+		self.curmenu.on_open(self.state.data)
 	toggle_functions(true)
-
-func setup_save_text(mode:String):
-	var time=Time.get_datetime_string_from_system()
-	time=time.replace('T',' ')
-	var data:Array[String]=[mode,time]
-	save_time_text.text="[center]%s at %s" % data
+	save_time_text.text=MainState.make_save_text(last_change)
