@@ -1,9 +1,14 @@
-[gd_scene format=3 uid="uid://bt6wsjiy0ubkg"]
+[gd_scene load_steps=2 format=3 uid="uid://bt6wsjiy0ubkg"]
+
+[ext_resource type="Script" path="res://Scenes/MobileDisplays/mobile_scene.gd" id="1_ycok1"]
 
 [node name="MobileScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -761.0
+offset_bottom = -226.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ycok1")

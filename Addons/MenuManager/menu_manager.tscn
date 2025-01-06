@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://dabat5sw54de6"]
+
+[ext_resource type="Script" path="res://Addons/MenuManager/menu_manager.gd" id="1_utr3y"]
+[ext_resource type="Script" path="res://Addons/MenuManager/menu_instance.gd" id="2_odyg8"]
+
+[node name="MenuManager" type="Control" node_paths=PackedStringArray("menus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_utr3y")
+menus = [NodePath("MenuInstance"), NodePath("MenuInstance2")]
+
+[node name="MenuInstance" type="Control" parent="." node_paths=PackedStringArray("menu_swap_buttons")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_odyg8")
+menu_swap_buttons = [NodePath("Button")]
+next_menus = Array[int]([1])
+
+[node name="Button" type="Button" parent="MenuInstance"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 315.0
+offset_right = 803.0
+offset_bottom = 499.0
+text = "Next"
+
+[node name="MenuInstance2" type="Control" parent="." node_paths=PackedStringArray("menu_swap_buttons")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_odyg8")
+menu_swap_buttons = [NodePath("Button")]
+next_menus = Array[int]([-17])
+
+[node name="Button" type="Button" parent="MenuInstance2"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 315.0
+offset_right = 803.0
+offset_bottom = 499.0
+text = "Previous"
+
+[connection signal="sig_menu_swap" from="MenuInstance" to="." method="open_menu"]
+[connection signal="sig_menu_swap" from="MenuInstance2" to="." method="open_menu"]
