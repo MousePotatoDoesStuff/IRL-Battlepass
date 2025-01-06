@@ -15,6 +15,8 @@ var curmenu:MenuMode=null
 
 var state:MainState=null
 func _ready() -> void:
+	# DisplayServer.window_set_min_size(Vector2i(800, 600))
+	print(DisplayServer.window_get_min_size())
 	assert(namenode!=null)
 	assert(pathnode!=null)
 	assert(notesmenu!=null)
