@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://c103fs8j3au8v"]
+
+[ext_resource type="Script" path="res://Scenes/MobileDisplays/Main Menu/mobile_main_menu.gd" id="1_mjop6"]
+[ext_resource type="Script" path="res://Scripts/menu_mode_opener.gd" id="2_6xkjl"]
+
+[node name="MobileMainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 1.0
+script = ExtResource("1_mjop6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.572549, 0.568627, 1)
+
+[node name="Extendable" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Extendable"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Header" type="VBoxContainer" parent="Extendable/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="TextEdit" parent="Extendable/VBoxContainer/Header"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="gap" type="ColorRect" parent="Extendable/VBoxContainer/Header"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="Filepath" type="RichTextLabel" parent="Extendable/VBoxContainer/Header"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Extendable/VBoxContainer/Header/Filepath"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.290196, 0.286275, 1)
+
+[node name="LSF" type="VBoxContainer" parent="Extendable/VBoxContainer"]
+layout_mode = 2
+
+[node name="New" type="Button" parent="Extendable/VBoxContainer/LSF"]
+layout_mode = 2
+text = "New
+"
+
+[node name="Load" type="Button" parent="Extendable/VBoxContainer/LSF"]
+layout_mode = 2
+text = "Load"
+
+[node name="Exit" type="Button" parent="Extendable/VBoxContainer/LSF"]
+layout_mode = 2
+text = "Exit"
+
+[node name="gap2" type="ColorRect" parent="Extendable/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="FunctionState" type="RichTextLabel" parent="Extendable/VBoxContainer/gap2"]
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[center]Text"
+fit_content = true
+
+[node name="Functions" type="VBoxContainer" parent="Extendable/VBoxContainer"]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="Extendable/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save"
+
+[node name="SaveAs" type="Button" parent="Extendable/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save as..."
+
+[node name="SaveAndExit" type="Button" parent="Extendable/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save and exit"
+
+[node name="gap3" type="ColorRect" parent="Extendable/VBoxContainer/Functions"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="SaveTime" type="RichTextLabel" parent="Extendable/VBoxContainer/Functions/gap3"]
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[center]No data"
+fit_content = true
+
+[node name="Notes" type="Button" parent="Extendable/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
+layout_mode = 2
+text = "Notes
+"
+script = ExtResource("2_6xkjl")
+manager = NodePath("")
+menu = NodePath("")
+
+[node name="Tasks" type="Button" parent="Extendable/VBoxContainer/Functions" node_paths=PackedStringArray("manager", "menu")]
+layout_mode = 2
+text = "Tasks"
+script = ExtResource("2_6xkjl")
+manager = NodePath("")
+menu = NodePath("")
