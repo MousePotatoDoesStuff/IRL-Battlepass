@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcwmogbavy0qx"]
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/inventory_editor.gd" id="1_ofgf3"]
-[ext_resource type="PackedScene" uid="uid://bsgypqqnvyhwr" path="res://Scenes/BaseInterfaces/dict_key_input.tscn" id="1_r18cd"]
+[ext_resource type="PackedScene" uid="uid://bsgypqqnvyhwr" path="res://Scenes/BaseInterfaces/Input/dict_key_input.tscn" id="1_r18cd"]
 
 [node name="InventoryEditor" type="Control" node_paths=PackedStringArray("Organizer", "Template", "ApplyChanges")]
 layout_mode = 3

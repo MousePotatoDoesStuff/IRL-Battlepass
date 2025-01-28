@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciejxium0crvf"]
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/task_edit.gd" id="1_bv7ku"]
-[ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/named_input.tscn" id="3_im0dx"]
+[ext_resource type="PackedScene" uid="uid://bxwpj8s6gtcch" path="res://Scenes/BaseInterfaces/Input/named_input.tscn" id="3_im0dx"]
 [ext_resource type="PackedScene" uid="uid://bcwmogbavy0qx" path="res://Scenes/Interfaces/inventory_editor.tscn" id="3_qr0yx"]
 [ext_resource type="PackedScene" uid="uid://c4vbx0cl816gg" path="res://Scenes/BaseInterfaces/ede_window.tscn" id="4_xrv74"]
 

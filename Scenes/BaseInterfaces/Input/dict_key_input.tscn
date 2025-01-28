@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsgypqqnvyhwr"]
 
-[ext_resource type="Script" path="res://Scenes/BaseInterfaces/dict_key_input.gd" id="1_pbmsx"]
-[ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/custom_input.tscn" id="2_75nt1"]
+[ext_resource type="Script" path="res://Scenes/BaseInterfaces/Input/dict_key_input.gd" id="1_pbmsx"]
+[ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/Input/custom_input.tscn" id="2_75nt1"]
 
 [node name="DictKeyInput" type="Control"]
 layout_mode = 3

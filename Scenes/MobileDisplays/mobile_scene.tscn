@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt6wsjiy0ubkg"]
+[gd_scene load_steps=3 format=3 uid="uid://bt6wsjiy0ubkg"]
 
 [ext_resource type="Script" path="res://Scenes/MobileDisplays/mobile_scene.gd" id="1_ycok1"]
+[ext_resource type="PackedScene" uid="uid://c103fs8j3au8v" path="res://Scenes/MobileDisplays/Main Menu/mobile_main_menu.tscn" id="2_rcmq7"]
 
 [node name="MobileScene" type="Control"]
 layout_mode = 3
@@ -11,3 +12,10 @@ offset_bottom = -0.100037
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ycok1")
+
+[node name="MobileMainMenu" parent="." instance=ExtResource("2_rcmq7")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2

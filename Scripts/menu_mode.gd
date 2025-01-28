@@ -1,6 +1,7 @@
 extends Control
 class_name MenuMode
 
+@export var menu_name:String=""
 func on_open(_data:Dictionary):
 	show()
 	return

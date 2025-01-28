@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cera3jgem28wk"]
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/progress_control.gd" id="1_7ydq1"]
-[ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/custom_input.tscn" id="1_x112r"]
+[ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/Input/custom_input.tscn" id="1_x112r"]
 [ext_resource type="PackedScene" uid="uid://qx6yj04f3171" path="res://Scenes/StaticDisplays/progress_bar.tscn" id="2_4vred"]
 
 [node name="ProgressControl" type="Control"]

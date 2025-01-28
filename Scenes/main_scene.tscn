@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1eefq807xt7g"]
+[gd_scene load_steps=3 format=3 uid="uid://d1eefq807xt7g"]
 
 [ext_resource type="PackedScene" uid="uid://bxkkpqrbwn1et" path="res://Scenes/PCDisplays/pc_scene.tscn" id="1_bm2k4"]
+[ext_resource type="PackedScene" uid="uid://bt6wsjiy0ubkg" path="res://Scenes/MobileDisplays/mobile_scene.tscn" id="2_bbvl4"]
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -11,4 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PCScene" parent="." instance=ExtResource("1_bm2k4")]
+visible = false
+layout_mode = 1
+
+[node name="MobileScene" parent="." instance=ExtResource("2_bbvl4")]
 layout_mode = 1
