@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxkkpqrbwn1et"]
 
 [ext_resource type="Script" path="res://Scenes/PCDisplays/pc_scene.gd" id="1_rf4q5"]
-[ext_resource type="Script" path="res://Scenes/Menus/sidebar.gd" id="2_uprqd"]
+[ext_resource type="PackedScene" uid="uid://dfcl5516k22pd" path="res://Scenes/Menus/sidebar.tscn" id="2_h76mj"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_40uw1"]
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/PCDisplays/work_frame_display.tscn" id="4_jjbw7"]
 
-[node name="PCScene" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "notesmenu", "taskmenu", "functionslist", "function_state_text", "save_time_text")]
+[node name="PCScene" type="Control" node_paths=PackedStringArray("notesmenu", "taskmenu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,155 +13,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rf4q5")
-namenode = NodePath("Sidebar/MainMenuDropdown/VBoxContainer/Header/Name")
-pathnode = NodePath("Sidebar/MainMenuDropdown/VBoxContainer/Header/Filepath")
 notesmenu = NodePath("Mainbar/Notes")
 taskmenu = NodePath("Mainbar/WorkFrameDisplay")
-functionslist = NodePath("Sidebar/MainMenuDropdown/VBoxContainer/Functions")
-function_state_text = NodePath("Sidebar/MainMenuDropdown/VBoxContainer/gap2/FunctionState")
-save_time_text = NodePath("Sidebar/MainMenuDropdown/VBoxContainer/Functions/gap3/SaveTime")
 
-[node name="Sidebar" type="Control" parent="." node_paths=PackedStringArray("func_parent")]
+[node name="Sidebar" parent="." instance=ExtResource("2_h76mj")]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 300.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_uprqd")
-func_parent = NodePath("MainMenuDropdown/VBoxContainer/LoadedFunctions")
-
-[node name="bg" type="ColorRect" parent="Sidebar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="MainMenuDropdown" type="ScrollContainer" parent="Sidebar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = -25.0
-offset_bottom = -75.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/MainMenuDropdown"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Header" type="VBoxContainer" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="Name" type="TextEdit" parent="Sidebar/MainMenuDropdown/VBoxContainer/Header"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="gap" type="ColorRect" parent="Sidebar/MainMenuDropdown/VBoxContainer/Header"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="Filepath" type="RichTextLabel" parent="Sidebar/MainMenuDropdown/VBoxContainer/Header"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="Sidebar/MainMenuDropdown/VBoxContainer/Header/Filepath"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0588235, 0.290196, 0.286275, 1)
-
-[node name="LSF" type="VBoxContainer" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="New" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LSF"]
-layout_mode = 2
-text = "New
-"
-
-[node name="Load" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LSF"]
-layout_mode = 2
-text = "Load"
-
-[node name="Exit" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LSF"]
-layout_mode = 2
-text = "Exit"
-
-[node name="gap2" type="ColorRect" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="FunctionState" type="RichTextLabel" parent="Sidebar/MainMenuDropdown/VBoxContainer/gap2"]
-layout_mode = 2
-offset_right = 250.0
-offset_bottom = 23.0
-bbcode_enabled = true
-text = "[center]Text"
-fit_content = true
-
-[node name="Functions" type="VBoxContainer" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="Save" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save"
-
-[node name="SaveAs" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save as..."
-
-[node name="SaveAndExit" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save and exit"
-
-[node name="gap3" type="ColorRect" parent="Sidebar/MainMenuDropdown/VBoxContainer/Functions"]
-custom_minimum_size = Vector2(50, 25)
-layout_mode = 2
-color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="SaveTime" type="RichTextLabel" parent="Sidebar/MainMenuDropdown/VBoxContainer/Functions/gap3"]
-layout_mode = 2
-offset_right = 250.0
-offset_bottom = 23.0
-bbcode_enabled = true
-text = "[center]No data"
-fit_content = true
-
-[node name="LoadedFunctions" type="VBoxContainer" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LoadedFunctions"]
-visible = false
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Sidebar"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.083
-anchor_top = 0.972
-anchor_right = 0.917
-anchor_bottom = 0.972
-offset_left = 0.0999985
-offset_top = -49.8
-offset_right = -0.100006
-offset_bottom = 0.199951
-grow_horizontal = 2
-grow_vertical = 2
-text = "Version 0.1.5
-Release date: 24/12/01"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 position = Vector2i(200, 200)
@@ -197,11 +53,5 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/LSF/New" to="." method="init_data"]
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/LSF/Load" to="." method="dialog_load_data"]
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/LSF/Exit" to="." method="exit"]
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/Functions/Save" to="." method="decide_save"]
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/Functions/SaveAs" to="." method="dialog_save_data"]
-[connection signal="pressed" from="Sidebar/MainMenuDropdown/VBoxContainer/Functions/SaveAndExit" to="." method="save_and_exit"]
 [connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]
 [connection signal="save_and_exit" from="Mainbar/WorkFrameDisplay" to="." method="close_tasks"]

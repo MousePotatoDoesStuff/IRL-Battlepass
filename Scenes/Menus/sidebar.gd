@@ -1,6 +1,13 @@
-extends Control
+class_name Sidebar extends Control
 
 signal menu_opened(menu_name:String)
+@export_category("Text nodes")
+@export var namenode:TextEdit
+@export var pathnode:RichTextLabel
+@export var function_state_text:RichTextLabel
+@export var save_time_text:RichTextLabel
+@export_category("Text nodes")
+@export var functionslist:VBoxContainer
 @export var func_parent:Control
 var menus:Array[MenuMode]
 var buttons:Array[Button]=[]

@@ -2,16 +2,11 @@ extends Control
 class_name MainScene
 
 @onready var file_dialog: FileDialog = $FileDialog
-@export var namenode:TextEdit
-@export var pathnode:RichTextLabel
 
 @export var notesmenu:Control
 @export var taskmenu:Control
 @export var menus:Array[MenuMode] # UPGRADE TO 4.4
 var menu_indices:Dictionary
-@export var functionslist:VBoxContainer
-@export var function_state_text:RichTextLabel
-@export var save_time_text:RichTextLabel
 
 var curmenu:MenuMode=null
 
@@ -19,13 +14,6 @@ var state:MainState=null
 func _ready() -> void:
 	# DisplayServer.window_set_min_size(Vector2i(800, 600))
 	print(DisplayServer.window_get_min_size())
-	assert(namenode!=null)
-	assert(pathnode!=null)
-	assert(functionslist is VBoxContainer)
-	assert(function_state_text!=null)
-	assert(save_time_text!=null)
-	namenode.text=""
-	pathnode.text=""
 	toggle_functions(false)
 
 func toggle_functions(enabled:bool=true):
