@@ -7,6 +7,8 @@ class_name MainScene
 
 @export var notesmenu:Control
 @export var taskmenu:Control
+@export var menus:Array[MenuMode] # UPGRADE TO 4.4
+var menu_indices:Dictionary
 @export var functionslist:VBoxContainer
 @export var function_state_text:RichTextLabel
 @export var save_time_text:RichTextLabel
@@ -19,8 +21,6 @@ func _ready() -> void:
 	print(DisplayServer.window_get_min_size())
 	assert(namenode!=null)
 	assert(pathnode!=null)
-	assert(notesmenu!=null)
-	assert(taskmenu!=null)
 	assert(functionslist is VBoxContainer)
 	assert(function_state_text!=null)
 	assert(save_time_text!=null)
@@ -111,6 +111,7 @@ func save_data(path: String):
 func load_data(path:String):
 	self.state=MainState.load_from_file(path)
 	setup_data('Loaded')
+	
 
 func setup_data(last_change:String):
 	namenode.text=self.state.name

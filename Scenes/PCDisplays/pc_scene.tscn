@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxkkpqrbwn1et"]
+[gd_scene load_steps=5 format=3 uid="uid://bxkkpqrbwn1et"]
 
 [ext_resource type="Script" path="res://Scenes/PCDisplays/pc_scene.gd" id="1_rf4q5"]
-[ext_resource type="Script" path="res://Scripts/menu_mode_opener.gd" id="2_6xnag"]
 [ext_resource type="Script" path="res://Scenes/Menus/sidebar.gd" id="2_uprqd"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_40uw1"]
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/PCDisplays/work_frame_display.tscn" id="4_jjbw7"]
@@ -143,21 +142,6 @@ fit_content = true
 
 [node name="LoadedFunctions" type="VBoxContainer" parent="Sidebar/MainMenuDropdown/VBoxContainer"]
 layout_mode = 2
-
-[node name="Notes" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LoadedFunctions" node_paths=PackedStringArray("manager", "menu")]
-layout_mode = 2
-text = "Notes
-"
-script = ExtResource("2_6xnag")
-manager = NodePath("../../../../..")
-menu = NodePath("../../../../../Mainbar/Notes")
-
-[node name="Tasks" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LoadedFunctions" node_paths=PackedStringArray("manager", "menu")]
-layout_mode = 2
-text = "Tasks"
-script = ExtResource("2_6xnag")
-manager = NodePath("../../../../..")
-menu = NodePath("../../../../../Mainbar/WorkFrameDisplay")
 
 [node name="Button" type="Button" parent="Sidebar/MainMenuDropdown/VBoxContainer/LoadedFunctions"]
 visible = false
