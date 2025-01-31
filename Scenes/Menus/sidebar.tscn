@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Menus/sidebar.gd" id="1_h7y7u"]
 
-[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "function_state_text", "save_time_text", "functionslist", "func_parent")]
+[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "save_time_text", "functionslist", "func_parent")]
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -10,14 +10,21 @@ offset_right = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h7y7u")
-namenode = NodePath("MainMenuDropdown/VBoxContainer/Header/Name")
-pathnode = NodePath("MainMenuDropdown/VBoxContainer/Header/Filepath")
-function_state_text = NodePath("MainMenuDropdown/VBoxContainer/gap2/FunctionState")
-save_time_text = NodePath("MainMenuDropdown/VBoxContainer/Functions/gap3/SaveTime")
-functionslist = NodePath("MainMenuDropdown/VBoxContainer/Functions")
-func_parent = NodePath("MainMenuDropdown/VBoxContainer/LoadedFunctions")
+namenode = NodePath("Control/MainMenuDropdown/VBoxContainer/Header/Name")
+pathnode = NodePath("Control/MainMenuDropdown/VBoxContainer/Header/Filepath")
+save_time_text = NodePath("Control/MainMenuDropdown/VBoxContainer/gap2/SaveTime")
+functionslist = NodePath("Control/MainMenuDropdown/VBoxContainer/Functions")
+func_parent = NodePath("Control/MainMenuDropdown/VBoxContainer/LoadedFunctions")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg" type="ColorRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,40 +33,40 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="MainMenuDropdown" type="ScrollContainer" parent="."]
+[node name="MainMenuDropdown" type="ScrollContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 25.0
-offset_top = 25.0
+offset_top = 83.0
 offset_right = -25.0
-offset_bottom = -75.0
+offset_bottom = -39.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuDropdown"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MainMenuDropdown"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Header" type="VBoxContainer" parent="MainMenuDropdown/VBoxContainer"]
+[node name="Header" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
 layout_mode = 2
 
-[node name="Name" type="TextEdit" parent="MainMenuDropdown/VBoxContainer/Header"]
+[node name="Name" type="TextEdit" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="gap" type="ColorRect" parent="MainMenuDropdown/VBoxContainer/Header"]
+[node name="gap" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="Filepath" type="RichTextLabel" parent="MainMenuDropdown/VBoxContainer/Header"]
+[node name="Filepath" type="RichTextLabel" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="MainMenuDropdown/VBoxContainer/Header/Filepath"]
+[node name="ColorRect" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer/Header/Filepath"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -69,56 +76,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0588235, 0.290196, 0.286275, 1)
 
-[node name="LSF" type="VBoxContainer" parent="MainMenuDropdown/VBoxContainer"]
+[node name="LSF" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
 layout_mode = 2
 
-[node name="New" type="Button" parent="MainMenuDropdown/VBoxContainer/LSF"]
+[node name="New" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/LSF"]
 layout_mode = 2
 text = "New
 "
 
-[node name="Load" type="Button" parent="MainMenuDropdown/VBoxContainer/LSF"]
+[node name="Load" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/LSF"]
 layout_mode = 2
 text = "Load"
 
-[node name="Exit" type="Button" parent="MainMenuDropdown/VBoxContainer/LSF"]
+[node name="Exit" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/LSF"]
 layout_mode = 2
 text = "Exit"
 
-[node name="gap2" type="ColorRect" parent="MainMenuDropdown/VBoxContainer"]
+[node name="gap2" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
 
-[node name="FunctionState" type="RichTextLabel" parent="MainMenuDropdown/VBoxContainer/gap2"]
-layout_mode = 2
-offset_right = 250.0
-offset_bottom = 23.0
-bbcode_enabled = true
-text = "[center]Text"
-fit_content = true
-
-[node name="Functions" type="VBoxContainer" parent="MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="Save" type="Button" parent="MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save"
-
-[node name="SaveAs" type="Button" parent="MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save as..."
-
-[node name="SaveAndExit" type="Button" parent="MainMenuDropdown/VBoxContainer/Functions"]
-layout_mode = 2
-text = "Save and exit"
-
-[node name="gap3" type="ColorRect" parent="MainMenuDropdown/VBoxContainer/Functions"]
-custom_minimum_size = Vector2(50, 25)
-layout_mode = 2
-color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="SaveTime" type="RichTextLabel" parent="MainMenuDropdown/VBoxContainer/Functions/gap3"]
+[node name="SaveTime" type="RichTextLabel" parent="Control/MainMenuDropdown/VBoxContainer/gap2"]
 layout_mode = 2
 offset_right = 250.0
 offset_bottom = 23.0
@@ -126,14 +105,34 @@ bbcode_enabled = true
 text = "[center]No data"
 fit_content = true
 
-[node name="LoadedFunctions" type="VBoxContainer" parent="MainMenuDropdown/VBoxContainer"]
+[node name="Functions" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MainMenuDropdown/VBoxContainer/LoadedFunctions"]
+[node name="Save" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save"
+
+[node name="SaveAs" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save as..."
+
+[node name="SaveAndExit" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/Functions"]
+layout_mode = 2
+text = "Save and exit"
+
+[node name="gap3" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer/Functions"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+color = Color(0, 0.570912, 0.567987, 1)
+
+[node name="LoadedFunctions" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Control/MainMenuDropdown/VBoxContainer/LoadedFunctions"]
 visible = false
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.083
@@ -143,8 +142,24 @@ anchor_bottom = 0.972
 offset_left = 0.0999985
 offset_top = -49.8
 offset_right = -0.100006
-offset_bottom = 0.199951
+offset_bottom = 0.200012
 grow_horizontal = 2
 grow_vertical = 2
 text = "Version 0.1.5
 Release date: 24/12/01"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 148.0
+offset_bottom = 68.0
+text = "Options"
+
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/LSF/New" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/LSF/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/LSF/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/Functions/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/Functions/SaveAs" to="." method="_on_save_as_pressed"]
+[connection signal="pressed" from="Control/MainMenuDropdown/VBoxContainer/Functions/SaveAndExit" to="." method="_on_save_and_exit_pressed"]
+[connection signal="pressed" from="Button" to="." method="toggle_visible"]

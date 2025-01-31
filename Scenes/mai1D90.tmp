@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_yr4s3"]
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/PCDisplays/work_frame_display.tscn" id="4_iy5xn"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("sidebar", "file_dialog", "notesmenu", "taskmenu", "menus")]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("notesmenu", "taskmenu", "menus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y0fnn")
-sidebar = NodePath("Sidebar")
-file_dialog = NodePath("FileDialog")
 notesmenu = NodePath("Mainbar/Notes")
 taskmenu = NodePath("Mainbar/WorkFrameDisplay")
 menus = [NodePath("Mainbar/Notes"), NodePath("Mainbar/WorkFrameDisplay")]
+
+[node name="Sidebar" parent="." instance=ExtResource("2_p1fxt")]
+layout_mode = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+position = Vector2i(200, 200)
+size = Vector2i(800, 500)
+access = 2
+filters = PackedStringArray("*.irlbp")
 
 [node name="Mainbar" type="Control" parent="."]
 layout_mode = 1
@@ -39,18 +46,3 @@ anchors_preset = 15
 anchor_right = 1.0
 offset_right = 0.0
 menu_name = "Tasks"
-
-[node name="Sidebar" parent="." instance=ExtResource("2_p1fxt")]
-layout_mode = 1
-
-[node name="FileDialog" type="FileDialog" parent="."]
-position = Vector2i(200, 200)
-size = Vector2i(800, 500)
-access = 2
-filters = PackedStringArray("*.irlbp")
-
-[connection signal="change_name_signal" from="Sidebar" to="." method="change_name"]
-[connection signal="exit_signal" from="Sidebar" to="." method="exit"]
-[connection signal="load_signal" from="Sidebar" to="." method="dialog_load_data"]
-[connection signal="open_menu_signal" from="Sidebar" to="." method="swap_menu"]
-[connection signal="save_signal" from="Sidebar" to="." method="choice_save"]

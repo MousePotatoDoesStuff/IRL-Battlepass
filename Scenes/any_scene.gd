@@ -1,8 +1,9 @@
 extends Control
 class_name MainScene
 
-@onready var file_dialog: FileDialog = $FileDialog
 
+@export var sidebar: Sidebar
+@export var file_dialog: FileDialog
 @export var notesmenu:Control
 @export var taskmenu:Control
 @export var menus:Array[MenuMode] # UPGRADE TO 4.4
@@ -11,23 +12,6 @@ var menu_indices:Dictionary
 var curmenu:MenuMode=null
 
 var state:MainState=null
-func _ready() -> void:
-	# DisplayServer.window_set_min_size(Vector2i(800, 600))
-	print(DisplayServer.window_get_min_size())
-	toggle_functions(false)
-
-func toggle_functions(enabled:bool=true):
-	var buttons:Array[Button]=[]
-	for obj in self.functionslist.get_children():
-		if obj is Button:
-			buttons.append(obj)
-	for obj in buttons:
-		obj.disabled=not enabled
-	var text='Create new or load to enable functions'
-	if enabled:
-		text='Functions enabled'
-	function_state_text.text="[center]"+text
-	return
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
@@ -35,12 +19,23 @@ func swap_menu(next_menu:MenuMode):
 	self.curmenu=next_menu
 	if self.curmenu!=null:
 		self.curmenu.on_open(self.state.data)
+	sidebar.toggle_visible()
+
+# ---------------------------------------------------------------------------- #
+#
+# ---------------------------------------------------------------------------- #
+
+func change_name(name:String):
+	self.state.name=name
 
 func init_data():
 	self.state=MainState.init_test()
 	setup_data("Created")
 
-func dialog_load_data():
+func dialog_load_data(new:bool=false):
+	if new:
+		init_data()
+		return
 	var filepath=self.state.filepath
 	var filename=self.state.filename
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
@@ -51,15 +46,18 @@ func dialog_load_data():
 	file_dialog.current_file=filename+".irlbp"
 	file_dialog.show()
 
-func exit():
+func exit(save:bool):
+	if save:
+		decide_save()
 	get_tree().quit()
 
-func save_and_exit():
-	decide_save()
-	get_tree().quit()
+func choice_save(choice:bool):
+	if choice:
+		decide_save()
+	else:
+		dialog_save_data()
 
 func decide_save():
-	self.state.name=namenode.text
 	var filepath=self.state.filepath
 	if not filepath:
 		dialog_save_data()
@@ -68,7 +66,6 @@ func decide_save():
 		finish_dialog(filepath)
 
 func dialog_save_data():
-	self.state.name=namenode.text
 	var filepath=self.state.filepath
 	file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
 	var filename=self.state.filename
@@ -98,13 +95,9 @@ func save_data(path: String):
 
 func load_data(path:String):
 	self.state=MainState.load_from_file(path)
-	setup_data('Loaded')
-	
+	self.setup_data("Loaded")
 
 func setup_data(last_change:String):
-	namenode.text=self.state.name
-	pathnode.text=self.state.filepath
 	if self.curmenu:
 		self.curmenu.on_open(self.state.data)
-	toggle_functions(true)
-	save_time_text.text=MainState.make_save_text(last_change)
+	self.sidebar.setup_data(self.state,last_change,self.menus)

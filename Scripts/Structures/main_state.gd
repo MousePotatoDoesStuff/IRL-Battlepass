@@ -77,3 +77,6 @@ func save_data(path: String="")->bool:
 	savefile.store_line(raw)
 	savefile.close()
 	return true
+
+func open_menu(menu:MenuInstance):
+	menu.on_
