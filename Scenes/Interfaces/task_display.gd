@@ -54,3 +54,7 @@ func pass_remove_task():
 func pass_copy_over():
 	CopyTaskOverSignal.emit(self.is_cur)
 	DataIsChangedSignal.emit()
+
+func pass_close():
+	CopyTaskOverSignal.emit(self.is_cur)
+	self.hide()

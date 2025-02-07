@@ -82,7 +82,7 @@ offset_right = 6.10352e-05
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.036
-anchor_top = 0.82
+anchor_top = 0.766667
 anchor_right = 0.41
 anchor_bottom = 0.921111
 offset_bottom = 50.0
@@ -103,7 +103,18 @@ layout_mode = 2
 text = "Remove task"
 metadata/_edit_use_anchors_ = true
 
+[node name="bg2" type="ColorRect" parent="Buttons"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+color = Color(0.121569, 0, 0.356863, 1)
+
+[node name="Close" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Close viewer"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="changeSignal" from="ProgressControl" to="." method="process_change"]
 [connection signal="pressed" from="Buttons/Edit" to="." method="pass_edit_task"]
 [connection signal="pressed" from="Buttons/Move" to="." method="pass_copy_over"]
 [connection signal="pressed" from="Buttons/Remove" to="." method="pass_remove_task"]
+[connection signal="pressed" from="Buttons/Close" to="." method="pass_close"]
