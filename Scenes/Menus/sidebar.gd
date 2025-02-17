@@ -42,6 +42,7 @@ func setup_data(new_state:MainState,last_change:String,in_menus:Array[MenuMode])
 func update_menus(in_menus:Array[MenuMode]):
 	for button in buttons:
 		button.queue_free()
+	buttons=[]
 	self.menus=in_menus
 	for menu in self.menus:
 		var button=Button.new()
@@ -65,11 +66,11 @@ func _on_exit_pressed() -> void:
 
 
 func _on_save_pressed() -> void:
-	save_signal.emit(false, self.name)
+	save_signal.emit(true)
 
 
 func _on_save_as_pressed() -> void:
-	save_signal.emit(true, self.name)
+	save_signal.emit(false)
 
 
 func _on_save_and_exit_pressed() -> void:

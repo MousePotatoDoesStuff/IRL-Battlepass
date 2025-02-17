@@ -54,3 +54,4 @@ filters = PackedStringArray("*.irlbp")
 [connection signal="load_signal" from="Sidebar" to="." method="dialog_load_data"]
 [connection signal="open_menu_signal" from="Sidebar" to="." method="swap_menu"]
 [connection signal="save_signal" from="Sidebar" to="." method="choice_save"]
+[connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]

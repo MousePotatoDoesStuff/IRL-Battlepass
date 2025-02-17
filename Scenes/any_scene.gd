@@ -11,7 +11,7 @@ var menu_indices:Dictionary
 
 var curmenu:MenuMode=null
 
-var state:MainState=null
+var state:MainState=MainState.new("","","",{})
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:

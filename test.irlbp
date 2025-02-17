@@ -1,86 +1,10 @@
 {
 	"cur_workframe": {
-		"available": [
-			{
-				"cur": 1,
-				"max": 2,
-				"min": 0,
-				"task": {
-					"desc": "Add description here",
-					"name": "Intitled",
-					"reqs": {
 
-					},
-					"rews": {
-
-					}
-				}
-			},
-			{
-				"cur": 0,
-				"max": 1,
-				"min": 0,
-				"task": {
-					"desc": "Add description here",
-					"name": "Untitled",
-					"reqs": {
-
-					},
-					"rews": {
-
-					}
-				}
-			}
-		],
-		"current": [
-			{
-				"cur": 1,
-				"max": 2,
-				"min": 0,
-				"task": {
-					"desc": "Add description here",
-					"name": "Intitled",
-					"reqs": {
-
-					},
-					"rews": {
-
-					}
-				}
-			},
-			{
-				"cur": 0,
-				"max": 1,
-				"min": 0,
-				"task": {
-					"desc": "Add description here",
-					"name": "Untitled",
-					"reqs": {
-
-					},
-					"rews": {
-
-					}
-				}
-			}
-		],
-		"inventory": {
-
-		},
-		"periodical": {
-
-		},
-		"targets": {
-
-		}
 	},
 	"editable": true,
 	"filename": "test",
 	"filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 	"name": "Test Name",
-	"notes": "Type your notes here????????????????????????????????????????????????????\n\n\nnotes saved?",
-	"tasks": [],
-	"workframes": {
-
-	}
+	"notes": "Type your notes here."
 }

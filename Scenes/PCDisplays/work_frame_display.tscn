@@ -14,92 +14,88 @@ offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwfmf")
-ex_task_display = NodePath("TaskParent/Task Display")
-ex_task_edit = NodePath("TaskParent/Task Edit")
-ex_av_task_list = NodePath("ATL")
-ex_cur_task_list = NodePath("CTL")
-ex_subframe_list = NodePath("Subframe List")
-ex_inv_disp = NodePath("InventoryDisplay")
+ex_task_display = NodePath("Task Display")
+ex_task_edit = NodePath("Task Edit")
+ex_av_task_list = NodePath("Control/ATL")
+ex_cur_task_list = NodePath("Control/CTL")
+ex_subframe_list = NodePath("Control/Subframe List")
+ex_inv_disp = NodePath("Control/InventoryDisplay")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.444
-anchor_bottom = 1.0
-offset_right = 0.399933
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.824582, 0, 0.417989, 1)
-
-[node name="ATL" parent="." instance=ExtResource("2_m1g5f")]
-layout_mode = 1
-anchor_top = 0.667
-anchor_right = 0.222
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -0.300049
-offset_right = -24.8
-offset_bottom = -50.0
-metadata/_edit_use_anchors_ = true
-
-[node name="CTL" parent="." instance=ExtResource("2_m1g5f")]
-layout_mode = 1
-anchor_left = 0.222
-anchor_top = 0.667
-anchor_right = 0.444
-anchor_bottom = 1.0
-offset_left = 25.2
-offset_top = -0.300049
-offset_right = -24.6
-offset_bottom = -50.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Subframe List" parent="." instance=ExtResource("2_m1g5f")]
-layout_mode = 1
-anchor_top = 0.333333
-anchor_right = 0.444444
-anchor_bottom = 0.666667
-offset_left = 25.0
-offset_top = 25.0
-offset_right = -25.0
-offset_bottom = -25.0
-metadata/_edit_use_anchors_ = true
-
-[node name="InventoryDisplay" parent="." instance=ExtResource("4_n3rv8")]
-layout_mode = 1
-anchor_left = 0.0
-anchor_top = 0.00555556
-anchor_right = 0.444
-anchor_bottom = 0.333
-offset_left = 25.0
-offset_top = 20.0
-offset_right = -24.6
-offset_bottom = -24.7
-
-[node name="TaskParent" type="Control" parent="."]
+[node name="Control" type="Control" parent="."]
 anchors_preset = 0
-anchor_left = 0.444444
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -6.10352e-05
 metadata/_edit_use_anchors_ = true
 
-[node name="Task Display" parent="TaskParent" instance=ExtResource("1_ajksy")]
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.824582, 0, 0.417989, 1)
+
+[node name="ATL" parent="Control" instance=ExtResource("2_m1g5f")]
+layout_mode = 1
+anchor_left = 0.03
+anchor_top = 0.351111
+anchor_right = 0.933333
+anchor_bottom = 0.631111
+offset_top = -3.05176e-05
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CTL" parent="Control" instance=ExtResource("2_m1g5f")]
+layout_mode = 1
+anchor_left = 0.0422222
+anchor_top = 0.677778
+anchor_right = 0.941111
+anchor_bottom = 0.968889
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Subframe List" parent="Control" instance=ExtResource("2_m1g5f")]
+layout_mode = 1
+anchor_left = 0.03
+anchor_top = 0.193333
+anchor_right = 0.945556
+anchor_bottom = 0.312222
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="InventoryDisplay" parent="Control" instance=ExtResource("4_n3rv8")]
+layout_mode = 1
+anchor_left = 0.0277778
+anchor_top = 0.0333333
+anchor_right = 0.95
+anchor_bottom = 0.146667
+
+[node name="Task Display" parent="." instance=ExtResource("1_ajksy")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 offset_right = 0.0
 
-[node name="Task Edit" parent="TaskParent" instance=ExtResource("5_xqd5u")]
+[node name="Task Edit" parent="." instance=ExtResource("5_xqd5u")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 offset_right = 6.10352e-05
 
-[connection signal="ButtonPressedSignal" from="ATL" to="." method="load_task" binds= [false]]
-[connection signal="ButtonPressedSignal" from="CTL" to="." method="load_task" binds= [true]]
-[connection signal="DataIsChangedSignal" from="TaskParent/Task Display" to="." method="update_display"]
-[connection signal="EditTaskSignal" from="TaskParent/Task Display" to="." method="edit_task"]
-[connection signal="RemoveTaskSignal" from="TaskParent/Task Display" to="." method="remove_current_task"]
-[connection signal="DataIsChangedSignal" from="TaskParent/Task Edit" to="." method="update_display"]
-[connection signal="ExitEditSignal" from="TaskParent/Task Edit" to="." method="exit_edit_task"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="ButtonPressedSignal" from="Control/ATL" to="." method="load_task" binds= [false]]
+[connection signal="ButtonPressedSignal" from="Control/CTL" to="." method="load_task" binds= [true]]
+[connection signal="DataIsChangedSignal" from="Task Display" to="." method="update_display"]
+[connection signal="EditTaskSignal" from="Task Display" to="." method="edit_task"]
+[connection signal="RemoveTaskSignal" from="Task Display" to="." method="remove_current_task"]
+[connection signal="DataIsChangedSignal" from="Task Edit" to="." method="update_display"]
+[connection signal="ExitEditSignal" from="Task Edit" to="." method="exit_edit_task"]

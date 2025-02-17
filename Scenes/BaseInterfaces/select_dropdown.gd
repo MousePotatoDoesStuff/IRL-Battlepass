@@ -26,7 +26,7 @@ func add_button(ind:int):
 	Organizer.add_child(button)
 	self.buttons.append(button)
 	var temp=func():
-		ButtonPressedSignal.emit(ind)
+		self.on_button_pressed(ind)
 	button.pressed.connect(temp)
 
 func remove_tail(count:int):
