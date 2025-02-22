@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1eefq807xt7g"]
+[gd_scene load_steps=6 format=3 uid="uid://d1eefq807xt7g"]
 
 [ext_resource type="Script" path="res://Scenes/any_scene.gd" id="1_y0fnn"]
 [ext_resource type="PackedScene" uid="uid://dfcl5516k22pd" path="res://Scenes/Menus/sidebar.tscn" id="2_p1fxt"]
+[ext_resource type="Script" path="res://Scenes/main_scene_rescaler.gd" id="2_vu42a"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_yr4s3"]
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/PCDisplays/work_frame_display.tscn" id="4_iy5xn"]
 
@@ -12,27 +13,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_y0fnn")
-sidebar = NodePath("Sidebar")
-file_dialog = NodePath("FileDialog")
-notesmenu = NodePath("Mainbar/Notes")
-taskmenu = NodePath("Mainbar/WorkFrameDisplay")
-menus = [NodePath("Mainbar/Notes"), NodePath("Mainbar/WorkFrameDisplay")]
+sidebar = NodePath("Rescaler/Sidebar")
+file_dialog = NodePath("Rescaler/FileDialog")
+notesmenu = NodePath("Rescaler/Mainbar/Notes")
+taskmenu = NodePath("Rescaler/Mainbar/WorkFrameDisplay")
+menus = [NodePath("Rescaler/Mainbar/Notes"), NodePath("Rescaler/Mainbar/WorkFrameDisplay")]
 
-[node name="Mainbar" type="Control" parent="."]
+[node name="Rescaler" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 900.0
+mouse_filter = 1
+script = ExtResource("2_vu42a")
 
-[node name="Notes" parent="Mainbar" instance=ExtResource("3_yr4s3")]
+[node name="Mainbar" type="Control" parent="Rescaler"]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 900.0
+mouse_filter = 1
+
+[node name="Notes" parent="Rescaler/Mainbar" instance=ExtResource("3_yr4s3")]
 visible = false
 layout_mode = 1
 menu_name = "Notes"
 
-[node name="WorkFrameDisplay" parent="Mainbar" instance=ExtResource("4_iy5xn")]
+[node name="WorkFrameDisplay" parent="Rescaler/Mainbar" instance=ExtResource("4_iy5xn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -40,18 +49,21 @@ anchor_right = 1.0
 offset_right = 0.0
 menu_name = "Tasks"
 
-[node name="Sidebar" parent="." instance=ExtResource("2_p1fxt")]
+[node name="Sidebar" parent="Rescaler" instance=ExtResource("2_p1fxt")]
 layout_mode = 1
+anchors_preset = 9
+anchor_right = 0.0
+offset_right = 300.0
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="Rescaler"]
 position = Vector2i(200, 200)
 size = Vector2i(800, 500)
 access = 2
 filters = PackedStringArray("*.irlbp")
 
-[connection signal="change_name_signal" from="Sidebar" to="." method="change_name"]
-[connection signal="exit_signal" from="Sidebar" to="." method="exit"]
-[connection signal="load_signal" from="Sidebar" to="." method="dialog_load_data"]
-[connection signal="open_menu_signal" from="Sidebar" to="." method="swap_menu"]
-[connection signal="save_signal" from="Sidebar" to="." method="choice_save"]
-[connection signal="file_selected" from="FileDialog" to="." method="finish_dialog"]
+[connection signal="change_name_signal" from="Rescaler/Sidebar" to="." method="change_name"]
+[connection signal="exit_signal" from="Rescaler/Sidebar" to="." method="exit"]
+[connection signal="load_signal" from="Rescaler/Sidebar" to="." method="dialog_load_data"]
+[connection signal="open_menu_signal" from="Rescaler/Sidebar" to="." method="swap_menu"]
+[connection signal="save_signal" from="Rescaler/Sidebar" to="." method="choice_save"]
+[connection signal="file_selected" from="Rescaler/FileDialog" to="." method="finish_dialog"]

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cesmlm3wcoih1"]
+
+[node name="AutoRescaleButton" type="Control"]
+layout_mode = 3
+anchor_right = 0.217
+anchor_bottom = 0.204
+offset_right = -0.400024
+offset_bottom = 0.399994
+grow_horizontal = 2
+grow_vertical = 2
