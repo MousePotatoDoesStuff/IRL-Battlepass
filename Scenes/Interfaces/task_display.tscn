@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cera3jgem28wk" path="res://Scenes/Interfaces/progress_control.tscn" id="2_4446n"]
 [ext_resource type="PackedScene" uid="uid://bifk7f7ksqfe4" path="res://Scenes/StaticDisplays/inventory_display.tscn" id="2_yvsos"]
 
-[node name="Task Display" type="Control"]
+[node name="Task Display" type="Control" node_paths=PackedStringArray("NodeTitle", "NodeDescription", "NodeProgressControl", "NodeInventoryDisplay", "NodeRewardDisplay")]
 layout_mode = 3
 anchor_right = 0.417
 anchor_bottom = 1.0
@@ -12,6 +12,21 @@ offset_right = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c5o8w")
+NodeTitle = NodePath("Title")
+NodeDescription = NodePath("Description")
+NodeProgressControl = NodePath("ProgressControl")
+NodeInventoryDisplay = NodePath("InventoryDisplay")
+NodeRewardDisplay = NodePath("RewardDisplay")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -14.0
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -29,6 +44,10 @@ anchor_left = 0.0574413
 anchor_top = 0.0416667
 anchor_right = 0.937337
 anchor_bottom = 0.136667
+offset_left = -3.72065
+offset_top = 12.5
+offset_right = 6.33154
+offset_bottom = -23.0003
 bbcode_enabled = true
 text = "[center]Task Title"
 metadata/_edit_use_anchors_ = true
@@ -36,12 +55,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Description" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.035
-anchor_top = 0.161667
-anchor_right = 0.926667
-anchor_bottom = 0.38
-offset_right = -6.10352e-05
-offset_bottom = 3.05176e-05
+anchor_left = 0.054
+anchor_top = 0.162222
+anchor_right = 0.945667
+anchor_bottom = 0.380555
+offset_left = -2.0
+offset_top = 4.0
+offset_right = 2.16653
+offset_bottom = 7.50031
 text = "What the task entails"
 metadata/_edit_use_anchors_ = true
 
@@ -54,15 +75,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressControl" parent="." instance=ExtResource("2_4446n")]
 layout_mode = 1
-anchor_left = 0.304
-anchor_top = 0.757778
-anchor_right = 0.962
-anchor_bottom = 0.984444
-offset_right = 3.05176e-05
-offset_bottom = 0.000549316
+anchor_left = 0.3
+anchor_top = 0.722222
+anchor_right = 0.95
+anchor_bottom = 0.948889
+offset_left = 25.0
+offset_bottom = -4.0
 metadata/_edit_use_anchors_ = true
 
 [node name="InventoryDisplay" parent="." instance=ExtResource("2_yvsos")]
@@ -81,11 +103,10 @@ offset_right = 6.10352e-05
 [node name="Buttons" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.036
-anchor_top = 0.766667
-anchor_right = 0.41
-anchor_bottom = 0.921111
-offset_bottom = 50.0
+anchor_left = 0.05
+anchor_top = 0.722222
+anchor_right = 0.3
+anchor_bottom = 0.944444
 metadata/_edit_use_anchors_ = true
 
 [node name="Edit" type="Button" parent="Buttons"]

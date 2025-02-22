@@ -10,6 +10,12 @@ signal CopyTaskOverSignal(is_cur: bool)
 var cur_editable:bool=false
 var cur_taskstate:TaskState
 var cur_inventory:Dictionary
+@export_category("Nodes")
+@export var NodeTitle:RichTextLabel
+@export var NodeDescription:RichTextLabel
+@export var NodeProgressControl:Control
+@export var NodeInventoryDisplay:Control
+@export var NodeRewardDisplay:Control
 
 func _ready() -> void:
 	var T=Task.new(
@@ -23,11 +29,11 @@ func set_curstate(in_ts:TaskState,in_inv:Dictionary,in_is_cur:int):
 	self.cur_taskstate=in_ts
 	self.cur_inventory=in_inv
 	self.is_cur=in_is_cur
-	$Title.text=cur_taskstate.task.name
-	$Description.text=cur_taskstate.task.description
-	$ProgressControl.set_progress_display(cur_taskstate)
-	$InventoryDisplay.display_data(in_inv,cur_taskstate.task.requirements)
-	$RewardDisplay.display_data(in_inv,cur_taskstate.task.rewards)
+	NodeTitle.text=cur_taskstate.task.name
+	NodeDescription.text=cur_taskstate.task.description
+	NodeProgressControl.set_progress_display(cur_taskstate)
+	NodeInventoryDisplay.display_data(in_inv,cur_taskstate.task.requirements)
+	NodeRewardDisplay.display_data(in_inv,cur_taskstate.task.rewards)
 
 func process_change(new_value:int):
 	var delta=new_value-cur_taskstate.cur_amount
