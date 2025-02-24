@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1eefq807xt7g"]
 
-[ext_resource type="Script" path="res://Scenes/any_scene.gd" id="1_y0fnn"]
+[ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_y0fnn"]
 [ext_resource type="PackedScene" uid="uid://dfcl5516k22pd" path="res://Scenes/Menus/sidebar.tscn" id="2_p1fxt"]
 [ext_resource type="Script" path="res://Scenes/main_scene_rescaler.gd" id="2_vu42a"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_yr4s3"]
@@ -15,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_y0fnn")
+platform_target = 0
 sidebar = NodePath("Rescaler/Sidebar")
 file_dialog = NodePath("Rescaler/FileDialog")
 notesmenu = NodePath("Rescaler/Mainbar/Notes")

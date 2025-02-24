@@ -4,8 +4,9 @@
 
 [node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "save_time_text", "functionslist", "func_parent")]
 layout_mode = 3
-anchor_right = 0.25
+anchor_right = 0.487
 anchor_bottom = 1.0
+offset_right = 7.79999
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_h7y7u")
@@ -144,8 +145,8 @@ offset_right = -0.100006
 offset_bottom = 0.200012
 grow_horizontal = 2
 grow_vertical = 2
-text = "Version 0.1.6
-Release date: 25/02/17"
+text = "Version 0.1.7
+Release date: 25/02/23"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

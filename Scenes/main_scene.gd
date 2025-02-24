@@ -2,6 +2,14 @@ extends Control
 class_name MainScene
 
 
+enum PlatformTarget{
+	ANDROID,
+	DETECT,
+	LINUX,
+	WEB,
+	WINDOWS
+}
+@export var platform_target:PlatformTarget=PlatformTarget.DETECT
 @export var sidebar: Sidebar
 @export var file_dialog: FileDialog
 @export var notesmenu:Control
@@ -12,6 +20,8 @@ var menu_indices:Dictionary
 var curmenu:MenuMode=null
 
 var state:MainState=MainState.new("","","",{})
+var force_exit:bool=false
+var is_save:bool=false
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
@@ -34,7 +44,13 @@ func init_data():
 		self.state.filepath="user://"
 	setup_data("Created")
 
+func choose_load_method(new:bool=false):
+	if self.platform_target==PlatformTarget.ANDROID:
+		return
+
 func dialog_load_data(new:bool=false):
+	force_exit=false
+	self.is_save=false
 	if new:
 		init_data()
 		return
@@ -50,22 +66,27 @@ func dialog_load_data(new:bool=false):
 
 func exit(save:bool):
 	if save:
-		decide_save()
+		force_exit=true
+		if not decide_save():
+			return
 	get_tree().quit()
 
 func choice_save(choice:bool):
+	self.is_save=true
+	force_exit=false
 	if choice:
 		decide_save()
 	else:
 		dialog_save_data()
 
-func decide_save():
+func decide_save()->bool:
+	self.is_save=true
 	var filepath=self.state.filepath
 	if not filepath:
 		dialog_save_data()
-	else:
-		file_dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE
-		finish_dialog(filepath)
+		return false
+	finish_dialog(filepath)
+	return true
 
 func dialog_save_data():
 	var filepath=self.state.filepath
@@ -80,7 +101,7 @@ func dialog_save_data():
 
 func finish_dialog(path: String) -> void:
 	self.state.filepath=path
-	if file_dialog.file_mode==FileDialog.FILE_MODE_SAVE_FILE:
+	if self.is_save:
 		save_data(path)
 	else:
 		load_data(path)
@@ -94,8 +115,12 @@ func save_data(path: String):
 		self.curmenu.on_open(self.state.data)
 	if result:
 		setup_data('Saved')
+	if force_exit:
+		self.exit(false)
 
 func load_data(path:String):
+	force_exit=false
+	self.is_save=false
 	self.state=MainState.load_from_file(path)
 	self.setup_data("Loaded")
 
