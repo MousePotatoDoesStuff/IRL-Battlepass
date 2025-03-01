@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Notes/notes.tscn" id="3_yr4s3"]
 [ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/PCDisplays/work_frame_display.tscn" id="4_iy5xn"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("autosaving_target_parent", "sidebar", "file_dialog", "notesmenu", "taskmenu", "menus")]
+[node name="MainScene" type="Control" node_paths=PackedStringArray("sidebar", "file_dialog", "notesmenu", "taskmenu", "menus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_y0fnn")
-autosaving_target_parent = NodePath("Rescaler/Mainbar")
 platform_target = 0
 sidebar = NodePath("Rescaler/Sidebar")
 file_dialog = NodePath("Rescaler/FileDialog")

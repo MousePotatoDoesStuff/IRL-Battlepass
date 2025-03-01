@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Menus/sidebar.gd" id="1_h7y7u"]
 
-[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "pathnode", "save_time_text", "functionslist", "func_parent")]
+[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "save_time_text", "functionslist", "func_parent")]
 layout_mode = 3
 anchor_right = 0.487
 anchor_bottom = 1.0
@@ -10,8 +10,7 @@ offset_right = 7.79999
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_h7y7u")
-namenode = NodePath("Control/MainMenuDropdown/VBoxContainer/Header/Name")
-pathnode = NodePath("Control/MainMenuDropdown/VBoxContainer/Header/Filepath")
+namenode = NodePath("Control/MainMenuDropdown/VBoxContainer/Name")
 save_time_text = NodePath("Control/MainMenuDropdown/VBoxContainer/gap2/SaveTime")
 functionslist = NodePath("Control/MainMenuDropdown/VBoxContainer/Functions")
 func_parent = NodePath("Control/MainMenuDropdown/VBoxContainer/LoadedFunctions")
@@ -50,31 +49,14 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Header" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
-layout_mode = 2
-
-[node name="Name" type="TextEdit" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
+[node name="Name" type="TextEdit" parent="Control/MainMenuDropdown/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="gap" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
+[node name="gap" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.570912, 0.567987, 1)
-
-[node name="Filepath" type="RichTextLabel" parent="Control/MainMenuDropdown/VBoxContainer/Header"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="Control/MainMenuDropdown/VBoxContainer/Header/Filepath"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0588235, 0.290196, 0.286275, 1)
 
 [node name="LSF" type="VBoxContainer" parent="Control/MainMenuDropdown/VBoxContainer"]
 layout_mode = 2

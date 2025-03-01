@@ -8,7 +8,6 @@ signal save_signal(choice:bool)
 signal exit_signal(save:bool)
 @export_category("Text nodes")
 @export var namenode:TextEdit
-@export var pathnode:RichTextLabel
 @export var save_time_text:RichTextLabel
 @export_category("Functions")
 @export var functionslist:VBoxContainer
@@ -31,7 +30,6 @@ func setup_data(new_state:MainState,last_change:String,in_menus:Array[MenuMode])
 	self.state=new_state
 	if self.state != null:
 		namenode.text=self.state.name
-		pathnode.text=self.state.filepath
 	if self.state == null:
 		functionslist.hide()
 	else:

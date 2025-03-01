@@ -1,7 +1,7 @@
 extends Control
 class_name MainScene
 
-
+const INTERNAL_SAVE="user://__active__save__.irlbp"
 enum PlatformTarget{
 	ANDROID,
 	DETECT,
@@ -9,6 +9,7 @@ enum PlatformTarget{
 	WEB,
 	WINDOWS
 }
+@export var autosaving_target_parent:Control
 @export var platform_target:PlatformTarget=PlatformTarget.DETECT
 @export var sidebar: Sidebar
 @export var file_dialog: FileDialog
@@ -19,9 +20,23 @@ var menu_indices:Dictionary
 
 var curmenu:MenuMode=null
 
-var state:MainState=MainState.new("","","",{})
+var state:MainState=null
 var force_exit:bool=false
 var is_save:bool=false
+var autosaving_targets:Array[MenuMode]=[]
+
+func _ready() -> void:
+	assert(self.autosaving_target_parent!=null)
+	self.load_data(INTERNAL_SAVE)
+	if self.state==null:
+		self.init_data()
+		if self.state.save_data(INTERNAL_SAVE,false):
+			print("Internal save created.")
+	else:
+		print("Internal save loaded.")
+	for menu in self.autosaving_target_parent.get_children():
+		if menu is MenuMode:
+			menu.quicksave.connect(self.on_quicksave)
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
@@ -109,22 +124,28 @@ func finish_dialog(path: String) -> void:
 
 func save_data(path: String):
 	if self.curmenu:
-		self.curmenu.on_close(self.state.data)
-	var result=self.state.save_data()
-	if self.curmenu:
-		self.curmenu.on_open(self.state.data)
+		self.curmenu.save_data(self.state.data)
+	var result=self.state.save_data(path)
 	if result:
-		setup_data('Saved')
+		self.sidebar.setup_data(self.state,"Saved",self.menus)
+		return true
 	if force_exit:
 		self.exit(false)
+	return false
 
 func load_data(path:String):
 	force_exit=false
 	self.is_save=false
-	self.state=MainState.load_from_file(path)
+	var state=MainState.load_from_file(path)
+	if state==null:
+		return
+	self.state=state
 	self.setup_data("Loaded")
 
 func setup_data(last_change:String):
 	if self.curmenu:
 		self.curmenu.on_open(self.state.data)
 	self.sidebar.setup_data(self.state,last_change,self.menus)
+
+func on_quicksave():
+	self.save_data(self.INTERNAL_SAVE)

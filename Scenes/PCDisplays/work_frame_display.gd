@@ -12,7 +12,6 @@ signal save_and_exit
 @export var ex_subframe_list:Control
 @export var ex_inv_disp:InventoryDisplay
 
-var main_data_struct={}
 var cur_editable:bool=false
 var cur_workframe:WorkFrame
 var cur_inventory:Dictionary
@@ -27,7 +26,7 @@ func _ready() -> void:
 
 func test():
 	init_data()
-	var raw_test_data=JSON.stringify(main_data_struct,"  ")
+	var raw_test_data=JSON.stringify(self.data,"  ")
 	print(raw_test_data)
 	print(cur_workframe.current_tasks)
 
@@ -54,7 +53,7 @@ func on_close(data:Dictionary):
 	return
 
 func load_data(data:Dictionary):
-	self.main_data_struct=data
+	self.data=data
 	if 'cur_workframe' not in data:
 		init_data()
 	
@@ -98,7 +97,7 @@ func update_display():
 	ex_subframe_list.populate(subfnl)
 
 func save_data(data_storage=null):
-	var data:Dictionary=data_storage if data_storage is Dictionary else self.main_data_struct
+	var data:Dictionary=data_storage if data_storage is Dictionary else self.self.data
 	data['editable']=self.cur_editable
 	var raw_main=self.cur_workframe.to_raw()
 	data['cur_workframe']=raw_main
@@ -132,20 +131,24 @@ func load_task(ind:int, is_cur:bool):
 		task=source[ind]
 		exit_edit_task(is_cur, task)
 	self.cur_task_ind=ind
+	quicksave.emit()
 
 func edit_task(is_cur: bool, task:TaskState):
 	ex_task_display.hide()
 	ex_task_edit.set_curstate(task, is_cur)
 	ex_task_edit.show()
+	quicksave.emit()
 
 func exit_edit_task(is_cur: bool, task:TaskState):
 	ex_task_edit.hide()
 	ex_task_display.set_curstate(task, cur_workframe.inventory, is_cur)
 	ex_task_display.show()
+	quicksave.emit()
 
 func insert_task(ind:int, task:Task):
 	self.cur_workframe.insert_task(ind,task)
 	update_display()
+	quicksave.emit()
 
 func remove_current_task(is_cur:bool):
 	if is_cur:
@@ -153,10 +156,12 @@ func remove_current_task(is_cur:bool):
 	update_display()
 	ex_task_edit.hide()
 	ex_task_display.hide()
+	quicksave.emit()
 
 func remove_task(ind:int):
 	self.cur_workframe.remove_task(ind)
 	update_display()
+	quicksave.emit()
 
 
 func save_and_exit_function() -> void:

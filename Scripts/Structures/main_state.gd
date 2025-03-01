@@ -40,6 +40,8 @@ static func init_test()->MainState:
 
 static func load_from_file(path:String)->MainState:
 	var savefile=FileAccess.open(path,FileAccess.READ)
+	if savefile==null:
+		return null
 	var raw=savefile.get_as_text()
 	savefile.close()
 	var temp_data=JSON.parse_string(raw)
@@ -65,10 +67,11 @@ func to_data():
 	self.data['filepath']=self.filepath
 	return self.data
 
-func save_data(path: String="")->bool:
-	if path!="":
+func save_data(path: String="", make_filepath:bool=true)->bool:
+	if make_filepath:
 		self.filepath=path
-	path=self.filepath
+	if path=="":
+		path=self.filepath
 	if path=="":
 		return false
 	data=self.to_data()
