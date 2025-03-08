@@ -56,7 +56,7 @@ func change_name(name:String):
 func init_data():
 	self.state=MainState.init_test()
 	if OS.has_feature("android"):
-		self.state.filepath="user://"
+		self.state.filepath=INTERNAL_SAVE
 	setup_data("Created")
 
 func choose_load_method(new:bool=false):
