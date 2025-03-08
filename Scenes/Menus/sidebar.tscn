@@ -127,8 +127,8 @@ offset_right = -0.100006
 offset_bottom = 0.200012
 grow_horizontal = 2
 grow_vertical = 2
-text = "Version 0.1.7
-Release date: 25/02/23"
+text = "Version 0.1.8
+Release date: 25/03/03"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

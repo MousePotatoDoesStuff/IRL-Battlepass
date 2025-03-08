@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bya8elrrxg0fn"]
+
+[ext_resource type="Script" path="res://Scenes/Settings/settings.gd" id="1_06frt"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06frt")
+
+[node name="ErasureButton" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.518333
+anchor_top = 0.807778
+anchor_right = 0.918333
+anchor_bottom = 0.938889
+text = "Erase data"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ErasureButton" to="." method="erase_data"]

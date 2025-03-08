@@ -1,7 +1,7 @@
 extends Control
 class_name MainScene
 
-const INTERNAL_SAVE="user://__active__save__.irlbp"
+var INTERNAL_SAVE=ProjectSettings.globalize_path("user://autosave.irlbp")
 enum PlatformTarget{
 	ANDROID,
 	DETECT,
@@ -125,6 +125,11 @@ func finish_dialog(path: String) -> void:
 func save_data(path: String):
 	if self.curmenu:
 		self.curmenu.save_data(self.state.data)
+	var data=self.state.data
+	if data.get("__technical__",{}).get("ERASE_QUICKSAVE",false):
+		DirAccess.remove_absolute(path)
+		self.exit(false)
+		return
 	var result=self.state.save_data(path)
 	if result:
 		self.sidebar.setup_data(self.state,"Saved",self.menus)

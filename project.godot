@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="IRL Battlepass"
-config/version="0.1.6"
+config/description="Version 0.1.7.2
+Release date: 25/03/03"
+config/version="0.1.7.2"
 run/main_scene="res://Scenes/main_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -25,7 +27,7 @@ gdscript/warnings/integer_division=0
 window/size/viewport_width=600
 window/size/viewport_height=900
 window/subwindows/embed_subwindows=false
-window/handheld/orientation=1
+window/handheld/orientation=6
 
 [rendering]
 

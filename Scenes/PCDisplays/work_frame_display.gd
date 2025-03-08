@@ -96,20 +96,21 @@ func update_display():
 	var subfnl:Array[String]=[]
 	ex_subframe_list.populate(subfnl)
 
-func save_data(data_storage=null):
-	var data:Dictionary=data_storage if data_storage is Dictionary else self.self.data
-	data['editable']=self.cur_editable
+func save_data(data_storage={}):
+	if data_storage.is_empty():
+		data_storage=self.data
+	data_storage['editable']=self.cur_editable
 	var raw_main=self.cur_workframe.to_raw()
-	data['cur_workframe']=raw_main
+	data_storage['cur_workframe']=raw_main
 	var raw_tasks=TaskState.to_array(self.tasks)
-	data['tasks']=raw_tasks
+	data_storage['tasks']=raw_tasks
 	var raw_workframes={}
 	for key in self.workframes:
 		var frame:WorkFrame=self.workframes[key]
 		var rawframe=frame.to_raw()
 		raw_workframes[key]=rawframe
-	data['workframes']=raw_workframes
-	return data
+	data_storage['workframes']=raw_workframes
+	return data_storage
 
 func set_workframe(workframe:WorkFrame):
 	self.cur_workframe=workframe

@@ -19,7 +19,8 @@ func on_edited():
 	self.data['notes']=$TextEdit.text
 	quicksave.emit()
 
-func save_data(data_storage=null)->Dictionary:
-	var data:Dictionary=data_storage if data_storage is Dictionary else self.data
-	self.data['notes']=$TextEdit.text
+func save_data(data_storage:Dictionary={})->Dictionary:
+	if data_storage.is_empty():
+		data_storage=self.data
+	data_storage['notes']=$TextEdit.text
 	return data_storage if data_storage!=null else {}

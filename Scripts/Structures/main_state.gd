@@ -82,4 +82,4 @@ func save_data(path: String="", make_filepath:bool=true)->bool:
 	return true
 
 func open_menu(menu:MenuInstance):
-	menu.on_
+	assert(false,"Function unimplemented!")
