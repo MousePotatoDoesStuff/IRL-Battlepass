@@ -13,7 +13,7 @@ config_version=5
 config/name="IRL Battlepass"
 config/description="Version 0.1.7.2
 Release date: 25/03/03"
-config/version="0.1.7.2"
+config/version="0.1.9"
 run/main_scene="res://Scenes/main_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
