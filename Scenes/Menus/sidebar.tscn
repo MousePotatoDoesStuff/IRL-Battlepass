@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Menus/sidebar.gd" id="1_h7y7u"]
 
-[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "save_time_text", "functionslist", "func_parent")]
+[node name="Sidebar" type="Control" node_paths=PackedStringArray("namenode", "save_time_text", "version_and_release", "functionslist", "func_parent")]
 layout_mode = 3
 anchor_right = 0.487
 anchor_bottom = 1.0
@@ -12,6 +12,7 @@ mouse_filter = 2
 script = ExtResource("1_h7y7u")
 namenode = NodePath("Control/MainMenuDropdown/VBoxContainer/Name")
 save_time_text = NodePath("Control/MainMenuDropdown/VBoxContainer/gap2/SaveTime")
+version_and_release = NodePath("Control/VersionLabel")
 functionslist = NodePath("Control/MainMenuDropdown/VBoxContainer/Functions")
 func_parent = NodePath("Control/MainMenuDropdown/VBoxContainer/LoadedFunctions")
 
@@ -114,7 +115,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+[node name="VersionLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.083

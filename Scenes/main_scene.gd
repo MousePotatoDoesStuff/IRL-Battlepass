@@ -9,13 +9,18 @@ enum PlatformTarget{
 	WEB,
 	WINDOWS
 }
+@export_category("Element nodes")
 @export var autosaving_target_parent:Control
-@export var platform_target:PlatformTarget=PlatformTarget.DETECT
 @export var sidebar: Sidebar
 @export var file_dialog: FileDialog
 @export var notesmenu:Control
 @export var taskmenu:Control
 @export var menus:Array[MenuMode] # UPGRADE TO 4.4
+@export_category("Settings")
+@export var version:String
+@export var version_minimums:Array[String]
+@export var release_date:String
+@export var platform_target:PlatformTarget=PlatformTarget.DETECT
 var menu_indices:Dictionary
 
 var curmenu:MenuMode=null
@@ -25,7 +30,16 @@ var force_exit:bool=false
 var is_save:bool=false
 var autosaving_targets:Array[MenuMode]=[]
 
+func setInternalSave():
+	if platform_target==PlatformTarget.DETECT:
+		return
+		# DETECT WHETHER PLATFORM IS ANDROID, WEB, LINUX, OR WINDOWS.
+
 func _ready() -> void:
+	assert(version)
+	assert(release_date)
+	self.version_minimums.append(self.version)
+	sidebar.on_init({"version":version,"release_date":release_date})
 	assert(self.autosaving_target_parent!=null)
 	self.load_data(INTERNAL_SAVE)
 	if self.state==null:
@@ -36,7 +50,7 @@ func _ready() -> void:
 		print("Internal save loaded.")
 	for menu in self.autosaving_target_parent.get_children():
 		if menu is MenuMode:
-			menu.quicksave.connect(self.on_quicksave)
+			menu.quicksave.connect(self.on_quicksave_trigger)
 
 func swap_menu(next_menu:MenuMode):
 	if self.curmenu!=null:
@@ -54,7 +68,7 @@ func change_name(name:String):
 	self.state.name=name
 
 func init_data():
-	self.state=MainState.init_test()
+	self.state=MainState.init_test(self.version,self.version_minimums)
 	if OS.has_feature("android"):
 		self.state.filepath=INTERNAL_SAVE
 	setup_data("Created")
@@ -141,7 +155,7 @@ func save_data(path: String):
 func load_data(path:String):
 	force_exit=false
 	self.is_save=false
-	var state=MainState.load_from_file(path)
+	var state=MainState.load_from_file(path,self.version_minimums)
 	if state==null:
 		return
 	self.state=state
@@ -152,5 +166,9 @@ func setup_data(last_change:String):
 		self.curmenu.on_open(self.state.data)
 	self.sidebar.setup_data(self.state,last_change,self.menus)
 
+func on_quicksave_trigger():
+	$Timer.start()
+
 func on_quicksave():
+	$Timer.stop()
 	self.save_data(self.INTERNAL_SAVE)

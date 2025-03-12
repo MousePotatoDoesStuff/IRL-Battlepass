@@ -17,28 +17,34 @@ func _init(
 	self.data=in_data
 	return
 
-static func load_from_data(data:Dictionary)->MainState:
+static func load_from_data(data:Dictionary,version_minimums:Array[String]=[])->MainState:
+	var version=data.get("version","0")
+	var version_supported_by=VersionCheck.isUpToDate(version,version_minimums)
+	if not version_supported_by:
+		return null
 	var name=data.get('name','Untitled')
 	var filename=data.get('filename','Untitled')
 	var filepath=data.get('filepath','')
 	var new_obj=MainState.new(name,filename,filepath,data)
 	return new_obj
 
-static func init_test()->MainState:
+static func init_test(version:String,version_minimums:Array[String]=[])->MainState:
+	if not version_minimums:
+		version_minimums=[]
 	var raw_workframe={
 	}
 	var data={
 		"filename": "test",
 		# "filepath": "C:/Godot/Projects/IRL-Battlepass/test.irlbp",
 		"name": "Test Name",
-		
+		"version": version,
 		"editable": true,
 		"cur_workframe": raw_workframe,
-		"notes": "Type your notes here."
+		"notes": ["Type your notes here."]
 	}
-	return load_from_data(data)
+	return load_from_data(data,version_minimums)
 
-static func load_from_file(path:String)->MainState:
+static func load_from_file(path:String,version_minimums:Array[String]=[])->MainState:
 	var savefile=FileAccess.open(path,FileAccess.READ)
 	if savefile==null:
 		return null
@@ -48,7 +54,7 @@ static func load_from_file(path:String)->MainState:
 	if temp_data is Array:
 		temp_data=temp_data[0]
 	if temp_data is Dictionary:
-		return load_from_data(temp_data)
+		return load_from_data(temp_data,version_minimums)
 	assert(false,"Wrong savefile data type!")
 	return MainState.new()
 

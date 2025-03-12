@@ -6,25 +6,29 @@ signal change_name_signal(name:String)
 signal load_signal(new:bool)
 signal save_signal(choice:bool)
 signal exit_signal(save:bool)
+
 @export_category("Text nodes")
 @export var namenode:TextEdit
 @export var save_time_text:RichTextLabel
+@export var version_and_release:RichTextLabel
 @export_category("Functions")
 @export var functionslist:VBoxContainer
 @export var func_parent:Control
+
 var menus:Array[MenuMode]
 var buttons:Array[Button]=[]
 var state:MainState
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	
 	assert(func_parent,"LoadedFunctions parent node not specified!")
 	setup_data(self.state,"Created",[])
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func on_init(init_data:Dictionary) -> void:
+	var version:String=init_data["version"]
+	var release_date:String=init_data["release_date"]
+	assert(version_and_release)
+	version_and_release.text="Version: %s\nRelease date: %s" % [version,release_date]
 
 func setup_data(new_state:MainState,last_change:String,in_menus:Array[MenuMode]):
 	self.state=new_state

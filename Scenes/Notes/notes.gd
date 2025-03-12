@@ -2,7 +2,7 @@ extends MenuMode
 
 @export var nametext:RichTextLabel
 @export var notetext:TextEdit
-var all_notes:Array[String]=["Main\nType your notes here."]
+var all_notes:Array=["Main\nType your notes here."]
 var current_note:int=0
 func on_open(in_data:Dictionary):
 	self.show()
@@ -10,7 +10,9 @@ func on_open(in_data:Dictionary):
 	var notes=self.data["notes"]
 	if typeof(notes)==typeof("string"):
 		self.all_notes=["Main"+"\n"+notes]
-	elif typeof(notes)==typeof([]):
+	elif typeof(notes)==typeof(self.all_notes):
+		self.all_notes=[]
+		print(notes)
 		self.all_notes=notes
 	else:
 		assert(false)

@@ -17,12 +17,15 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_y0fnn")
 autosaving_target_parent = NodePath("Rescaler/Mainbar")
-platform_target = 0
 sidebar = NodePath("Rescaler/Sidebar")
 file_dialog = NodePath("Rescaler/FileDialog")
 notesmenu = NodePath("Rescaler/Mainbar/Notes")
 taskmenu = NodePath("Rescaler/Mainbar/WorkFrameDisplay")
 menus = [NodePath("Rescaler/Mainbar/Notes"), NodePath("Rescaler/Mainbar/WorkFrameDisplay"), NodePath("Rescaler/Mainbar/Settings")]
+version = "0.1.9.1"
+release_date = "2025/03/10"
+
+[node name="Timer" type="Timer" parent="."]
 
 [node name="Rescaler" type="Control" parent="."]
 layout_mode = 1
@@ -71,6 +74,7 @@ size = Vector2i(800, 500)
 access = 2
 filters = PackedStringArray("*.irlbp")
 
+[connection signal="timeout" from="Timer" to="." method="on_quicksave"]
 [connection signal="change_name_signal" from="Rescaler/Sidebar" to="." method="change_name"]
 [connection signal="exit_signal" from="Rescaler/Sidebar" to="." method="exit"]
 [connection signal="load_signal" from="Rescaler/Sidebar" to="." method="dialog_load_data"]
