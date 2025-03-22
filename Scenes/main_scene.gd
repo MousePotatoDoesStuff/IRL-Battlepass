@@ -1,14 +1,26 @@
 extends Control
 class_name MainScene
 
-var INTERNAL_SAVE=ProjectSettings.globalize_path("user://autosave.irlbp")
 enum PlatformTarget{
 	ANDROID,
 	DETECT,
 	LINUX,
 	WEB,
-	WINDOWS
+	WINDOWS,
+	OTHER
 }
+
+static func detectPlatform():
+	if OS.has_feature("Android"):
+		return PlatformTarget.ANDROID
+	if OS.has_feature("Linux"):
+		return PlatformTarget.LINUX
+	if OS.has_feature("Web"):
+		return PlatformTarget.WEB
+	if OS.has_feature("Windows"):
+		return PlatformTarget.WINDOWS
+	return PlatformTarget.OTHER
+
 @export_category("Element nodes")
 @export var autosaving_target_parent:Control
 @export var sidebar: Sidebar
@@ -25,17 +37,19 @@ var menu_indices:Dictionary
 
 var curmenu:MenuMode=null
 
+var INTERNAL_SAVE=ProjectSettings.globalize_path("user://autosave.irlbp")
 var state:MainState=null
 var force_exit:bool=false
 var is_save:bool=false
 var autosaving_targets:Array[MenuMode]=[]
 
-func setInternalSave():
-	if platform_target==PlatformTarget.DETECT:
-		return
-		# DETECT WHETHER PLATFORM IS ANDROID, WEB, LINUX, OR WINDOWS.
+# ---------------------------------------------------------------------------- #
+# Main functions
+# ---------------------------------------------------------------------------- #
 
 func _ready() -> void:
+	if self.platform_target==PlatformTarget.DETECT:
+		self.platform_target=self.detectPlatform()
 	assert(version)
 	assert(release_date)
 	self.version_minimums.append(self.version)
@@ -77,6 +91,11 @@ func choose_load_method(new:bool=false):
 	if self.platform_target==PlatformTarget.ANDROID:
 		return
 
+func choose_filepath_if_internal():
+	if self.platform_target==PlatformTarget.ANDROID:
+		return self.state.filepath
+	return ""
+
 func dialog_load_data(new:bool=false):
 	force_exit=false
 	self.is_save=false
@@ -84,6 +103,8 @@ func dialog_load_data(new:bool=false):
 		init_data()
 		return
 	var filepath=self.state.filepath
+	if filepath==self.INTERNAL_SAVE:
+		filepath=self.choose_filepath_if_internal()
 	var filename=self.state.filename
 	file_dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE
 	if filepath!="":

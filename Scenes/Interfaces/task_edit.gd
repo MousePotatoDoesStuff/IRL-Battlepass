@@ -50,6 +50,7 @@ func save():
 	self.cur_taskstate.max_amount=$VBoxContainer/Max.get_value()
 	self.cur_taskstate.cur_amount=$VBoxContainer/Cur.get_value()
 	DataIsChangedSignal.emit()
+	close()
 
 func close():
 	ExitEditSignal.emit(self.is_cur,self.cur_taskstate)

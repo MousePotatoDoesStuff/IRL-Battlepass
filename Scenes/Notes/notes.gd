@@ -61,6 +61,7 @@ func next():
 func new():
 	self.all_notes.append("New note")
 	self.showNote(self.current_note+1)
+	quicksave.emit()
 
 func remove():
 	if len(self.all_notes)==1:
@@ -70,3 +71,4 @@ func remove():
 		prev()
 		return
 	self.showNote(self.current_note)
+	quicksave.emit()
