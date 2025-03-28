@@ -26,7 +26,8 @@ static func detectPlatform():
 @export var sidebar: Sidebar
 @export var file_dialog: FileDialog
 @export var notesmenu:Control
-@export var taskmenu:Control
+@export var taskmenu:MenuMode
+@export var savemenu:MenuMode
 @export var menus:Array[MenuMode] # UPGRADE TO 4.4
 @export_category("Settings")
 @export var version:String
@@ -50,6 +51,10 @@ var autosaving_targets:Array[MenuMode]=[]
 func _ready() -> void:
 	if self.platform_target==PlatformTarget.DETECT:
 		self.platform_target=self.detectPlatform()
+	if self.platform_target==PlatformTarget.ANDROID:
+		self.sidebar.remove_save_and_load()
+	if self.platform_target==PlatformTarget.WEB:
+		self.sidebar.remove_save_and_load()
 	assert(version)
 	assert(release_date)
 	self.version_minimums.append(self.version)
@@ -145,6 +150,12 @@ func dialog_save_data():
 	if filepath!=null:
 		var dirpath=filepath.get_base_dir()
 		file_dialog.current_dir=dirpath
+	if platform_target==PlatformTarget.ANDROID:
+		self.state.data["temp"]={
+			"filepath":file_dialog.current_dir,
+			"filename":filename
+		}
+		return
 	file_dialog.current_file=filename+".irlbp"
 	file_dialog.show()
 

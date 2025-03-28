@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0wr16nsmis33"]
 
-[ext_resource type="Script" path="res://Scenes/Notes/notes.gd" id="1_akocs"]
+[ext_resource type="Script" path="res://Scenes/Menus/Notes/notes.gd" id="1_akocs"]
 
 [node name="Notes" type="Control" node_paths=PackedStringArray("nametext", "notetext")]
 layout_mode = 3

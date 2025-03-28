@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyfmx8i4rjyww"]
+
+[ext_resource type="Script" path="res://Scenes/Interfaces/timeline_bar.gd" id="1_yhh1s"]
+
+[node name="TimelineBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yhh1s")
+
+[node name="template" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[connection signal="mouse_entered" from="." to="." method="hover"]
+[connection signal="mouse_exited" from="." to="." method="unhover"]

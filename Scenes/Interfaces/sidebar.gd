@@ -18,11 +18,18 @@ signal exit_signal(save:bool)
 var menus:Array[MenuMode]
 var buttons:Array[Button]=[]
 var state:MainState
+var is_saveload:bool=true
 
 func _ready() -> void:
+	return
 	
 	assert(func_parent,"LoadedFunctions parent node not specified!")
 	setup_data(self.state,"Created",[])
+
+func remove_save_and_load():
+	is_saveload=false
+	functionslist.hide()
+	$Control/MainMenuDropdown/VBoxContainer/LSF/Load.hide()
 
 func on_init(init_data:Dictionary) -> void:
 	var version:String=init_data["version"]
@@ -34,7 +41,7 @@ func setup_data(new_state:MainState,last_change:String,in_menus:Array[MenuMode])
 	self.state=new_state
 	if self.state != null:
 		namenode.text=self.state.name
-	if self.state == null:
+	if self.state == null or not is_saveload:
 		functionslist.hide()
 	else:
 		functionslist.show()

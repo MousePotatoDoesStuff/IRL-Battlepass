@@ -31,7 +31,7 @@ func set_curstate(in_ts:TaskState,in_inv:Dictionary,in_is_cur:int):
 	self.is_cur=in_is_cur
 	NodeTitle.text=cur_taskstate.task.name
 	NodeDescription.text=cur_taskstate.task.description
-	NodeProgressControl.set_progress_display(cur_taskstate)
+	NodeProgressControl.setProgressDisplay(cur_taskstate)
 	NodeInventoryDisplay.display_data(in_inv,cur_taskstate.task.requirements)
 	NodeRewardDisplay.display_data(in_inv,cur_taskstate.task.rewards)
 

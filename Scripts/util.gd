@@ -1,6 +1,22 @@
 extends Node
 class_name Util
 
+static func accumulate(L:Array,start_with_zero:bool):
+	var res=[]
+	if start_with_zero:
+		res.append(0)
+	var acc=0
+	for e in L:
+		acc+=e
+		res.append(acc)
+	return res
+
+static func multiply(L:Array,factor:float):
+	var res=[]
+	for e in L:
+		res.append(e*factor)
+	return res
+
 static func enumerate(L:Array):
 	var reslist=[]
 	var n=len(L)
