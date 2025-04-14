@@ -102,7 +102,7 @@ func choose_filepath_if_internal():
 	return ""
 
 func dialog_load_data(new:bool=false):
-	force_exit=false
+	self.force_exit=false
 	self.is_save=false
 	if new:
 		init_data()
@@ -121,14 +121,14 @@ func dialog_load_data(new:bool=false):
 
 func exit(save:bool):
 	if save:
-		force_exit=true
+		self.force_exit=true
 		if not decide_save():
 			return
 	get_tree().quit()
 
 func choice_save(choice:bool):
 	self.is_save=true
-	force_exit=false
+	self.force_exit=false
 	if choice:
 		decide_save()
 	else:
@@ -180,17 +180,18 @@ func save_data(path: String):
 	if result:
 		self.sidebar.setup_data(self.state,"Saved",self.menus)
 		return true
-	if force_exit:
+	if self.force_exit:
 		self.exit(false)
 	return false
 
 func load_data(path:String):
-	force_exit=false
+	self.force_exit=false
 	self.is_save=false
 	var state=MainState.load_from_file(path,self.version_minimums)
 	if state==null:
 		return
 	self.state=state
+	self.on_quicksave()
 	self.setup_data("Loaded")
 
 func setup_data(last_change:String):

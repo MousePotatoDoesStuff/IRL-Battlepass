@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dfcl5516k22pd" path="res://Scenes/Interfaces/sidebar.tscn" id="2_p1fxt"]
 [ext_resource type="Script" path="res://Scenes/main_scene_rescaler.gd" id="2_vu42a"]
 [ext_resource type="PackedScene" uid="uid://c0wr16nsmis33" path="res://Scenes/Menus/Notes/notes.tscn" id="3_yr4s3"]
-[ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/Menus/work_frame_display.tscn" id="4_iy5xn"]
+[ext_resource type="PackedScene" uid="uid://b8n6i7776pp52" path="res://Scenes/Menus/Work Frame/work_frame_display.tscn" id="4_iy5xn"]
 [ext_resource type="PackedScene" uid="uid://bya8elrrxg0fn" path="res://Scenes/Settings/settings.tscn" id="5_0d4c7"]
 [ext_resource type="PackedScene" uid="uid://buj2vsh2mq61i" path="res://Scenes/Menus/Save Menu/save_menu.tscn" id="6_jxw4o"]
 
@@ -24,7 +24,7 @@ notesmenu = NodePath("Rescaler/Mainbar/Notes")
 taskmenu = NodePath("Rescaler/Mainbar/WorkFrameDisplay")
 savemenu = NodePath("Rescaler/Mainbar/SaveMenu")
 menus = [NodePath("Rescaler/Mainbar/Notes"), NodePath("Rescaler/Mainbar/WorkFrameDisplay"), NodePath("Rescaler/Mainbar/Settings")]
-version = "0.1.9.2"
+version = "0.1.9.3"
 release_date = "2025/03/10"
 
 [node name="Timer" type="Timer" parent="."]

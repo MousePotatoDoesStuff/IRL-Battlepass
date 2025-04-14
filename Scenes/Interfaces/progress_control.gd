@@ -2,8 +2,10 @@ extends Control
 signal changeSignal(new_value:int)
 
 var taskstate:TaskState
+@export var colors:Array[Color]=[Color.BLUE,Color.GREEN,Color.YELLOW]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	test()
 	return
 
 func test():
@@ -15,7 +17,10 @@ func setProgressDisplay(new_taskstate:TaskState):
 	self.taskstate=new_taskstate
 	var relprogress:float=self.taskstate.get_cur_ratio()
 	var minprogress:float=self.taskstate.get_min_ratio()
-	$ProgressBar.setProgress(relprogress,minprogress)
+	var units:Array[int]=[new_taskstate.min_amount,new_taskstate.cur_amount,new_taskstate.max_amount]
+	$TimelineBar.displayUnits(
+		units,colors,false
+	)
 	$ProgressNumber.text=self.taskstate.get_ratio_text()
 
 func setProgress(val:int):
@@ -40,3 +45,6 @@ func button_refund():
 func button_set():
 	var delta=int($CustomInput.text)
 	setProgress(delta)
+
+func bar_feedback(bar_res:int):
+	self.setProgress(bar_res)

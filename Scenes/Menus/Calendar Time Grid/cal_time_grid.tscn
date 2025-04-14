@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://btxbehhg6ycoi"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/Calendar Time Grid/cal_time_grid.gd" id="1_6trrg"]
+[ext_resource type="PackedScene" uid="uid://dyfmx8i4rjyww" path="res://Scenes/Interfaces/timeline_bar.tscn" id="2_8tt5l"]
+
+[node name="CalTimeGrid" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6trrg")
+
+[node name="template" parent="." instance=ExtResource("2_8tt5l")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2

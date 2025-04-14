@@ -1,0 +1,8 @@
+red: problem causes damage to user (e.g. data loss)
+orange: critical core functionality missing (program crashes instantly)
+yellow: features missing (program runs but doesn't work)
+green: QoL updates needed (
+blue: technical debt
+lavender: messy code?
+unsorted
+	universal display list - nice to have

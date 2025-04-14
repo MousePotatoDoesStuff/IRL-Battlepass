@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Interfaces/progress_control.gd" id="1_7ydq1"]
 [ext_resource type="PackedScene" uid="uid://r1erbh5spxqf" path="res://Scenes/BaseInterfaces/Input/custom_input.tscn" id="1_x112r"]
-[ext_resource type="PackedScene" uid="uid://qx6yj04f3171" path="res://Scenes/StaticDisplays/progress_bar.tscn" id="2_4vred"]
+[ext_resource type="PackedScene" uid="uid://dyfmx8i4rjyww" path="res://Scenes/Interfaces/timeline_bar.tscn" id="4_10gfi"]
 
 [node name="ProgressControl" type="Control"]
 layout_mode = 3
@@ -19,13 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.59, 0, 0.6, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="ProgressBar" parent="." instance=ExtResource("2_4vred")]
-layout_mode = 1
-anchor_left = 0.05
-anchor_top = 0.1
-anchor_right = 0.950001
-anchor_bottom = 0.4
 
 [node name="CustomInput" parent="." instance=ExtResource("1_x112r")]
 layout_mode = 1
@@ -76,6 +69,15 @@ anchor_bottom = 0.87
 text = "Unused"
 metadata/_edit_use_anchors_ = true
 
+[node name="TimelineBar" parent="." instance=ExtResource("4_10gfi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.1008
+anchor_right = 0.950401
+anchor_bottom = 0.3996
+
 [connection signal="pressed" from="Use" to="." method="button_use"]
 [connection signal="pressed" from="Refund" to="." method="button_refund"]
 [connection signal="pressed" from="Set" to="." method="button_set"]
+[connection signal="clicked" from="TimelineBar" to="." method="bar_feedback"]

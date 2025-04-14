@@ -10,16 +10,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yhh1s")
+metadata/_edit_use_anchors_ = true
 
-[node name="template" type="ColorRect" parent="."]
+[node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -600.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0, 1)
+color = Color(0.53, 0.53, 1, 1)
 
-[connection signal="mouse_entered" from="." to="." method="hover"]
-[connection signal="mouse_exited" from="." to="." method="unhover"]
+[node name="template" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 600.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="resized" from="." to="." method="_on_resized"]
